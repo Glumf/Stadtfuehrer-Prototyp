@@ -40,7 +40,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
     <p style="margin: 16px 0 0; font-size: 17px; line-height: 26px; color: {{c.muted}}">Touren, die zu dir passen. Zu Fuß, mit dem Rad, mit Öffis oder dem Auto, erzählt genau dort, wo du gerade bist.</p>
     <div style="margin-top: 28px; display: flex; flex-direction: column; gap: 14px">
       <div style="display: flex; align-items: center; gap: 12px"><span style="flex: none; width: 40px; height: 40px; border-radius: 12px; background: {{c.soft}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.13-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.13a.5.5 0 0 1 .96 0L14.06 8.5A2 2 0 0 0 15.5 9.94l6.13 1.58a.5.5 0 0 1 0 .96L15.5 14.06a2 2 0 0 0-1.44 1.44l-1.58 6.13a.5.5 0 0 1-.96 0z"></path></svg></span><span style="font-size: 16px; font-weight: 700">Nach deinen Interessen</span></div>
-      <div style="display: flex; align-items: center; gap: 12px"><span style="flex: none; width: 40px; height: 40px; border-radius: 12px; background: {{c.soft}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"></path><path d="M11 3 8 9l4 13 4-13-3-6"></path><path d="M2 9h20"></path></svg></span><span style="font-size: 16px; font-weight: 700">Mit Geheimtipps der Stadt</span></div>
+      <div style="display: flex; align-items: center; gap: 12px"><span style="flex: none; width: 40px; height: 40px; border-radius: 12px; background: {{c.soft}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"></path><path d="M11 3 8 9l4 13 4-13-3-6"></path><path d="M2 9h20"></path></svg></span><span style="font-size: 16px; font-weight: 700">Für jedes Verkehrsmittel</span></div>
       <div style="display: flex; align-items: center; gap: 12px"><span style="flex: none; width: 40px; height: 40px; border-radius: 12px; background: {{c.soft}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"></path></svg></span><span style="font-size: 16px; font-weight: 700">Als Text oder zum Zuhören</span></div>
     </div>
   </div>
@@ -66,7 +66,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
       <sc-for list="{{auds}}" as="a" hint-placeholder-count="2"><button type="button" aria-pressed="{{a.pressed}}" onClick="{{a.pick}}" style="font: inherit; font-size: 15px; height: 44px; border: 0; border-radius: 10px; cursor: pointer; {{a.st}}">{{a.label}}</button></sc-for>
     </div>
     <span style="display: block; margin: 12px 0 6px; font-size: 13px; color: {{c.muted}}">{{levelLabel}}</span>
-    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
+    <div style="display: grid; grid-template-columns: repeat({{levelCols}}, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
       <sc-for list="{{levels}}" as="l" hint-placeholder-count="3"><button type="button" aria-pressed="{{l.pressed}}" onClick="{{l.pick}}" style="font: inherit; font-size: 15px; height: 44px; border: 0; border-radius: 10px; cursor: pointer; {{l.st}}">{{l.label}}</button></sc-for>
     </div>
     <p style="margin: 10px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{levelHint}}</p>
@@ -80,11 +80,6 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
         <sc-for list="{{kidStyles}}" as="s" hint-placeholder-count="3"><button type="button" aria-pressed="{{s.pressed}}" onClick="{{s.pick}}" style="font: inherit; text-align: left; width: 100%; height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 0 14px; border-radius: 14px; cursor: pointer; {{s.st}}"><span style="font-weight: 700; font-size: 15px">{{s.label}}</span><span style="font-size: 13px; text-align: right; {{s.subSt}}">{{s.sub}}</span></button></sc-for>
       </div>
     </sc-if>
-    <div style="margin-top: 16px; display: flex; align-items: center; gap: 12px; padding: 12px 8px 12px 14px; background: {{c.surface}}; border-radius: 16px">
-      <span style="flex: none; width: 40px; height: 40px; border-radius: 12px; background: {{c.soft}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"></path><path d="M11 3 8 9l4 13 4-13-3-6"></path><path d="M2 9h20"></path></svg></span>
-      <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 15px">Unbekannte Ecken</span><span style="font-size: 13px; color: {{c.muted}}">Mehr Geheimtipps</span></span>
-      <button type="button" role="switch" aria-checked="{{sw.hidden.on}}" aria-label="Unbekannte Ecken bevorzugen" onClick="{{sw.hidden.toggle}}" style="flex: none; width: 60px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="width: 52px; height: 32px; box-sizing: border-box; border-radius: 16px; padding: 3px; display: flex; {{sw.hidden.track}}"><span style="width: 26px; height: 26px; border-radius: 13px; {{sw.hidden.knob}}"></span></span></button>
-    </div>
   </div>
   <div style="flex: none; padding: 12px 24px 20px; border-top: 1px solid {{c.divider}}">
     <button type="button" onClick="{{profileDone}}" style="font: inherit; width: 100%; height: 54px; border: 0; border-radius: 27px; background: {{c.accent}}; color: {{c.onAccent}}; font-weight: 700; font-size: 17px; cursor: pointer">{{profileCta}}</button>
@@ -111,6 +106,10 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
     <button type="button" onClick="{{goExplorer}}" style="font: inherit; text-align: left; margin-top: 12px; width: 100%; border: 1.5px solid {{c.border}}; border-radius: 20px; background: {{c.surface}}; color: {{c.ink}}; padding: 18px 20px; display: flex; align-items: center; gap: 14px; cursor: pointer">
       <span style="flex: none; width: 48px; height: 48px; border-radius: 24px; background: {{c.soft}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9 16.2 7.8"></polygon></svg></span>
       <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 17px">Einfach loslaufen</span><span style="font-size: 14px; line-height: 20px; color: {{c.muted}}">Entdecker-Modus: Die App erzählt, was um dich herum ist</span></span>
+    </button>
+    <button type="button" onClick="{{receiveTour}}" style="font: inherit; text-align: left; margin-top: 12px; width: 100%; border: 1.5px solid {{c.border}}; border-radius: 20px; background: {{c.surface}}; color: {{c.ink}}; padding: 14px 20px; display: flex; align-items: center; gap: 14px; cursor: pointer">
+      <span style="flex: none; width: 48px; height: 48px; border-radius: 24px; background: {{c.soft}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><path d="M14 14h3v3h-3z"></path><path d="M21 14v7h-7"></path></svg></span>
+      <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 17px">Tour empfangen</span><span style="font-size: 14px; line-height: 20px; color: {{c.muted}}">Vom Rechner oder per Gruppen-Link</span></span>
     </button>
     <h2 style="margin: 24px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 24px">Zuletzt unterwegs</h2>
     <div style="display: flex; flex-direction: column; gap: 8px">
@@ -161,27 +160,53 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
       </div>
     </sc-if>
     <p style="margin: 10px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{whomHint}}</p>
+    <sc-if value="{{isGroup}}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top: 10px; padding: 14px; border-radius: 16px; background: {{c.soft}}; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 20px">
+        <span style="font-weight: 700; font-size: 15px">Du leitest die Gruppe</span>
+        <span>Nur du legst die Einstellungen fest. Nach dem Erstellen teilst du einen Link.</span>
+        <span>Die anderen brauchen nur die App, kein Konto. Für sie ist diese Tour kostenlos.</span>
+        <span>Alle hören gemeinsam, du startest die Tour und kannst die Route später ändern.</span>
+      </div>
+    </sc-if>
 
     <h2 style="margin: 20px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 24px">Wie bist du unterwegs?</h2>
     <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
       <button type="button" aria-pressed="{{modes.walk.pressed}}" onClick="{{modes.walk.pick}}" style="font: inherit; font-size: 14px; height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; border-radius: 16px; cursor: pointer; {{modes.walk.st}}"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{modes.walk.icon}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"></circle><path d="M12 7l-1 7"></path><path d="M11 14l-3 7"></path><path d="M11 14l3 3 1 4"></path><path d="M8 11l4-3 3 3 2 1"></path></svg>Zu Fuß</button>
-      <button type="button" aria-pressed="{{modes.bike.pressed}}" onClick="{{modes.bike.pick}}" style="font: inherit; font-size: 14px; height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; border-radius: 16px; cursor: pointer; {{modes.bike.st}}"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{modes.bike.icon}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="3.5"></circle><circle cx="18.5" cy="17.5" r="3.5"></circle><circle cx="15" cy="5" r="1"></circle><path d="M12 17.5V14l-3-3 4-3 2 3h2"></path></svg>Fahrrad</button>
+      <button type="button" aria-pressed="{{modes.bike.pressed}}" onClick="{{modes.bike.pick}}" style="font: inherit; font-size: 14px; height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; border-radius: 16px; cursor: pointer; {{modes.bike.st}}"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{modes.bike.icon}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="3.5"></circle><circle cx="18.5" cy="17.5" r="3.5"></circle><circle cx="15" cy="5" r="1"></circle><path d="M12 17.5V14l-3-3 4-3 2 3h2"></path></svg><span style="text-align: center; line-height: 16px">Rad / <span style="white-space: nowrap">E-Scooter</span></span></button>
       <button type="button" aria-pressed="{{modes.transit.pressed}}" onClick="{{modes.transit.pick}}" style="font: inherit; font-size: 14px; height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; border-radius: 16px; cursor: pointer; {{modes.transit.st}}"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{modes.transit.icon}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="15" rx="3"></rect><path d="M4 11h16"></path><path d="M8 15h.01"></path><path d="M16 15h.01"></path><path d="m8 18-2 3"></path><path d="m16 18 2 3"></path></svg>Öffis</button>
       <button type="button" aria-pressed="{{modes.car.pressed}}" onClick="{{modes.car.pick}}" style="font: inherit; font-size: 14px; height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; border-radius: 16px; cursor: pointer; {{modes.car.st}}"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{modes.car.icon}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"></path><path d="M3 12h18"></path><path d="M9 17h6"></path><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle></svg>Auto</button>
     </div>
     <p style="margin: 10px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{modeHint}}</p>
-    <sc-if value="{{isCar}}" hint-placeholder-val="{{ false }}">
-      <span style="display: block; margin: 14px 0 6px; font-size: 13px; color: {{c.muted}}">Unterwegs auch zu Fuß?</span>
-      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
-        <sc-for list="{{carWalks}}" as="w" hint-placeholder-count="3"><button type="button" aria-pressed="{{w.pressed}}" onClick="{{w.pick}}" style="font: inherit; font-size: 14px; height: 44px; border: 0; border-radius: 10px; cursor: pointer; {{w.st}}">{{w.label}}</button></sc-for>
+    <sc-if value="{{isWalk}}" hint-placeholder-val="{{ true }}">
+      <div style="margin: 14px 0 6px; display: flex; align-items: baseline; justify-content: space-between"><span style="font-size: 13px; color: {{c.muted}}">Gehstrecke gesamt</span><span style="font-size: 15px; font-weight: 700">{{walkKmLabel}}</span></div>
+      <input type="range" min="1" max="10" step="0.5" value="{{walkKm}}" onChange="{{setWalkKm}}" aria-label="Gehstrecke gesamt in Kilometern" style="width: 100%; height: 32px; margin: 0; accent-color: {{c.primary}}">
+      <div style="display: flex; justify-content: space-between; font-size: 12px; color: {{c.muted}}"><span>1 km</span><span>10 km</span></div>
+    </sc-if>
+    <sc-if value="{{showWalkTime}}" hint-placeholder-val="{{ false }}">
+      <span style="display: block; margin: 14px 0 6px; font-size: 13px; color: {{c.muted}}">Zu Fuß unterwegs</span>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
+        <sc-for list="{{walkTimes}}" as="w" hint-placeholder-count="4"><button type="button" aria-pressed="{{w.pressed}}" onClick="{{w.pick}}" style="font: inherit; font-size: 14px; height: 44px; border: 0; border-radius: 10px; cursor: pointer; {{w.st}}">{{w.label}}</button></sc-for>
       </div>
-      <p style="margin: 8px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{carWalkHint}}</p>
-      <sc-if value="{{showParkOnly}}" hint-placeholder-val="{{ true }}">
-        <div style="margin-top: 10px; display: flex; align-items: center; gap: 12px; padding: 6px 8px 6px 14px; background: {{c.surface}}; border-radius: 16px">
-          <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px">Halte nur mit Parkplatz</span><span style="font-size: 13px; color: {{c.muted}}">Stopps nur dort, wo man in der Nähe parken kann</span></span>
-          <button type="button" role="switch" aria-checked="{{parkSw.on}}" aria-label="Halte nur mit Parkplatz" onClick="{{parkSw.toggle}}" style="flex: none; width: 60px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="width: 52px; height: 32px; box-sizing: border-box; border-radius: 16px; padding: 3px; display: flex; {{parkSw.track}}"><span style="width: 26px; height: 26px; border-radius: 13px; {{parkSw.knob}}"></span></span></button>
-        </div>
-      </sc-if>
+      <p style="margin: 8px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{walkTimeHint}}</p>
+    </sc-if>
+    <sc-if value="{{showParkOnly}}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top: 10px; display: flex; align-items: center; gap: 12px; padding: 6px 8px 6px 14px; background: {{c.surface}}; border-radius: 16px">
+        <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px">Halte nur mit Parkplatz</span><span style="font-size: 13px; color: {{c.muted}}">Stopps nur dort, wo man in der Nähe parken kann</span></span>
+        <button type="button" role="switch" aria-checked="{{parkSw.on}}" aria-label="Halte nur mit Parkplatz" onClick="{{parkSw.toggle}}" style="flex: none; width: 60px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="width: 52px; height: 32px; box-sizing: border-box; border-radius: 16px; padding: 3px; display: flex; {{parkSw.track}}"><span style="width: 26px; height: 26px; border-radius: 13px; {{parkSw.knob}}"></span></span></button>
+      </div>
+    </sc-if>
+    <sc-if value="{{isTransit}}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top: 10px; display: flex; align-items: center; gap: 12px; padding: 6px 8px 6px 14px; background: {{c.surface}}; border-radius: 16px">
+        <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px">Hop-on-Hop-off</span><span style="font-size: 13px; color: {{c.muted}}">Geplante Ausstiege mit kurzer Runde, bevorzugt Linien an Sehenswürdigkeiten vorbei</span></span>
+        <button type="button" role="switch" aria-checked="{{hopSw.on}}" aria-label="Hop-on-Hop-off" onClick="{{hopSw.toggle}}" style="flex: none; width: 60px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="width: 52px; height: 32px; box-sizing: border-box; border-radius: 16px; padding: 3px; display: flex; {{hopSw.track}}"><span style="width: 26px; height: 26px; border-radius: 13px; {{hopSw.knob}}"></span></span></button>
+      </div>
+    </sc-if>
+
+    <h2 style="margin: 20px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 24px">Tourart</h2>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
+      <sc-for list="{{tourTypes}}" as="t" hint-placeholder-count="2"><button type="button" aria-pressed="{{t.pressed}}" onClick="{{t.pick}}" style="font: inherit; font-size: 15px; height: 44px; border: 0; border-radius: 10px; cursor: pointer; {{t.st}}">{{t.label}}</button></sc-for>
+    </div>
+    <p style="margin: 8px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{tourTypeHint}}</p>
     </sc-if>
 
     <h2 style="margin: 20px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 24px">Dauer &amp; Tempo</h2>
@@ -210,11 +235,6 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
       <sc-for list="{{tourStyles}}" as="s" hint-placeholder-count="3"><button type="button" aria-pressed="{{s.pressed}}" onClick="{{s.pick}}" style="font: inherit; font-size: 14px; display: flex; align-items: center; gap: 6px; height: 44px; padding: 0 12px; border-radius: 22px; cursor: pointer; {{s.st}}"><sc-if value="{{s.on}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{s.check}}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>{{s.label}}</button></sc-for>
     </div>
     <span style="display: block; margin: 14px 0 6px; font-size: 13px; color: {{c.muted}}">{{lenLabel}}</span>
-    <sc-if value="{{tourKids}}" hint-placeholder-val="{{ false }}">
-      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
-        <sc-for list="{{tourLens}}" as="l" hint-placeholder-count="4"><button type="button" aria-pressed="{{l.pressed}}" onClick="{{l.pick}}" style="font: inherit; font-size: 15px; height: 44px; border: 0; border-radius: 10px; cursor: pointer; {{l.st}}">{{l.label}}</button></sc-for>
-      </div>
-    </sc-if>
     <p style="margin: 6px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{lenHint}}</p>
     <span style="display: block; margin: 14px 0 6px; font-size: 13px; color: {{c.muted}}">Ausgabe</span>
     <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
@@ -242,37 +262,29 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
 <div style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; display: flex; flex-direction: column; background: {{c.bg}}">
   <div style="flex: none; height: 60px; box-sizing: border-box; padding: 8px 16px; display: flex; align-items: center; justify-content: space-between">
     <button type="button" aria-label="Zurück" onClick="{{back}}" style="width: 44px; height: 44px; border-radius: 22px; border: 0; background: {{c.surface}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
-    <span style="font-weight: 700; font-size: 17px">Gruppen-Tour</span>
+    <span style="font-weight: 700; font-size: 17px">Einladung</span>
     <span style="width: 44px; height: 44px"></span>
   </div>
   <div style="flex: 1; min-height: 0; overflow-y: auto; padding: 4px 24px 24px">
-    <div style="display: flex; align-items: center; gap: 14px; padding: 14px; background: {{c.surface}}; border-radius: 16px">
-      <div style="flex: none; width: 96px; height: 96px; box-sizing: border-box; border-radius: 12px; border: 1.5px dashed {{c.off}}; display: flex; align-items: center; justify-content: center; font-size: 13px; color: {{c.muted}}">QR-Code</div>
-      <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
-        <span style="font-weight: 700; font-size: 15px">Lade deine Gruppe ein</span>
-        <span style="font-size: 13px; line-height: 18px; color: {{c.muted}}">Die anderen scannen den Code oder öffnen den Link.</span>
-        <button type="button" onClick="{{shareLink}}" style="margin-top: 4px; align-self: flex-start; font: inherit; font-size: 14px; font-weight: 700; height: 44px; padding: 0 14px; border-radius: 22px; border: 1.5px solid {{c.ink}}; background: transparent; color: {{c.ink}}; cursor: pointer">Link teilen</button>
-      </div>
+    <span style="display: inline-flex; height: 28px; align-items: center; padding: 0 10px; border-radius: 14px; background: {{c.soft}}; font-size: 13px; font-weight: 700">So sieht es bei den Teilnehmern aus</span>
+    <h1 style="margin: 14px 0 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 28px; line-height: 32px; letter-spacing: -0.5px">{{joinTitle}}</h1>
+    <p style="margin: 8px 0 0; font-size: 15px; line-height: 22px; color: {{c.muted}}">{{joinMeta}}</p>
+    <div style="margin-top: 16px; display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 16px; background: {{c.surface}}">
+      <span style="flex: none; width: 44px; height: 44px; border-radius: 22px; background: {{c.primary}}; color: {{c.onPrimary}}; display: flex; align-items: center; justify-content: center; font-weight: 700">GL</span>
+      <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 15px">[Gruppenleitung] leitet die Tour</span><span style="font-size: 13px; color: {{c.muted}}">Einstellungen und Route legt die Leitung fest</span></span>
     </div>
-    <div style="margin: 20px 0 10px; display: flex; align-items: baseline; justify-content: space-between">
-      <h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 24px">Wer ist dabei?</h2>
-      <span style="font-size: 13px; color: {{c.muted}}">{{readyCount}}</span>
+    <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 10px; padding: 14px; border-radius: 16px; background: {{c.surface}}; font-size: 15px; line-height: 21px">
+      <span style="display: flex; gap: 10px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex: none; margin-top: 1px"><path d="M20 6 9 17l-5-5"></path></svg>Kein Konto nötig</span>
+      <span style="display: flex; gap: 10px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex: none; margin-top: 1px"><path d="M20 6 9 17l-5-5"></path></svg>Diese Tour ist für dich kostenlos</span>
+      <span style="display: flex; gap: 10px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex: none; margin-top: 1px"><path d="M20 6 9 17l-5-5"></path></svg>Ändert die Leitung die Route, bekommst du sie automatisch</span>
     </div>
-    <div style="display: flex; flex-direction: column; gap: 8px">
-      <sc-for list="{{members}}" as="m" hint-placeholder-count="4"><button type="button" onClick="{{m.tap}}" style="font: inherit; text-align: left; width: 100%; height: 64px; box-sizing: border-box; border: 0; border-radius: 16px; background: {{m.col.surface}}; color: {{m.col.ink}}; padding: 0 14px; display: flex; align-items: center; gap: 12px; cursor: pointer"><span style="flex: none; width: 40px; height: 40px; border-radius: 20px; font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center; {{m.avatar}}">{{m.init}}</span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 15px">{{m.name}}</span><span style="font-size: 13px; color: {{m.col.muted}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{m.sub}}</span></span><span style="flex: none; font-size: 13px; {{m.statusSt}}">{{m.status}}</span></button></sc-for>
-    </div>
-    <span style="display: block; margin-top: 8px; font-size: 13px; color: {{c.muted}}">{{memberHint}}</span>
-    <h2 style="margin: 20px 0 4px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 24px">Das habt ihr gemeinsam</h2>
-    <p style="margin: 0 0 10px; font-size: 13px; line-height: 18px; color: {{c.muted}}">Gemeinsames kommt zuerst, jeder bekommt etwas ab.</p>
-    <div style="display: flex; flex-wrap: wrap; gap: 6px">
-      <sc-for list="{{common}}" as="k" hint-placeholder-count="5"><span style="height: 32px; box-sizing: border-box; padding: 0 10px; border-radius: 16px; font-size: 13px; display: flex; align-items: center; {{k.st}}">{{k.label}}</span></sc-for>
-    </div>
-    <div style="margin-top: 16px; display: flex; flex-direction: column; background: {{c.surface}}; border-radius: 16px; padding: 0 8px 0 14px">
-      <sc-for list="{{groupOpts}}" as="x" hint-placeholder-count="2"><div style="height: 56px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid {{x.divider}}"><span style="flex: 1; font-size: 15px">{{x.label}}</span><button type="button" role="switch" aria-checked="{{x.sw.on}}" aria-label="{{x.label}}" onClick="{{x.toggle}}" style="flex: none; width: 60px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="width: 52px; height: 32px; box-sizing: border-box; border-radius: 16px; padding: 3px; display: flex; {{x.sw.track}}"><span style="width: 26px; height: 26px; border-radius: 13px; {{x.sw.knob}}"></span></span></button></div></sc-for>
+    <div style="margin-top: 16px; padding: 16px; border-radius: 16px; border: 1.5px dashed {{c.off}}; text-align: center">
+      <span style="display: block; font-weight: 700; font-size: 16px">Wartet auf den Start</span>
+      <span style="display: block; margin-top: 4px; font-size: 14px; line-height: 20px; color: {{c.muted}}">Die Leitung startet die Tour für alle. Hat sie schon begonnen, steigst du beim aktuellen Stopp der Gruppe ein.</span>
     </div>
   </div>
   <div style="flex: none; padding: 12px 24px 20px; border-top: 1px solid {{c.divider}}">
-    <button type="button" onClick="{{createGroupTour}}" style="font: inherit; width: 100%; height: 54px; border: 0; border-radius: 27px; background: {{c.accent}}; color: {{c.onAccent}}; font-weight: 700; font-size: 17px; cursor: pointer">Gruppen-Tour erstellen</button>
+    <button type="button" onClick="{{joinLive}}" style="font: inherit; width: 100%; height: 54px; border: 0; border-radius: 27px; background: {{c.accent}}; color: {{c.onAccent}}; font-weight: 700; font-size: 17px; cursor: pointer">Leitung startet (Vorschau)</button>
   </div>
 </div>
 </sc-if>
@@ -291,6 +303,19 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
     <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px">
       <sc-for list="{{badges}}" as="b" hint-placeholder-count="3"><span style="height: 26px; box-sizing: border-box; padding: 0 9px; border-radius: 13px; font-size: 12px; display: flex; align-items: center; {{b.st}}">{{b.label}}</span></sc-for>
     </div>
+    <sc-if value="{{groupOn}}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top: 14px; display: flex; align-items: center; gap: 14px; padding: 14px; background: {{c.surface}}; border-radius: 16px">
+        <div style="flex: none; width: 84px; height: 84px; box-sizing: border-box; border-radius: 12px; border: 1.5px dashed {{c.off}}; display: flex; align-items: center; justify-content: center; font-size: 13px; color: {{c.muted}}">QR-Code</div>
+        <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+          <span style="font-weight: 700; font-size: 15px">Gruppe einladen</span>
+          <span style="font-size: 13px; line-height: 18px; color: {{c.muted}}">{{joinedInfo}}</span>
+          <div style="margin-top: 2px; display: flex; flex-wrap: wrap; gap: 6px">
+            <button type="button" onClick="{{shareLink}}" style="font: inherit; font-size: 14px; font-weight: 700; height: 40px; padding: 0 12px; border-radius: 20px; border: 1.5px solid {{c.ink}}; background: transparent; color: {{c.ink}}; cursor: pointer">Link teilen</button>
+            <button type="button" onClick="{{openJoin}}" style="font: inherit; font-size: 13px; height: 40px; padding: 0 8px; border: 0; background: transparent; color: {{c.ink}}; text-decoration: underline; cursor: pointer">Ansicht der anderen</button>
+          </div>
+        </div>
+      </div>
+    </sc-if>
     <div style="margin-top: 14px; position: relative; width: 342px; height: 200px; border-radius: 18px; overflow: hidden; background: {{c.mapBg}}">
       <svg aria-hidden="true" width="342" height="200" viewBox="0 0 342 200" style="position: absolute; left: 0; top: 0">
         <rect x="198" y="96" width="52" height="40" rx="10" fill="{{c.park}}"></rect>
@@ -300,7 +325,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
         <polyline points="{{routePts}}" fill="none" stroke="{{c.ink}}" stroke-width="3.5" stroke-linejoin="round"></polyline>
         <circle cx="{{youX}}" cy="{{youY}}" r="8" fill="{{c.you}}" stroke="#FFFFFF" stroke-width="3"></circle>
       </svg>
-      <sc-for list="{{parkPins}}" as="pp" hint-placeholder-count="1"><span style="position: absolute; left: {{pp.left}}px; top: {{pp.top}}px; width: 24px; height: 24px; box-sizing: border-box; border-radius: 6px; background: {{c.you}}; border: 2px solid #FFFFFF; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700">P</span></sc-for>
+      <sc-for list="{{parkPins}}" as="pp" hint-placeholder-count="1"><span style="position: absolute; left: {{pp.left}}px; top: {{pp.top}}px; width: 24px; height: 24px; box-sizing: border-box; border-radius: 6px; background: {{c.you}}; border: 2px solid #FFFFFF; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700">{{pp.label}}</span></sc-for>
       <sc-for list="{{markers}}" as="m" hint-placeholder-count="6"><span style="position: absolute; left: {{m.left}}px; top: {{m.top}}px; width: 24px; height: 24px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; {{m.st}}">{{m.no}}</span></sc-for>
     </div>
     <div style="margin-top: 20px; display: flex; align-items: baseline; justify-content: space-between">
@@ -311,13 +336,13 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
     <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px">
       <sc-for list="{{rows}}" as="r" hint-placeholder-count="6">
         <sc-if value="{{r.isStop}}" hint-placeholder-val="{{ true }}"><div style="height: 64px; box-sizing: border-box; display: flex; align-items: center; gap: 10px; padding: 0 2px 0 12px; background: {{r.col.surface}}; border-radius: 14px"><span style="flex: none; width: 32px; height: 32px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; {{r.badge}}">{{r.no}}</span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{r.name}}</span><span style="font-size: 13px; color: {{r.col.muted}}">{{r.meta}}</span></span><button type="button" aria-label="{{r.swapLabel}}" onClick="{{r.swap}}" style="flex: none; width: 44px; height: 44px; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{r.col.muted}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 3 4 4-4 4"></path><path d="M20 7H4"></path><path d="m8 21-4-4 4-4"></path><path d="M4 17h16"></path></svg></button><button type="button" aria-label="{{r.removeLabel}}" onClick="{{r.remove}}" style="flex: none; width: 44px; height: 44px; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{r.col.muted}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div></sc-if>
-        <sc-if value="{{r.isNote}}" hint-placeholder-val="{{ false }}"><div style="min-height: 52px; box-sizing: border-box; display: flex; align-items: center; gap: 10px; padding: 6px 2px 6px 12px; border-radius: 14px; {{r.boxSt}}"><span style="flex: none; width: 32px; height: 32px; border-radius: 16px; background: {{r.col.surface}}; display: flex; align-items: center; justify-content: center"><sc-if value="{{r.ic.car}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"></path><path d="M3 12h18"></path><path d="M9 17h6"></path><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle></svg></sc-if><sc-if value="{{r.ic.walk}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"></circle><path d="M12 7l-1 7"></path><path d="M11 14l-3 7"></path><path d="M11 14l3 3 1 4"></path><path d="M8 11l4-3 3 3 2 1"></path></svg></sc-if><sc-if value="{{r.ic.cafe}}" hint-placeholder-val="{{ true }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"></path><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path><path d="M6 2v2"></path><path d="M10 2v2"></path><path d="M14 2v2"></path></svg></sc-if><sc-if value="{{r.ic.park}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-8"></path><path d="M7 14h10L12 3Z"></path><path d="M4 22h16"></path></svg></sc-if><sc-if value="{{r.ic.play}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V3h16v18"></path><path d="M9 3v11"></path><path d="M15 3v11"></path><path d="M8 14h8"></path></svg></sc-if><sc-if value="{{r.ic.wc}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; font-weight: 700; color: {{r.col.ink}}">WC</span></sc-if></span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px"><span style="font-weight: 700; font-size: 14px">{{r.title}}</span><span style="font-size: 13px; color: {{r.col.muted}}">{{r.sub}}</span></span><sc-if value="{{r.removable}}" hint-placeholder-val="{{ true }}"><button type="button" aria-label="{{r.removeLabel}}" onClick="{{r.remove}}" style="flex: none; width: 44px; height: 44px; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{r.col.muted}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></sc-if></div></sc-if>
+        <sc-if value="{{r.isNote}}" hint-placeholder-val="{{ false }}"><div style="min-height: 52px; box-sizing: border-box; display: flex; align-items: center; gap: 10px; padding: 6px 2px 6px 12px; border-radius: 14px; {{r.boxSt}}"><span style="flex: none; width: 32px; height: 32px; border-radius: 16px; background: {{r.col.surface}}; display: flex; align-items: center; justify-content: center"><sc-if value="{{r.ic.car}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"></path><path d="M3 12h18"></path><path d="M9 17h6"></path><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle></svg></sc-if><sc-if value="{{r.ic.tram}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="15" rx="3"></rect><path d="M4 11h16"></path><path d="M8 15h.01"></path><path d="M16 15h.01"></path><path d="m8 18-2 3"></path><path d="m16 18 2 3"></path></svg></sc-if><sc-if value="{{r.ic.bike}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="3.5"></circle><circle cx="18.5" cy="17.5" r="3.5"></circle><circle cx="15" cy="5" r="1"></circle><path d="M12 17.5V14l-3-3 4-3 2 3h2"></path></svg></sc-if><sc-if value="{{r.ic.walk}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"></circle><path d="M12 7l-1 7"></path><path d="M11 14l-3 7"></path><path d="M11 14l3 3 1 4"></path><path d="M8 11l4-3 3 3 2 1"></path></svg></sc-if><sc-if value="{{r.ic.cafe}}" hint-placeholder-val="{{ true }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"></path><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path><path d="M6 2v2"></path><path d="M10 2v2"></path><path d="M14 2v2"></path></svg></sc-if><sc-if value="{{r.ic.park}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-8"></path><path d="M7 14h10L12 3Z"></path><path d="M4 22h16"></path></svg></sc-if><sc-if value="{{r.ic.play}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V3h16v18"></path><path d="M9 3v11"></path><path d="M15 3v11"></path><path d="M8 14h8"></path></svg></sc-if><sc-if value="{{r.ic.wc}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; font-weight: 700; color: {{r.col.ink}}">WC</span></sc-if></span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px"><span style="font-weight: 700; font-size: 14px">{{r.title}}</span><span style="font-size: 13px; color: {{r.col.muted}}">{{r.sub}}</span></span><sc-if value="{{r.removable}}" hint-placeholder-val="{{ true }}"><button type="button" aria-label="{{r.removeLabel}}" onClick="{{r.remove}}" style="flex: none; width: 44px; height: 44px; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{r.col.muted}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></sc-if></div></sc-if>
       </sc-for>
     </div>
   </div>
   <div style="flex: none; padding: 12px 24px 20px; border-top: 1px solid {{c.divider}}; display: flex; gap: 10px">
     <button type="button" onClick="{{replan}}" style="flex: 1; font: inherit; font-weight: 700; font-size: 16px; height: 54px; border-radius: 27px; border: 1.5px solid {{c.ink}}; background: {{c.surface}}; color: {{c.ink}}; cursor: pointer">Neu planen</button>
-    <button type="button" onClick="{{startTour}}" style="flex: 1.4; font: inherit; font-weight: 700; font-size: 17px; height: 54px; border: 0; border-radius: 27px; background: {{c.accent}}; color: {{c.onAccent}}; cursor: pointer">Tour starten</button>
+    <button type="button" onClick="{{startTour}}" style="flex: 1.4; font: inherit; font-weight: 700; font-size: 17px; height: 54px; border: 0; border-radius: 27px; background: {{c.accent}}; color: {{c.onAccent}}; cursor: pointer">{{startLabel}}</button>
   </div>
 </div>
 </sc-if>
@@ -329,6 +354,13 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
     <div style="flex: 1; min-width: 0; height: 44px; box-sizing: border-box; border-radius: 22px; background: {{c.surface}}; padding: 0 14px; display: flex; align-items: center; gap: 8px; font-size: 14px"><span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis"><strong>Stopp {{liveNo}} von {{liveTotal}}</strong> · {{nextInfo}}</span></div>
   </div>
   <div style="flex: 1; min-height: 0; overflow-y: auto; padding: 4px 24px 24px">
+    <sc-if value="{{liveGroupOn}}" hint-placeholder-val="{{ false }}">
+      <div style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 14px; border-radius: 16px; background: {{c.soft}}">
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        <span style="flex: 1; font-size: 14px; line-height: 19px">{{liveGroupText}}</span>
+        <sc-if value="{{liveLead}}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{changeRoute}}" style="flex: none; font: inherit; font-size: 13px; font-weight: 700; height: 36px; padding: 0 10px; border-radius: 18px; border: 1.5px solid {{c.ink}}; background: transparent; color: {{c.ink}}; cursor: pointer">Route ändern</button></sc-if>
+      </div>
+    </sc-if>
     <div style="position: relative; width: 342px; height: 200px; border-radius: 18px; overflow: hidden; background: {{c.mapBg}}">
       <svg aria-hidden="true" width="342" height="200" viewBox="0 0 342 200" style="position: absolute; left: 0; top: 0">
         <rect x="198" y="96" width="52" height="40" rx="10" fill="{{c.park}}"></rect>
@@ -339,9 +371,11 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
         <circle cx="{{liveYouX}}" cy="{{liveYouY}}" r="9" fill="{{c.you}}" stroke="#FFFFFF" stroke-width="3"></circle>
       </svg>
       <sc-for list="{{liveMarkers}}" as="m" hint-placeholder-count="6"><span style="position: absolute; left: {{m.left}}px; top: {{m.top}}px; width: 24px; height: 24px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; {{m.st}}">{{m.no}}</span></sc-for>
+      <sc-if value="{{wcOn}}" hint-placeholder-val="{{ false }}"><sc-for list="{{wcPins}}" as="w" hint-placeholder-count="2"><span aria-label="Öffentliche Toilette" style="position: absolute; left: {{w.left}}px; top: {{w.top}}px; width: 26px; height: 22px; box-sizing: border-box; border-radius: 6px; background: {{c.surface}}; border: 1.5px solid {{c.ink}}; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: {{c.ink}}">WC</span></sc-for></sc-if>
+      <button type="button" aria-pressed="{{wcPressed}}" aria-label="Toiletten auf der Karte zeigen" onClick="{{toggleWc}}" style="position: absolute; right: 8px; top: 8px; font: inherit; font-size: 13px; font-weight: 700; height: 34px; padding: 0 10px; border-radius: 17px; border: 0; display: flex; align-items: center; gap: 6px; cursor: pointer; {{wcBtnSt}}">WC <span style="width: 26px; height: 16px; box-sizing: border-box; border-radius: 8px; padding: 2px; display: flex; {{wcSw.track}}"><span style="width: 12px; height: 12px; border-radius: 6px; {{wcSw.knob}}"></span></span></button>
     </div>
     <div style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px">
-      <sc-if value="{{liveTip}}" hint-placeholder-val="{{ true }}"><span style="height: 30px; box-sizing: border-box; padding: 0 10px; border-radius: 15px; background: {{c.soft}}; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 5px"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"></path><path d="M11 3 8 9l4 13 4-13-3-6"></path><path d="M2 9h20"></path></svg>Geheimtipp</span></sc-if>
+      
       <span style="height: 30px; box-sizing: border-box; padding: 0 10px; border-radius: 15px; border: 1.5px solid {{c.border}}; font-size: 13px; display: flex; align-items: center">{{liveStyle}}</span>
       <span style="height: 30px; box-sizing: border-box; padding: 0 10px; border-radius: 15px; border: 1.5px solid {{c.border}}; font-size: 13px; display: flex; align-items: center">{{liveTopic}}</span>
     </div>
@@ -368,7 +402,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
       <button type="button" onClick="{{nextStop}}" style="flex: none; font: inherit; font-size: 14px; height: 44px; padding: 0 12px; border-radius: 22px; border: 1.5px solid {{c.border}}; background: {{c.surface}}; color: {{c.ink}}; cursor: pointer">Überspringen</button>
     </div>
     <button type="button" onClick="{{openAsk}}" style="margin-top: 16px; font: inherit; font-weight: 700; font-size: 16px; width: 100%; height: 54px; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 27px; border: 2px solid {{c.ink}}; background: transparent; color: {{c.ink}}; cursor: pointer"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"></rect><path d="M19 10v1a7 7 0 0 1-14 0v-1"></path><path d="M12 18v4"></path></svg>Was ist das hier?</button>
-    <p style="margin: 8px 0 0; text-align: center; font-size: 13px; color: {{c.muted}}">Die Erzählung startet automatisch, sobald du ankommst.</p>
+    <p style="margin: 8px 0 0; text-align: center; font-size: 13px; color: {{c.muted}}">{{liveFooter}}</p>
   </div>
 </div>
 </sc-if>
@@ -438,10 +472,6 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
     <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
       <sc-for list="{{exModes}}" as="e" hint-placeholder-count="3"><button type="button" aria-pressed="{{e.pressed}}" onClick="{{e.pick}}" style="font: inherit; font-size: 15px; height: 44px; border: 0; border-radius: 10px; cursor: pointer; {{e.st}}">{{e.label}}</button></sc-for>
     </div>
-    <div style="margin-top: 12px; display: flex; align-items: center; gap: 12px; padding: 6px 8px 6px 14px; background: {{c.surface}}; border-radius: 16px">
-      <span style="flex: 1; font-size: 15px">Unbekannte Ecken bevorzugen</span>
-      <button type="button" role="switch" aria-checked="{{sw.hidden.on}}" aria-label="Unbekannte Ecken bevorzugen" onClick="{{sw.hidden.toggle}}" style="flex: none; width: 60px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="width: 52px; height: 32px; box-sizing: border-box; border-radius: 16px; padding: 3px; display: flex; {{sw.hidden.track}}"><span style="width: 26px; height: 26px; border-radius: 13px; {{sw.hidden.knob}}"></span></span></button>
-    </div>
   </div>
   <div style="flex: none; padding: 12px 24px 20px; border-top: 1px solid {{c.divider}}">
     <button type="button" onClick="{{endExplore}}" style="font: inherit; width: 100%; height: 54px; border: 0; border-radius: 27px; background: {{c.accent}}; color: {{c.onAccent}}; font-weight: 700; font-size: 17px; cursor: pointer">Erkundung beenden</button>
@@ -466,10 +496,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
       </div>
       <p style="margin: 12px 0 0; font-size: 14px; line-height: 20px; opacity: 0.85">{{learned}}</p>
     </div>
-    <div style="margin: 24px 0 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px">
-      <h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 24px">Gespeicherte Touren</h2>
-      <button type="button" onClick="{{receiveTour}}" style="flex: none; font: inherit; font-size: 14px; font-weight: 700; height: 40px; padding: 0 12px; border-radius: 20px; border: 1.5px solid {{c.ink}}; background: transparent; color: {{c.ink}}; display: flex; align-items: center; gap: 6px; cursor: pointer"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><path d="M14 14h3v3h-3z"></path><path d="M21 14v7h-7"></path></svg>Tour empfangen</button>
-    </div>
+    <h2 style="margin: 24px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 24px">Gespeicherte Touren</h2>
     <div style="display: flex; flex-direction: column; gap: 8px">
       <sc-for list="{{savedRows}}" as="t" hint-placeholder-count="3"><div style="height: 72px; box-sizing: border-box; display: flex; align-items: center; gap: 4px; padding: 0 4px 0 0; background: {{t.col.surface}}; border-radius: 16px"><button type="button" onClick="{{t.open}}" style="flex: 1; min-width: 0; font: inherit; text-align: left; height: 72px; border: 0; background: transparent; color: {{t.col.ink}}; padding: 0 0 0 14px; display: flex; align-items: center; gap: 12px; cursor: pointer"><span style="flex: none; width: 44px; height: 44px; border-radius: 22px; background: {{t.col.bg}}; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">{{t.modeShort}}</span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{t.title}}</span><span style="font-size: 13px; color: {{t.col.muted}}">{{t.meta}}</span></span></button><button type="button" aria-label="{{t.shareLabel}}" onClick="{{t.share}}" style="flex: none; width: 44px; height: 44px; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{t.col.muted}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.6 13.5 6.8 4"></path><path d="m15.4 6.5-6.8 4"></path></svg></button></div></sc-for>
     </div>
@@ -594,27 +621,50 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
               </div>
             </sc-if>
             <p style="margin: 8px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{whomHint}}</p>
+            <sc-if value="{{isGroup}}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top: 10px; padding: 12px 14px; border-radius: 14px; background: {{c.soft}}; display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 20px">
+                <span style="font-weight: 700">Du leitest die Gruppe</span>
+                <span>Nur du legst die Einstellungen fest und teilst danach einen Link. Die anderen brauchen nur die App, kein Konto, und die Tour ist für sie kostenlos. Unterwegs startest du für alle und kannst die Route noch ändern.</span>
+              </div>
+            </sc-if>
 
             <h2 style="margin: 22px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 18px; line-height: 24px">Unterwegs mit</h2>
             <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
               <button type="button" aria-pressed="{{modes.walk.pressed}}" onClick="{{modes.walk.pick}}" style="font: inherit; font-size: 13px; height: 68px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; border-radius: 14px; cursor: pointer; {{modes.walk.st}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{modes.walk.icon}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"></circle><path d="M12 7l-1 7"></path><path d="M11 14l-3 7"></path><path d="M11 14l3 3 1 4"></path><path d="M8 11l4-3 3 3 2 1"></path></svg>Zu Fuß</button>
-              <button type="button" aria-pressed="{{modes.bike.pressed}}" onClick="{{modes.bike.pick}}" style="font: inherit; font-size: 13px; height: 68px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; border-radius: 14px; cursor: pointer; {{modes.bike.st}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{modes.bike.icon}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="3.5"></circle><circle cx="18.5" cy="17.5" r="3.5"></circle><circle cx="15" cy="5" r="1"></circle><path d="M12 17.5V14l-3-3 4-3 2 3h2"></path></svg>Fahrrad</button>
+              <button type="button" aria-pressed="{{modes.bike.pressed}}" onClick="{{modes.bike.pick}}" style="font: inherit; font-size: 13px; height: 68px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; border-radius: 14px; cursor: pointer; {{modes.bike.st}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{modes.bike.icon}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="3.5"></circle><circle cx="18.5" cy="17.5" r="3.5"></circle><circle cx="15" cy="5" r="1"></circle><path d="M12 17.5V14l-3-3 4-3 2 3h2"></path></svg><span style="text-align: center; line-height: 15px">Rad / <span style="white-space: nowrap">E-Scooter</span></span></button>
               <button type="button" aria-pressed="{{modes.transit.pressed}}" onClick="{{modes.transit.pick}}" style="font: inherit; font-size: 13px; height: 68px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; border-radius: 14px; cursor: pointer; {{modes.transit.st}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{modes.transit.icon}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="15" rx="3"></rect><path d="M4 11h16"></path><path d="M8 15h.01"></path><path d="M16 15h.01"></path><path d="m8 18-2 3"></path><path d="m16 18 2 3"></path></svg>Öffis</button>
               <button type="button" aria-pressed="{{modes.car.pressed}}" onClick="{{modes.car.pick}}" style="font: inherit; font-size: 13px; height: 68px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; border-radius: 14px; cursor: pointer; {{modes.car.st}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{modes.car.icon}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"></path><path d="M3 12h18"></path><path d="M9 17h6"></path><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle></svg>Auto</button>
             </div>
             <p style="margin: 8px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{modeHint}}</p>
-            <sc-if value="{{isCar}}" hint-placeholder-val="{{ false }}">
-              <span style="display: block; margin: 12px 0 6px; font-size: 13px; color: {{c.muted}}">Unterwegs auch zu Fuß?</span>
-              <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
-                <sc-for list="{{carWalks}}" as="w" hint-placeholder-count="3"><button type="button" aria-pressed="{{w.pressed}}" onClick="{{w.pick}}" style="font: inherit; font-size: 14px; height: 40px; border: 0; border-radius: 10px; cursor: pointer; {{w.st}}">{{w.label}}</button></sc-for>
+            <sc-if value="{{isWalk}}" hint-placeholder-val="{{ true }}">
+              <div style="margin: 12px 0 4px; display: flex; align-items: baseline; justify-content: space-between"><span style="font-size: 13px; color: {{c.muted}}">Gehstrecke gesamt</span><span style="font-size: 15px; font-weight: 700">{{walkKmLabel}}</span></div>
+              <input type="range" min="1" max="10" step="0.5" value="{{walkKm}}" onChange="{{setWalkKm}}" aria-label="Gehstrecke gesamt in Kilometern" style="width: 100%; height: 30px; margin: 0; accent-color: {{c.primary}}">
+              <div style="display: flex; justify-content: space-between; font-size: 12px; color: {{c.muted}}"><span>1 km</span><span>10 km</span></div>
+            </sc-if>
+            <sc-if value="{{showWalkTime}}" hint-placeholder-val="{{ false }}">
+              <span style="display: block; margin: 12px 0 6px; font-size: 13px; color: {{c.muted}}">Zu Fuß unterwegs</span>
+              <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
+                <sc-for list="{{walkTimes}}" as="w" hint-placeholder-count="4"><button type="button" aria-pressed="{{w.pressed}}" onClick="{{w.pick}}" style="font: inherit; font-size: 14px; height: 40px; border: 0; border-radius: 10px; cursor: pointer; {{w.st}}">{{w.label}}</button></sc-for>
               </div>
-              <p style="margin: 8px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{carWalkHint}}</p>
-              <sc-if value="{{showParkOnly}}" hint-placeholder-val="{{ true }}">
-                <div style="margin-top: 8px; display: flex; align-items: center; gap: 12px; padding: 4px 8px 4px 14px; background: {{c.surface}}; border-radius: 16px">
-                  <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px">Halte nur mit Parkplatz</span><span style="font-size: 13px; color: {{c.muted}}">Stopps nur dort, wo man in der Nähe parken kann</span></span>
-                  <button type="button" role="switch" aria-checked="{{parkSw.on}}" aria-label="Halte nur mit Parkplatz" onClick="{{parkSw.toggle}}" style="flex: none; width: 60px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="width: 48px; height: 28px; box-sizing: border-box; border-radius: 14px; padding: 3px; display: flex; {{parkSw.track}}"><span style="width: 22px; height: 22px; border-radius: 11px; {{parkSw.knob}}"></span></span></button>
-                </div>
-              </sc-if>
+              <p style="margin: 8px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{walkTimeHint}}</p>
+            </sc-if>
+            <sc-if value="{{showParkOnly}}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top: 8px; display: flex; align-items: center; gap: 12px; padding: 4px 8px 4px 14px; background: {{c.surface}}; border-radius: 16px">
+                <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px">Halte nur mit Parkplatz</span><span style="font-size: 13px; color: {{c.muted}}">Stopps nur dort, wo man in der Nähe parken kann</span></span>
+                <button type="button" role="switch" aria-checked="{{parkSw.on}}" aria-label="Halte nur mit Parkplatz" onClick="{{parkSw.toggle}}" style="flex: none; width: 60px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="width: 48px; height: 28px; box-sizing: border-box; border-radius: 14px; padding: 3px; display: flex; {{parkSw.track}}"><span style="width: 22px; height: 22px; border-radius: 11px; {{parkSw.knob}}"></span></span></button>
+              </div>
+            </sc-if>
+            <sc-if value="{{isTransit}}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top: 8px; display: flex; align-items: center; gap: 12px; padding: 4px 8px 4px 14px; background: {{c.surface}}; border-radius: 16px">
+                <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px">Hop-on-Hop-off</span><span style="font-size: 13px; color: {{c.muted}}">Geplante Ausstiege mit kurzer Runde, bevorzugt Linien an Sehenswürdigkeiten vorbei</span></span>
+                <button type="button" role="switch" aria-checked="{{hopSw.on}}" aria-label="Hop-on-Hop-off" onClick="{{hopSw.toggle}}" style="flex: none; width: 60px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="width: 48px; height: 28px; box-sizing: border-box; border-radius: 14px; padding: 3px; display: flex; {{hopSw.track}}"><span style="width: 22px; height: 22px; border-radius: 11px; {{hopSw.knob}}"></span></span></button>
+              </div>
+            </sc-if>
+            <span style="display: block; margin: 14px 0 6px; font-size: 13px; color: {{c.muted}}">Tourart</span>
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
+              <sc-for list="{{tourTypes}}" as="t" hint-placeholder-count="2"><button type="button" aria-pressed="{{t.pressed}}" onClick="{{t.pick}}" style="font: inherit; font-size: 14px; height: 40px; border: 0; border-radius: 10px; cursor: pointer; {{t.st}}">{{t.label}}</button></sc-for>
+            </div>
+            <p style="margin: 8px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{tourTypeHint}}</p>
             </sc-if>
 
             <h2 style="margin: 22px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 18px; line-height: 24px">Dauer, Tempo und Route</h2>
@@ -638,11 +688,6 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
               <sc-for list="{{tourStyles}}" as="s" hint-placeholder-count="3"><button type="button" aria-pressed="{{s.pressed}}" onClick="{{s.pick}}" style="font: inherit; font-size: 14px; height: 40px; padding: 0 12px; border-radius: 20px; cursor: pointer; {{s.st}}">{{s.label}}</button></sc-for>
             </div>
             <span style="display: block; margin: 12px 0 6px; font-size: 13px; color: {{c.muted}}">{{lenLabel}}</span>
-            <sc-if value="{{tourKids}}" hint-placeholder-val="{{ false }}">
-              <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
-                <sc-for list="{{tourLens}}" as="l" hint-placeholder-count="4"><button type="button" aria-pressed="{{l.pressed}}" onClick="{{l.pick}}" style="font: inherit; font-size: 14px; height: 40px; border: 0; border-radius: 10px; cursor: pointer; {{l.st}}">{{l.label}}</button></sc-for>
-              </div>
-            </sc-if>
             <p style="margin: 6px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{lenHint}}</p>
             <span style="display: block; margin: 12px 0 6px; font-size: 13px; color: {{c.muted}}">Ausgabe</span>
             <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
@@ -676,7 +721,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
                 </sc-if>
                 <sc-if value="{{r.isNote}}" hint-placeholder-val="{{ false }}">
                   <div style="display: flex; align-items: center; gap: 10px; padding: 8px 4px 8px 10px; border-radius: 14px; {{r.boxSt}}">
-                    <span style="flex: none; width: 30px; height: 30px; border-radius: 15px; background: {{r.col.surface}}; display: flex; align-items: center; justify-content: center"><sc-if value="{{r.ic.car}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"></path><path d="M3 12h18"></path><path d="M9 17h6"></path><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle></svg></sc-if><sc-if value="{{r.ic.walk}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"></circle><path d="M12 7l-1 7"></path><path d="M11 14l-3 7"></path><path d="M11 14l3 3 1 4"></path><path d="M8 11l4-3 3 3 2 1"></path></svg></sc-if><sc-if value="{{r.ic.cafe}}" hint-placeholder-val="{{ true }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"></path><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path><path d="M6 2v2"></path><path d="M10 2v2"></path><path d="M14 2v2"></path></svg></sc-if><sc-if value="{{r.ic.park}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-8"></path><path d="M7 14h10L12 3Z"></path><path d="M4 22h16"></path></svg></sc-if><sc-if value="{{r.ic.play}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V3h16v18"></path><path d="M9 3v11"></path><path d="M15 3v11"></path><path d="M8 14h8"></path></svg></sc-if><sc-if value="{{r.ic.wc}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; font-weight: 700; color: {{r.col.ink}}">WC</span></sc-if></span>
+                    <span style="flex: none; width: 30px; height: 30px; border-radius: 15px; background: {{r.col.surface}}; display: flex; align-items: center; justify-content: center"><sc-if value="{{r.ic.car}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"></path><path d="M3 12h18"></path><path d="M9 17h6"></path><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle></svg></sc-if><sc-if value="{{r.ic.tram}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="15" rx="3"></rect><path d="M4 11h16"></path><path d="M8 15h.01"></path><path d="M16 15h.01"></path><path d="m8 18-2 3"></path><path d="m16 18 2 3"></path></svg></sc-if><sc-if value="{{r.ic.bike}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="3.5"></circle><circle cx="18.5" cy="17.5" r="3.5"></circle><circle cx="15" cy="5" r="1"></circle><path d="M12 17.5V14l-3-3 4-3 2 3h2"></path></svg></sc-if><sc-if value="{{r.ic.walk}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"></circle><path d="M12 7l-1 7"></path><path d="M11 14l-3 7"></path><path d="M11 14l3 3 1 4"></path><path d="M8 11l4-3 3 3 2 1"></path></svg></sc-if><sc-if value="{{r.ic.cafe}}" hint-placeholder-val="{{ true }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"></path><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path><path d="M6 2v2"></path><path d="M10 2v2"></path><path d="M14 2v2"></path></svg></sc-if><sc-if value="{{r.ic.park}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-8"></path><path d="M7 14h10L12 3Z"></path><path d="M4 22h16"></path></svg></sc-if><sc-if value="{{r.ic.play}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V3h16v18"></path><path d="M9 3v11"></path><path d="M15 3v11"></path><path d="M8 14h8"></path></svg></sc-if><sc-if value="{{r.ic.wc}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; font-weight: 700; color: {{r.col.ink}}">WC</span></sc-if></span>
                     <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 14px">{{r.title}}</span><span style="font-size: 13px; color: {{r.col.muted}}">{{r.sub}}</span></span>
                     <sc-if value="{{r.removable}}" hint-placeholder-val="{{ true }}"><button type="button" aria-label="{{r.removeLabel}}" onClick="{{r.remove}}" style="flex: none; width: 36px; height: 36px; border: 0; border-radius: 18px; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></sc-if>
                   </div>
@@ -695,7 +740,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
 
         <div style="flex: none; padding: 12px 24px 16px; border-top: 1px solid {{c.divider}}; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 8px">
           <button type="button" onClick="{{savePlan}}" style="font: inherit; font-size: 15px; font-weight: 700; height: 48px; border-radius: 24px; border: 1.5px solid {{c.ink}}; background: transparent; color: {{c.ink}}; cursor: pointer">{{saveLabel}}</button>
-          <button type="button" onClick="{{openSend}}" style="font: inherit; font-size: 15px; font-weight: 700; height: 48px; border-radius: 24px; border: 0; background: {{c.accent}}; color: {{c.onAccent}}; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{c.onAccent}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"></rect><path d="M11 18h2"></path></svg>Aufs Handy schicken</button>
+          <button type="button" onClick="{{openSend}}" style="font: inherit; font-size: 15px; font-weight: 700; height: 48px; border-radius: 24px; border: 0; background: {{c.accent}}; color: {{c.onAccent}}; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{c.onAccent}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"></rect><path d="M11 18h2"></path></svg>{{sendLabel}}</button>
         </div>
       </section>
 
@@ -730,8 +775,9 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
         <sc-if value="{{startIsFlag}}" hint-placeholder-val="{{ true }}">
           <span style="position: absolute; left: {{startPos.left}}%; top: {{startPos.top}}%; transform: translate(-50%, -50%); width: 34px; height: 34px; box-sizing: border-box; border-radius: 17px; background: {{c.you}}; border: 3px solid #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25)"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><path d="M4 22V15"></path></svg></span>
         </sc-if>
-        <sc-for list="{{parkPins}}" as="pp" hint-placeholder-count="1"><span aria-label="{{pp.label}}" style="position: absolute; left: {{pp.left}}%; top: {{pp.top}}%; transform: translate(-50%, -50%); width: 34px; height: 34px; box-sizing: border-box; border-radius: 9px; background: {{c.you}}; border: 3px solid #FFFFFF; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25)">P</span></sc-for>
-        <sc-for list="{{pausePins}}" as="r" hint-placeholder-count="1"><span aria-label="{{r.title}}" style="position: absolute; left: {{r.left}}%; top: {{r.top}}%; transform: translate(-50%, -50%); width: 30px; height: 30px; border-radius: 15px; background: {{c.surface}}; border: 2px solid {{c.ink}}; box-sizing: border-box; display: flex; align-items: center; justify-content: center"><sc-if value="{{r.ic.car}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"></path><path d="M3 12h18"></path><path d="M9 17h6"></path><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle></svg></sc-if><sc-if value="{{r.ic.walk}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"></circle><path d="M12 7l-1 7"></path><path d="M11 14l-3 7"></path><path d="M11 14l3 3 1 4"></path><path d="M8 11l4-3 3 3 2 1"></path></svg></sc-if><sc-if value="{{r.ic.cafe}}" hint-placeholder-val="{{ true }}"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"></path><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path><path d="M6 2v2"></path><path d="M10 2v2"></path><path d="M14 2v2"></path></svg></sc-if><sc-if value="{{r.ic.park}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-8"></path><path d="M7 14h10L12 3Z"></path><path d="M4 22h16"></path></svg></sc-if><sc-if value="{{r.ic.play}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V3h16v18"></path><path d="M9 3v11"></path><path d="M15 3v11"></path><path d="M8 14h8"></path></svg></sc-if><sc-if value="{{r.ic.wc}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; font-weight: 700; color: {{r.col.ink}}">WC</span></sc-if></span></sc-for>
+        <sc-for list="{{parkPins}}" as="pp" hint-placeholder-count="1"><span aria-label="{{pp.label}}" style="position: absolute; left: {{pp.left}}%; top: {{pp.top}}%; transform: translate(-50%, -50%); width: 34px; height: 34px; box-sizing: border-box; border-radius: 9px; background: {{c.you}}; border: 3px solid #FFFFFF; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25)">{{pp.letter}}</span></sc-for>
+        <sc-for list="{{pausePins}}" as="r" hint-placeholder-count="1"><span aria-label="{{r.title}}" style="position: absolute; left: {{r.left}}%; top: {{r.top}}%; transform: translate(-50%, -50%); width: 30px; height: 30px; border-radius: 15px; background: {{c.surface}}; border: 2px solid {{c.ink}}; box-sizing: border-box; display: flex; align-items: center; justify-content: center"><sc-if value="{{r.ic.car}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"></path><path d="M3 12h18"></path><path d="M9 17h6"></path><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle></svg></sc-if><sc-if value="{{r.ic.tram}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="15" rx="3"></rect><path d="M4 11h16"></path><path d="M8 15h.01"></path><path d="M16 15h.01"></path><path d="m8 18-2 3"></path><path d="m16 18 2 3"></path></svg></sc-if><sc-if value="{{r.ic.bike}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="3.5"></circle><circle cx="18.5" cy="17.5" r="3.5"></circle><circle cx="15" cy="5" r="1"></circle><path d="M12 17.5V14l-3-3 4-3 2 3h2"></path></svg></sc-if><sc-if value="{{r.ic.walk}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"></circle><path d="M12 7l-1 7"></path><path d="M11 14l-3 7"></path><path d="M11 14l3 3 1 4"></path><path d="M8 11l4-3 3 3 2 1"></path></svg></sc-if><sc-if value="{{r.ic.cafe}}" hint-placeholder-val="{{ true }}"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"></path><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path><path d="M6 2v2"></path><path d="M10 2v2"></path><path d="M14 2v2"></path></svg></sc-if><sc-if value="{{r.ic.park}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-8"></path><path d="M7 14h10L12 3Z"></path><path d="M4 22h16"></path></svg></sc-if><sc-if value="{{r.ic.play}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V3h16v18"></path><path d="M9 3v11"></path><path d="M15 3v11"></path><path d="M8 14h8"></path></svg></sc-if><sc-if value="{{r.ic.wc}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; font-weight: 700; color: {{r.col.ink}}">WC</span></sc-if></span></sc-for>
+        <sc-if value="{{wcOn}}" hint-placeholder-val="{{ false }}"><sc-for list="{{wcPins}}" as="w" hint-placeholder-count="2"><span aria-label="Öffentliche Toilette" style="position: absolute; left: {{w.left}}%; top: {{w.top}}%; transform: translate(-50%, -50%); width: 32px; height: 26px; box-sizing: border-box; border-radius: 7px; background: {{c.surface}}; border: 2px solid {{c.ink}}; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: {{c.ink}}">WC</span></sc-for></sc-if>
         <sc-for list="{{markers}}" as="m" hint-placeholder-count="6"><button type="button" aria-label="{{m.label}}" onClick="{{m.pick}}" style="position: absolute; left: {{m.left}}%; top: {{m.top}}%; transform: translate(-50%, -50%); width: 34px; height: 34px; box-sizing: border-box; padding: 0; display: flex; align-items: center; justify-content: center; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; {{m.st}}">{{m.no}}</button></sc-for>
 
         <div style="position: absolute; left: 20px; top: 20px; max-width: 440px; box-sizing: border-box; padding: 16px 18px; border-radius: 18px; background: {{c.surface}}; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12)">
@@ -746,13 +792,13 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
         <div style="position: absolute; right: 20px; top: 20px; display: flex; flex-direction: column; gap: 8px">
           <button type="button" aria-label="Hineinzoomen" onClick="{{zoom}}" style="width: 44px; height: 44px; border-radius: 12px; border: 0; background: {{c.surface}}; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12); display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
           <button type="button" aria-label="Herauszoomen" onClick="{{zoom}}" style="width: 44px; height: 44px; border-radius: 12px; border: 0; background: {{c.surface}}; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12); display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"></path></svg></button>
+          <button type="button" aria-pressed="{{wcPressed}}" aria-label="Toiletten auf der Karte zeigen" onClick="{{toggleWc}}" style="width: 44px; height: 44px; border-radius: 12px; border: 0; display: flex; align-items: center; justify-content: center; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12); {{wcBtnSt}}">WC</button>
         </div>
 
         <div style="position: absolute; left: 20px; bottom: 20px; padding: 10px 14px; border-radius: 14px; background: {{c.surface}}; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12); display: flex; align-items: center; gap: 14px; font-size: 13px">
           <span style="display: flex; align-items: center; gap: 6px"><span style="width: 16px; height: 16px; border-radius: 8px; background: {{c.accent}}; border: 2px solid {{c.primary}}; box-sizing: border-box"></span>Stopp</span>
-          <span style="display: flex; align-items: center; gap: 6px"><span style="width: 16px; height: 16px; border-radius: 4px; background: {{c.primary}}; border: 2px solid {{c.accent}}; box-sizing: border-box"></span>Geheimtipp</span>
-          <span style="display: flex; align-items: center; gap: 6px"><span style="width: 16px; height: 16px; border-radius: 8px; background: {{c.you}}; border: 2px solid #FFFFFF; box-sizing: border-box"></span>Start</span>
-          <span style="display: flex; align-items: center; gap: 6px"><span style="width: 16px; height: 16px; border-radius: 5px; background: {{c.you}}; color: #FFFFFF; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center">P</span>Parken</span>
+                    <span style="display: flex; align-items: center; gap: 6px"><span style="width: 16px; height: 16px; border-radius: 8px; background: {{c.you}}; border: 2px solid #FFFFFF; box-sizing: border-box"></span>Start</span>
+          <span style="display: flex; align-items: center; gap: 6px"><span style="width: 16px; height: 16px; border-radius: 5px; background: {{c.you}}; color: #FFFFFF; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center">{{legendPin}}</span>{{legendPinLabel}}</span>
           <span style="display: flex; align-items: center; gap: 6px"><span style="width: 16px; height: 16px; border-radius: 8px; background: {{c.surface}}; border: 2px solid {{c.ink}}; box-sizing: border-box"></span>Pause</span>
         </div>
 
@@ -858,7 +904,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
                   <sc-for list="{{auds}}" as="a" hint-placeholder-count="2"><button type="button" aria-pressed="{{a.pressed}}" onClick="{{a.pick}}" style="font: inherit; font-size: 15px; height: 42px; border: 0; border-radius: 10px; cursor: pointer; {{a.st}}">{{a.label}}</button></sc-for>
                 </div>
                 <span style="display: block; margin: 12px 0 6px; font-size: 13px; color: {{c.muted}}">{{levelLabel}}</span>
-                <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
+                <div style="display: grid; grid-template-columns: repeat({{levelCols}}, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
                   <sc-for list="{{levels}}" as="l" hint-placeholder-count="3"><button type="button" aria-pressed="{{l.pressed}}" onClick="{{l.pick}}" style="font: inherit; font-size: 15px; height: 42px; border: 0; border-radius: 10px; cursor: pointer; {{l.st}}">{{l.label}}</button></sc-for>
                 </div>
                 <p style="margin: 10px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{levelHint}}</p>
@@ -881,14 +927,10 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
                     <sc-for list="{{kidStyles}}" as="s" hint-placeholder-count="3"><button type="button" aria-pressed="{{s.pressed}}" onClick="{{s.pick}}" style="font: inherit; text-align: left; width: 100%; height: 50px; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 0 14px; border-radius: 14px; cursor: pointer; {{s.st}}"><span style="font-weight: 700; font-size: 15px">{{s.label}}</span><span style="font-size: 13px; {{s.subSt}}">{{s.sub}}</span></button></sc-for>
                   </div>
                 </sc-if>
-                <div style="margin-top: 16px; display: flex; align-items: center; gap: 12px">
-                  <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 15px">Unbekannte Ecken bevorzugen</span><span style="font-size: 13px; color: {{c.muted}}">Mehr Geheimtipps in jeder Tour</span></span>
-                  <button type="button" role="switch" aria-checked="{{hiddenSw.on}}" aria-label="Unbekannte Ecken bevorzugen" onClick="{{hiddenSw.toggle}}" style="flex: none; width: 60px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="width: 48px; height: 28px; box-sizing: border-box; border-radius: 14px; padding: 3px; display: flex; {{hiddenSw.track}}"><span style="width: 22px; height: 22px; border-radius: 11px; {{hiddenSw.knob}}"></span></span></button>
-                </div>
               </div>
               <div style="padding: 22px 24px; border-radius: 20px; background: {{c.primary}}; color: {{c.onPrimary}}">
                 <h2 style="margin: 0 0 8px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px">Aus deinen Bewertungen gelernt</h2>
-                <p style="margin: 0; font-size: 15px; line-height: 22px">Mehr Hinterhöfe und Geheimtipps, weniger Kirchen. Daumen, „Mehr davon“ und „Überspringen“ aus der App fließen hier ein.</p>
+                <p style="margin: 0; font-size: 15px; line-height: 22px">Mehr Hinterhöfe und Kurioses, weniger Kirchen. Daumen, „Mehr davon“ und „Überspringen“ aus der App fließen hier ein.</p>
                 <button type="button" onClick="{{resetLearned}}" style="margin-top: 14px; font: inherit; font-size: 14px; font-weight: 700; height: 38px; padding: 0 14px; border-radius: 19px; border: 1.5px solid {{c.onPrimary}}; background: transparent; color: {{c.onPrimary}}; cursor: pointer">Zurücksetzen</button>
               </div>
             </div>
@@ -977,10 +1019,10 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
 
   <sc-if value="{{sendOn}}" hint-placeholder-val="{{ false }}">
     <div style="position: fixed; left: 0; right: 0; top: 0; bottom: 0; background: rgba(0, 0, 0, 0.45); display: flex; align-items: center; justify-content: center; z-index: 20">
-      <div role="dialog" aria-modal="true" aria-label="Tour aufs Handy schicken" style="width: 680px; max-width: calc(100% - 48px); box-sizing: border-box; padding: 28px; border-radius: 24px; background: {{c.surface}}; color: {{c.ink}}; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3)">
+      <div role="dialog" aria-modal="true" aria-label="{{sendTitle}}" style="width: 680px; max-width: calc(100% - 48px); box-sizing: border-box; padding: 28px; border-radius: 24px; background: {{c.surface}}; color: {{c.ink}}; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3)">
         <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
           <div>
-            <h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 24px; line-height: 30px">Aufs Handy schicken</h2>
+            <h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 24px; line-height: 30px">{{sendTitle}}</h2>
             <span style="display: block; margin-top: 4px; font-size: 14px; color: {{c.muted}}">{{tourTitle}} · {{tourMeta}}</span>
           </div>
           <button type="button" aria-label="Schließen" onClick="{{closeSend}}" style="flex: none; width: 40px; height: 40px; border-radius: 20px; border: 0; background: {{c.bg}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
@@ -990,12 +1032,22 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
             <sc-for list="{{qr}}" as="q" hint-placeholder-count="441"><span style="{{q.st}}"></span></sc-for>
           </div>
           <div style="flex: 1; min-width: 0">
+            <sc-if value="{{sendSolo}}" hint-placeholder-val="{{ true }}">
             <ol style="margin: 0; padding-left: 20px; font-size: 15px; line-height: 23px">
               <li>Öffne die App auf deinem Handy.</li>
-              <li>Tippe in „Meine Touren“ auf „Tour empfangen“ und scanne den Code.</li>
+              <li>Tippe auf der Startseite auf „Tour empfangen“ und scanne den Code.</li>
               <li>Fertig. Die Tour läuft unterwegs auch ohne Internet.</li>
             </ol>
             <p style="margin: 12px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">Bist du in der App mit demselben Konto angemeldet, liegt die Tour auch ohne Scannen dort bereit.</p>
+            </sc-if>
+            <sc-if value="{{sendGroup}}" hint-placeholder-val="{{ false }}">
+            <ol style="margin: 0; padding-left: 20px; font-size: 15px; line-height: 23px">
+              <li>Schicke den Link oder zeige den QR-Code.</li>
+              <li>Die anderen laden die App und öffnen den Link, ganz ohne Konto.</li>
+              <li>Unterwegs startest du die Tour in der App für alle.</li>
+            </ol>
+            <p style="margin: 12px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">Für die Teilnehmer ist diese Tour kostenlos. Änderst du die Route, bekommen alle automatisch die neue Version. Wer später kommt, steigt beim aktuellen Stopp ein.</p>
+            </sc-if>
             <div style="margin-top: 14px; display: flex; align-items: center; gap: 12px; padding: 10px 6px 10px 14px; border-radius: 14px; background: {{c.bg}}">
               <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 15px">Gleich für offline laden</span><span style="font-size: 13px; color: {{c.muted}}">{{offlineSize}}</span></span>
               <button type="button" role="switch" aria-checked="{{offlineSw.on}}" aria-label="Gleich für offline laden" onClick="{{offlineSw.toggle}}" style="flex: none; width: 60px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="width: 48px; height: 28px; box-sizing: border-box; border-radius: 14px; padding: 3px; display: flex; {{offlineSw.track}}"><span style="width: 22px; height: 22px; border-radius: 11px; {{offlineSw.knob}}"></span></span></button>
@@ -1003,7 +1055,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
           </div>
         </div>
         <div style="margin-top: 22px; display: flex; justify-content: flex-end; gap: 8px">
-          <button type="button" onClick="{{mailLink}}" style="font: inherit; font-size: 15px; height: 46px; padding: 0 18px; border-radius: 23px; border: 1.5px solid {{c.border}}; background: transparent; color: {{c.ink}}; cursor: pointer">Link per E-Mail</button>
+          <button type="button" onClick="{{mailLink}}" style="font: inherit; font-size: 15px; height: 46px; padding: 0 18px; border-radius: 23px; border: 1.5px solid {{c.border}}; background: transparent; color: {{c.ink}}; cursor: pointer">{{mailLabel}}</button>
           <button type="button" onClick="{{confirmSend}}" style="font: inherit; font-size: 15px; font-weight: 700; height: 46px; padding: 0 22px; border-radius: 23px; border: 0; background: {{c.accent}}; color: {{c.onAccent}}; cursor: pointer">Fertig</button>
         </div>
       </div>
@@ -1118,19 +1170,18 @@ var PALETTES = {
 var INTERESTS = ['Geschichte', 'Kurioses', 'Natur', 'Essen & Trinken', 'Street Art', 'Architektur', 'Krimi', 'Nachtleben', 'Drehorte'];
 // Stile für alle (im Kinder-Modus nur einfacher erzählt) und Stile nur für Kinder
 var STYLES = [['Sachlich', 'Klare Fakten'], ['Humorvoll', 'Mit Augenzwinkern'], ['Zeitreise', 'Mittendrin um 1890']];
-var KID_STYLES = [['Abenteuer', 'Mutproben und Entdeckungen'], ['Detektivfall', 'Hinweise sammeln, Fall lösen'], ['Märchen & Sagen', 'Legenden vom Ort']];
+var KID_STYLES = [['Rätsel & Entdecken', 'Hinweise suchen, Rätsel lösen'], ['Märchen & Sagen', 'Legenden vom Ort']];
 var LEVELS = ['Einsteiger', 'Interessiert', 'Kenner'];
 var LEVEL_HINTS = {
   'Einsteiger': 'Einsteiger: Alles wird erklärt, kein Vorwissen nötig.',
   'Interessiert': 'Interessiert: Grundwissen wird vorausgesetzt, dafür mehr Hintergründe.',
   'Kenner': 'Kenner: Details, Fachbegriffe und Zusammenhänge für Leute mit Vorwissen.'
 };
-var AGES = ['5–7', '8–10', '11–14'];
-var KID_MAX = { '5–7': 3, '8–10': 5, '11–14': 8 };
-var LENS = [3, 5, 8, 10];
+var AGES = ['unter 10', '10–14'];
+var AGE_LABEL = { 'unter 10': 'Unter 10', '10–14': '10 bis 14' };
 var MODES = {
   walk: { label: 'Zu Fuß', short: 'Fuß', km: 0.6, hint: 'Zu Fuß: viele kurze Stopps mit Text und Bild.', len: 'Zu Fuß: an großen Orten bis etwa 10 Min., an kleinen kürzer.' },
-  bike: { label: 'Fahrrad', short: 'Rad', km: 1.8, hint: 'Fahrrad: vor allem Ton, Stopps an Abstellplätzen, Radwege.', len: 'Fahrrad: eher kurz, weil du meist nur kurz anhältst.' },
+  bike: { label: 'Rad / E-Scooter', short: 'Rad', km: 1.8, hint: 'Rad oder E-Scooter: vor allem Ton, Stopps an Abstellplätzen, Radwege. Scooter nur dort abstellen, wo es erlaubt ist.', len: 'Rad und E-Scooter: eher kurz, weil du meist nur kurz anhältst.' },
   transit: { label: 'Öffis', short: 'Bahn', km: 2.5, hint: 'Öffis: Die Erzählung passt zur Fahrzeit, Hinweise aus dem Fenster.', len: 'Öffis: passend zur Fahrzeit zwischen den Haltestellen.' },
   car: { label: 'Auto', short: 'Auto', km: 6, hint: 'Auto: nur Ton, keine Bedienung während der Fahrt, Hinweise zu Parkplätzen.', len: 'Auto: kurz und passend zur Fahrt.' }
 };
@@ -1139,22 +1190,22 @@ var TEMPOS = ['Gemütlich', 'Ausgewogen', 'Viel sehen'];
 var OUTPUTS = ['Text', 'Ton', 'Beides'];
 var POOL = [
   { id: 1, name: 'Alter Marktplatz', topic: 'Geschichte', min: 10, tip: false, text: 'Hier schlug das Herz der Stadt: Händler, Gaukler und jeden Samstag der große Markt.', k: 'Hier war früher jeden Samstag Markt. Es gab Händler, Musiker und sogar Jongleure!' },
-  { id: 2, name: 'Gerberei-Hinterhof', topic: 'Kurioses', min: 8, tip: true, text: 'Hinter diesem Tor wurde Leder gegerbt, und die Nachbarn beschwerten sich über den Geruch.', k: 'Hier hat man früher aus Tierhaut Leder gemacht. Das hat so gestunken, dass sich alle Nachbarn beschwert haben!' },
+  { id: 2, name: 'Gerberei-Hinterhof', topic: 'Kurioses', min: 8, tip: false, text: 'Hinter diesem Tor wurde Leder gegerbt, und die Nachbarn beschwerten sich über den Geruch.', k: 'Hier hat man früher aus Tierhaut Leder gemacht. Das hat so gestunken, dass sich alle Nachbarn beschwert haben!' },
   { id: 3, name: 'Wandbild am Bahnbogen', topic: 'Street Art', min: 6, tip: false, text: 'Das riesige Wandbild haben Leute aus dem Viertel gemeinsam gemalt.', k: 'Dieses riesige Bild haben ganz viele Leute aus der Nachbarschaft zusammen gemalt.' },
   { id: 4, name: 'Markthalle', topic: 'Essen & Trinken', min: 15, tip: false, text: 'Unter dem Glasdach probierst du dich durch Stände mit Spezialitäten aus der Region.', k: 'Unter dem großen Glasdach gibt es ganz viele Stände mit leckerem Essen.' },
-  { id: 5, name: 'Stiller Brunnenhof', topic: 'Geschichte', min: 8, tip: true, text: 'Kaum jemand kennt diesen Hof. Der Brunnen war früher der Treffpunkt der Nachbarschaft.', k: 'Diesen versteckten Hof kennen nur wenige. Früher haben sich hier alle am Brunnen getroffen.' },
+  { id: 5, name: 'Stiller Brunnenhof', topic: 'Geschichte', min: 8, tip: false, text: 'Kaum jemand kennt diesen Hof. Der Brunnen war früher der Treffpunkt der Nachbarschaft.', k: 'Diesen versteckten Hof kennen nur wenige. Früher haben sich hier alle am Brunnen getroffen.' },
   { id: 6, name: 'Turm am Stadtwall', topic: 'Architektur', min: 10, tip: false, text: 'Von hier hielten Wächter Ausschau. Heute hast du den besten Blick über die Dächer.', k: 'Von diesem Turm haben früher Wächter aufgepasst, ob Feinde kommen. Heute siehst du von oben die ganze Stadt.' },
-  { id: 7, name: 'Uhrmacher-Werkstatt', topic: 'Kurioses', min: 7, tip: true, text: 'In der kleinen Werkstatt ticken Hunderte Uhren, manche älter als das Haus selbst.', k: 'In dieser Werkstatt ticken Hunderte Uhren. Manche sind älter als das ganze Haus!' },
+  { id: 7, name: 'Uhrmacher-Werkstatt', topic: 'Kurioses', min: 7, tip: false, text: 'In der kleinen Werkstatt ticken Hunderte Uhren, manche älter als das Haus selbst.', k: 'In dieser Werkstatt ticken Hunderte Uhren. Manche sind älter als das ganze Haus!' },
   { id: 8, name: 'Pavillon im Stadtpark', topic: 'Natur', min: 8, tip: false, text: 'Im Pavillon spielte sonntags die Kapelle, und die halbe Stadt kam zum Zuhören.', k: 'Hier hat sonntags eine Musikkapelle gespielt, und viele Leute kamen zum Zuhören.' },
   { id: 9, name: 'Alte Druckerei', topic: 'Architektur', min: 9, tip: false, text: 'Die Backsteinfassade verrät es: Hier wurden einst Zeitungen gedruckt.', k: 'In diesem Haus aus roten Ziegeln wurden früher Zeitungen gedruckt.' },
-  { id: 10, name: 'Gewölbekeller am Hafen', topic: 'Nachtleben', min: 6, tip: true, text: 'Eine Treppe hinunter, und du stehst in einem Keller, in dem schon vor hundert Jahren gefeiert wurde.', k: 'Unter der Erde ist ein alter Keller. Dort haben die Leute schon vor hundert Jahren gefeiert.' },
-  { id: 11, name: 'Graffiti-Gasse', topic: 'Street Art', min: 6, tip: true, text: 'Die schmale Gasse wird jedes Jahr neu gestaltet, jede Wand erzählt etwas anderes.', k: 'In dieser schmalen Gasse werden die Wände jedes Jahr neu bemalt.' },
+  { id: 10, name: 'Gewölbekeller am Hafen', topic: 'Nachtleben', min: 6, tip: false, text: 'Eine Treppe hinunter, und du stehst in einem Keller, in dem schon vor hundert Jahren gefeiert wurde.', k: 'Unter der Erde ist ein alter Keller. Dort haben die Leute schon vor hundert Jahren gefeiert.' },
+  { id: 11, name: 'Graffiti-Gasse', topic: 'Street Art', min: 6, tip: false, text: 'Die schmale Gasse wird jedes Jahr neu gestaltet, jede Wand erzählt etwas anderes.', k: 'In dieser schmalen Gasse werden die Wände jedes Jahr neu bemalt.' },
   { id: 12, name: 'Brücke am Kanal', topic: 'Drehorte', min: 7, tip: false, text: 'An dieser Brücke wurde ein Film gedreht, Fans kommen bis heute für dasselbe Foto.', k: 'An dieser Brücke wurde ein Film gedreht. Viele Fans machen hier das gleiche Foto.' },
-  { id: 14, name: 'Alte Polizeiwache', topic: 'Krimi', min: 8, tip: true, text: 'In dieser Wache wurde ein berühmter Juwelendiebstahl aufgeklärt, verraten hat den Täter ein Fingerabdruck an der Fensterscheibe.', k: 'In dieser alten Polizeiwache haben Polizisten einen Juwelendieb geschnappt. Der Trick: ein Fingerabdruck am Fenster!' },
-  { id: 13, name: 'Kaffeerösterei', topic: 'Essen & Trinken', min: 10, tip: true, text: 'Schon an der Ecke riechst du es: Hier wird jeden Morgen frisch geröstet.', k: 'Riechst du das? Hier werden jeden Morgen Kaffeebohnen geröstet.' }
+  { id: 14, name: 'Alte Polizeiwache', topic: 'Krimi', min: 8, tip: false, text: 'In dieser Wache wurde ein berühmter Juwelendiebstahl aufgeklärt, verraten hat den Täter ein Fingerabdruck an der Fensterscheibe.', k: 'In dieser alten Polizeiwache haben Polizisten einen Juwelendieb geschnappt. Der Trick: ein Fingerabdruck am Fenster!' },
+  { id: 13, name: 'Kaffeerösterei', topic: 'Essen & Trinken', min: 10, tip: false, text: 'Schon an der Ecke riechst du es: Hier wird jeden Morgen frisch geröstet.', k: 'Riechst du das? Hier werden jeden Morgen Kaffeebohnen geröstet.' }
 ];
-var INTROS = { 'Sachlich': '', 'Humorvoll': 'Kleiner Spoiler: ', 'Zeitreise': 'Wir schreiben das Jahr 1890. ', 'Abenteuer': 'Achtung, Abenteurer! ', 'Detektivfall': 'Neuer Hinweis für dich, Detektiv! ', 'Märchen & Sagen': 'Es war einmal … ' };
-var TITLES = { 'Sachlich': 'Altstadt kompakt', 'Humorvoll': 'Die Altstadt mit Augenzwinkern', 'Zeitreise': 'Zeitreise durch die Altstadt', 'Abenteuer': 'Abenteuer in der Altstadt', 'Detektivfall': 'Detektivfall in der Altstadt', 'Märchen & Sagen': 'Sagenhafte Altstadt' };
+var INTROS = { 'Sachlich': '', 'Humorvoll': 'Kleiner Spoiler: ', 'Zeitreise': 'Wir schreiben das Jahr 1890. ', 'Rätsel & Entdecken': 'Neuer Hinweis für dich, Spürnase! ', 'Märchen & Sagen': 'Es war einmal … ' };
+var TITLES = { 'Sachlich': 'Altstadt kompakt', 'Humorvoll': 'Die Altstadt mit Augenzwinkern', 'Zeitreise': 'Zeitreise durch die Altstadt', 'Rätsel & Entdecken': 'Rätseljagd durch die Altstadt', 'Märchen & Sagen': 'Sagenhafte Altstadt' };
 var COORDS = {
   4: [[60, 120], [150, 160], [270, 130], [180, 60]],
   6: [[60, 118], [118, 156], [200, 164], [284, 140], [262, 80], [160, 72]],
@@ -1168,35 +1219,26 @@ var EXPLORE = [
   { id: 13, dist: '300 m', x: 274, y: 172 }
 ];
 var SPEEDS = ['1,0×', '1,25×', '1,5×', '0,75×'];
-var GROUP_OTHERS = { anna: ['Essen & Trinken', 'Street Art'], ben: ['Architektur', 'Geschichte'], mila: ['Natur', 'Kurioses'] };
 
 function isKidStyle(st) { return KID_STYLES.some(function (x) { return x[0] === st; }); }
-function audFor(s) { if (s.group) return s.kidFriendly && s.milaReady ? '8–10' : 'Erwachsene'; return s.tourAud; }
-function lenFor(s) { var a = audFor(s); return a === 'Erwachsene' ? 0 : s.group ? KID_MAX[a] : s.tourLen; }
+function audFor(s) { return s.tourAud; }
 function byId(id) { for (var i = 0; i < POOL.length; i++) { if (POOL[i].id === id) return POOL[i]; } return POOL[0]; }
 function nForDuration(d) { for (var i = 0; i < DURATIONS.length; i++) { if (DURATIONS[i][0] === d) return DURATIONS[i][1]; } return 6; }
 function coordsFor(len) { var k = len <= 4 ? 4 : len <= 6 ? 6 : len <= 8 ? 8 : 10; return COORDS[k].slice(0, len); }
 function selected(obj) { return INTERESTS.filter(function (k) { return !!obj[k]; }); }
-function groupInterests(s) {
-  var counts = {};
-  var lists = [selected(s.interests), GROUP_OTHERS.anna, GROUP_OTHERS.ben];
-  if (s.milaReady) lists.push(GROUP_OTHERS.mila);
-  lists.forEach(function (l) { l.forEach(function (k) { counts[k] = (counts[k] || 0) + 1; }); });
-  return counts;
-}
 function activeInterests(s) {
-  if (s.group) { var g = groupInterests(s); var o = {}; Object.keys(g).forEach(function (k) { o[k] = true; }); return o; }
   if (s.whom === 'Frei') return s.freeInterests;
   return s.interests;
 }
 function buildStops(s) {
   var n = nForDuration(s.duration);
+  if (s.mode === 'walk' && s.walkKm) n = Math.min(n, Math.max(2, Math.floor(s.walkKm / 0.6)));
   var ints = activeInterests(s);
   var surprise = s.whom === 'Überraschung' && !s.group;
   var pool = POOL.slice();
   var rot = (s.seed * 5) % pool.length;
   pool = pool.slice(rot).concat(pool.slice(0, rot));
-  var score = function (p) { return (surprise ? 0 : (ints[p.topic] ? 2 : 0)) + (s.hidden && p.tip ? 1 : 0); };
+  var score = function (p) { return (surprise ? 0 : (ints[p.topic] ? 2 : 0)) ; };
   var ranked = pool.map(function (p, i) { return { p: p, i: i }; }).sort(function (a, b) { return (score(b.p) - score(a.p)) || (a.i - b.i); });
   return ranked.slice(0, n).map(function (r) { return r.p.id; });
 }
@@ -1204,19 +1246,22 @@ function titleFor(s) {
   if (s.whom === 'Überraschung' && !s.group) return 'Überraschungstour';
   return (s.group ? 'Gruppen-Tour: ' : '') + TITLES[s.tourStyle];
 }
-var PAUSES = [['cafe', 'Café oder Imbiss'], ['park', 'Bank oder Park'], ['play', 'Spielplatz'], ['wc', 'Toiletten anzeigen']];
-var CARWALK = [
-  ['none', 'Nur Auto', 'Die ganze Tour im Auto, die Erzählung passt zur Fahrt.'],
-  ['loop', 'Eine Runde', 'Mit dem Auto zum Parkplatz, dort eine Runde zu Fuß, die wieder am Auto endet.'],
-  ['stages', 'Etappen', 'Mehrere Etappen, z. B. zu Fuß durch die Altstadt, mit dem Auto weiter zum Hafen und dort wieder zu Fuß.']
-];
-function carWalkOf(s) { return s.mode === 'car' ? s.carWalk : 'none'; }
+var PAUSES = [['cafe', 'Café oder Imbiss'], ['park', 'Bank oder Park'], ['play', 'Spielplatz']];
+var WALKTIMES = [[0, 'Keine'], [15, '15 Min.'], [30, '30 Min.'], [60, '60 Min.']];
+var TOURTYPES = [['stop', 'Stop-and-go', 'An jedem Ort anhalten und in Ruhe zuhören.'], ['move', 'In Bewegung', 'Die Erzählung läuft im Gehen oder Fahren, ohne anzuhalten.']];
+var VEH = {
+  car: { icon: 'car', pin: 'P', go: 'Mit dem Auto zum Parkhaus am Markt', goSub: '12 Min. Fahrt, dann zu Fuß weiter', back: 'Zurück zum Auto', on: 'Weiter zum Hafenparkplatz', onSub: '8 Min. Fahrt, dann zu Fuß weiter', mid: 'Parkhaus', end: 'Hafenparkplatz' },
+  bike: { icon: 'bike', pin: 'P', go: 'Mit dem Rad zum Abstellplatz am Markt', goSub: '10 Min. Fahrt, dann zu Fuß weiter', back: 'Zurück zum Rad', on: 'Weiter zum Abstellplatz am Hafen', onSub: '7 Min. Fahrt, dann zu Fuß weiter', mid: 'Abstellplatz', end: 'Abstellplatz am Hafen' },
+  transit: { icon: 'tram', pin: 'H', go: 'Mit der Tram 4 zum Rathausplatz', goSub: '8 Min. Fahrt, dann zu Fuß weiter', back: 'Zurück zur Haltestelle', on: 'Weiter mit Bus 100 zum Hafen', onSub: '9 Min. Fahrt, dann zu Fuß weiter', mid: 'Haltestelle', end: 'Haltestelle Hafen' }
+};
+var HOP = [['Tram 4 bis Rathausplatz', '6 Min. · Linie mit Blick auf Dom und Fluss'], ['Bus 100 bis Museumsufer', '9 Min. · fährt an den Museen vorbei'], ['Tram 2 bis Hafen', '7 Min. · am Wasser entlang'], ['Bus 42 bis Schlossgarten', '5 Min. · durch die Altstadt'], ['Tram 4 bis Markt', '6 Min.']];
+function carWalkOf(s) { if (s.mode === 'walk' || (s.mode === 'transit' && s.hop)) return 'none'; return s.walkTime >= 60 ? 'stages' : s.walkTime > 0 ? 'loop' : 'none'; }
+function hopOn(s) { return s.mode === 'transit' && s.hop; }
 function stageSplit(n) { return Math.ceil(n / 2); }
 function parkDist(id) { return [50, 100, 150, 80][id % 4]; }
 function pauseAfter(s, i, n) {
   var out = [];
   var p = s.pauses || {};
-  if (p.wc && i === 0 && n > 1) out.push({ key: 'wc', title: 'Öffentliche Toilette', sub: 'Am Weg nach Stopp 1' });
   if (p.play && i === 1 && n > 2) out.push({ key: 'play', title: 'Spielplatz · 15 Min.', sub: 'Zum Toben zwischendurch' });
   if (p.cafe && i === 2 && n > 3) out.push({ key: 'cafe', title: 'Café-Pause · 20 Min.', sub: 'Nach Stopp 3' });
   if (p.park && n > 4 && i === (n > 5 ? 4 : 3)) out.push({ key: 'park', title: 'Bank im Park · 10 Min.', sub: 'Durchatmen mit Aussicht' });
@@ -1230,11 +1275,11 @@ class Component extends DCLogic {
     this.state = {
       screen: 'welcome', history: [], toast: '',
       interests: { 'Geschichte': true, 'Kurioses': true, 'Essen & Trinken': true, 'Street Art': true },
-      style: 'Zeitreise', aud: 'Erwachsene', level: 'Interessiert', age: '8–10', hidden: true, profileMode: 'new',
+      style: 'Zeitreise', aud: 'Erwachsene', level: 'Interessiert', age: 'unter 10', profileMode: 'new',
       whom: 'Ich', freeInterests: { 'Natur': true, 'Architektur': true },
-      mode: 'walk', duration: '2 Std.', tempo: 'Ausgewogen', route: 'Rundtour', output: 'Beides', tourStyle: 'Zeitreise', tourAud: 'Erwachsene', tourLen: 5,
-      barrier: false, pauses: { cafe: true, park: false, play: false, wc: false }, carWalk: 'loop', parkOnly: true,
-      group: false, milaReady: false, hearTogether: true, kidFriendly: true,
+      mode: 'walk', duration: '2 Std.', tempo: 'Ausgewogen', route: 'Rundtour', output: 'Beides', tourStyle: 'Zeitreise', tourAud: 'Erwachsene', tourType: 'stop', walkTime: 0, walkKm: 4, hop: false, showWc: false, participant: false,
+      barrier: false, pauses: { cafe: true, park: false, play: false }, parkOnly: true,
+      group: false,
       stops: [], seed: 0, swapCursor: 0,
       liveIdx: 0, playing: true, showText: true, speed: 0, rating: {}, more: {}, ask: false,
       saved: [
@@ -1312,10 +1357,9 @@ class Component extends DCLogic {
 
     var selInts = selected(s.interests);
     var profKids = s.aud === 'Kinder';
-    var profAud = profKids ? 'Kinder ' + s.age + ' J.' : s.level;
+    var profAud = profKids ? 'Kinder ' + s.age : s.level;
     var styleTile = function (x) { var on = s.style === x[0]; return { label: x[0], sub: x[1], pressed: pressed(on), st: tileSt(on), subSt: on ? 'color: ' + c.onPrimary + '; opacity: 0.8' : 'color: ' + c.muted, pick: setter({ style: x[0] }) }; };
     var tourKids = s.tourAud !== 'Erwachsene';
-    var kidMax = KID_MAX[s.tourAud];
     var interestSummary = selInts.length ? selInts.slice(0, 3).join(', ') + (selInts.length > 3 ? ' +' + (selInts.length - 3) : '') : 'Noch keine Interessen';
 
     // ---------- Vorschau / Unterwegs ----------
@@ -1330,41 +1374,47 @@ class Component extends DCLogic {
       return { left: pts[i][0] - 12, top: pts[i][1] - 12, no: i + 1, st: markerSt(p.tip) + extra };
     });
     var cw = carWalkOf(s);
+    var hop = hopOn(s);
+    var V = VEH[s.mode] || VEH.car;
     var carOnlyPark = s.mode === 'car' && cw === 'none' && s.parkOnly;
     var noteRow = function (key, title, sub, removable) {
-      var ic = { car: key === 'car', walk: key === 'walk', cafe: key === 'cafe', park: key === 'park', play: key === 'play', wc: key === 'wc' };
-      var isCarRow = key === 'car' || key === 'walk';
+      var ic = { car: key === 'car', bike: key === 'bike', tram: key === 'tram', walk: key === 'walk', cafe: key === 'cafe', park: key === 'park', play: key === 'play', wc: key === 'wc' };
+      var isCarRow = key === 'car' || key === 'walk' || key === 'bike' || key === 'tram';
       return { isStop: false, isNote: true, col: c, ic: ic, title: title, sub: sub, removable: removable, removeLabel: title + ' entfernen',
         boxSt: isCarRow ? 'background: ' + c.soft + '; padding-right: 12px' : 'border: 1.5px dashed ' + c.off,
         remove: function () { self.setState(function (st) { var o = Object.assign({}, st.pauses); o[key] = false; return { pauses: o }; }); } };
     };
     var rows = [];
     tourStops.forEach(function (p, i) {
-      rows.push({ isStop: true, isNote: false, no: i + 1, name: p.name, meta: (p.tip ? 'Geheimtipp' : p.topic) + ' · ' + (carOnlyPark ? 'Parken ' + parkDist(p.id) + ' m' : p.min + ' Min.'), badge: p.tip ? 'border-radius: 8px; background: ' + c.primary + '; border: 2px solid ' + c.accent + '; color: ' + c.check : 'border-radius: 16px; background: ' + c.accent + '; border: 2px solid ' + c.primary + '; color: ' + c.onAccent, col: c, swapLabel: p.name + ' tauschen', removeLabel: p.name + ' entfernen',
+      rows.push({ isStop: true, isNote: false, no: i + 1, name: p.name, meta: p.topic + ' · ' + (carOnlyPark ? 'Parken ' + parkDist(p.id) + ' m' : s.tourType === 'move' ? (s.mode === 'walk' || cw !== 'none' || hop ? 'im Vorbeigehen' : 'im Vorbeifahren') : p.min + ' Min.'), badge: p.tip ? 'border-radius: 8px; background: ' + c.primary + '; border: 2px solid ' + c.accent + '; color: ' + c.check : 'border-radius: 16px; background: ' + c.accent + '; border: 2px solid ' + c.primary + '; color: ' + c.onAccent, col: c, swapLabel: p.name + ' tauschen', removeLabel: p.name + ' entfernen',
         swap: function () { self.setState(function (st) { var used = {}; st.stops.forEach(function (id) { used[id] = true; }); var cands = POOL.filter(function (q) { return !used[q.id]; }); if (!cands.length) return null; var pick = cands[st.swapCursor % cands.length]; var ns = st.stops.slice(); ns[i] = pick.id; return { stops: ns, swapCursor: st.swapCursor + 1 }; }); },
         remove: function () { self.setState(function (st) { return { stops: st.stops.filter(function (id, j) { return j !== i; }) }; }); } });
       pauseAfter(s, i, tourStops.length).forEach(function (q) { rows.push(noteRow(q.key, q.title, q.sub, true)); });
       if (cw === 'stages' && i === stageSplit(tourStops.length) - 1 && i < tourStops.length - 1) {
-        rows.push(noteRow('walk', 'Zurück zum Auto', '4 Min. zu Fuß zum Parkhaus', false));
-        rows.push(noteRow('car', 'Weiter zum Hafenparkplatz', '8 Min. Fahrt, dann zu Fuß weiter', false));
+        rows.push(noteRow('walk', V.back, '4 Min. zu Fuß zum Ausgangspunkt', false));
+        rows.push(noteRow(V.icon, V.on, V.onSub, false));
       }
+      if (hop && i % 2 === 1 && i < tourStops.length - 1) { var hl = HOP[Math.min(HOP.length - 1, (i + 1) / 2)]; rows.push(noteRow('tram', hl[0], hl[1], false)); }
     });
     if (cw !== 'none' && tourStops.length) {
-      rows.unshift(noteRow('car', 'Mit dem Auto zum Parkhaus am Markt', '12 Min. Fahrt, dann zu Fuß weiter', false));
-      rows.push(noteRow('walk', 'Zurück zum Auto', cw === 'stages' ? '5 Min. zu Fuß zum Hafenparkplatz' : '5 Min. zu Fuß zum Parkhaus', false));
+      rows.unshift(noteRow(V.icon, V.go, V.goSub, false));
+      rows.push(noteRow('walk', V.back, cw === 'stages' ? '5 Min. zu Fuß zum Ziel: ' + V.end : '5 Min. zu Fuß zum Ausgangspunkt', false));
+    }
+    if (hop && tourStops.length) {
+      rows.unshift(noteRow('tram', HOP[0][0], HOP[0][1] + ', dann kurze Runde zu Fuß', false));
+      rows.push(noteRow('tram', 'Zurück mit Tram 4', 'Nächste Verbindung in 4 Min.', false));
     }
     var n = tourStops.length;
-    var badges = [s.route, s.tempo, s.output === 'Beides' ? 'Text und Ton' : s.output];
+    var badges = [s.route, s.tempo, s.output === 'Beides' ? 'Text und Ton' : s.output, s.tourType === 'move' ? 'In Bewegung' : 'Stop-and-go'];
     if (s.barrier) badges.push('Stufenlos');
     var ta = audFor(s);
-    badges.push(ta === 'Erwachsene' ? s.level : 'Kinder ' + ta + ' J.');
-    if (ta !== 'Erwachsene') badges.push('Bis ' + lenFor(s) + ' Min. pro Ort');
-    if (s.group && s.hearTogether) badges.push('Alle hören gleichzeitig');
-    if (cw === 'loop') badges.push('Parken + Runde zu Fuß');
-    if (cw === 'stages') badges.push('2 Etappen zu Fuß');
+    badges.push(ta === 'Erwachsene' ? s.level : 'Kinder ' + ta);
+    if (s.group) badges.push('Gruppe, gemeinsamer Start');
+    if (s.mode === 'walk') badges.push('Bis ' + String(s.walkKm).replace('.', ',') + ' km zu Fuß');
+    if (cw !== 'none') badges.push(s.walkTime + ' Min. zu Fuß' + (cw === 'stages' ? ' in 2 Etappen' : ''));
+    if (hop) badges.push('Hop-on-Hop-off');
     if (carOnlyPark) badges.push('Halte mit Parkplatz');
-    if (s.pauses.wc) badges.push('Toiletten an der Strecke');
-    var previewLabel = s.group ? 'Für eure Gruppe zusammengestellt' : s.whom === 'Überraschung' ? 'Lass dich überraschen' : s.whom === 'Frei' ? 'Frei zusammengestellt' : s.whom === 'Ich' ? 'Für dich zusammengestellt' : 'Für das Profil ' + s.whom;
+    var previewLabel = s.group ? 'Gruppen-Tour · du leitest' : s.whom === 'Überraschung' ? 'Lass dich überraschen' : s.whom === 'Frei' ? 'Frei zusammengestellt' : s.whom === 'Ich' ? 'Für dich zusammengestellt' : 'Für das Profil ' + s.whom;
     var cur = tourStops[Math.min(s.liveIdx, Math.max(0, n - 1))] || POOL[0];
     var curPt = pts[Math.min(s.liveIdx, Math.max(0, n - 1))] || [60, 118];
     var nxt = tourStops[s.liveIdx + 1];
@@ -1372,18 +1422,6 @@ class Component extends DCLogic {
     var thumb = function (val) { var on = rated === val; return { pressed: pressed(on), st: on ? 'border: 1.5px solid ' + c.primary + '; background: ' + c.primary : 'border: 1.5px solid ' + c.border + '; background: ' + c.surface, icon: on ? c.onPrimary : c.ink, pick: function () { self.setState(function (st) { var r = Object.assign({}, st.rating); r[st.liveIdx] = r[st.liveIdx] === val ? '' : val; return { rating: r }; }); } }; };
     var moreOn = !!s.more[s.liveIdx];
     var liveHeard = s.saved.some(function (t) { return t.stopIds.indexOf(cur.id) >= 0; });
-
-    // ---------- Gruppe ----------
-    var gi = groupInterests(s);
-    var common = Object.keys(gi).sort(function (a, b) { return gi[b] - gi[a]; }).map(function (k) { var strong = gi[k] > 1; return { label: strong ? k + ' · ' + gi[k] : k, st: strong ? 'background: ' + c.primary + '; color: ' + c.onPrimary + '; font-weight: 700' : 'border: 1.5px solid ' + c.border + '; background: ' + c.surface + '; color: ' + c.ink }; });
-    if (s.kidFriendly && s.milaReady) common.push({ label: 'Kinderfreundlich', st: 'background: ' + c.soft + '; color: ' + c.ink + '; font-weight: 700' });
-    var readySt = 'color: ' + c.ink + '; font-weight: 700';
-    var members = [
-      { init: 'Du', name: 'Du', sub: interestSummary, status: 'bereit', statusSt: readySt, avatar: 'background: ' + c.primary + '; color: ' + c.check, col: c, tap: function () { self.say('Das bist du'); } },
-      { init: 'A', name: 'Anna', sub: GROUP_OTHERS.anna.join(', '), status: 'bereit', statusSt: readySt, avatar: 'background: ' + c.soft + '; color: ' + c.ink, col: c, tap: function () { self.say('Anna ist bereit'); } },
-      { init: 'B', name: 'Ben', sub: GROUP_OTHERS.ben.join(', '), status: 'bereit', statusSt: readySt, avatar: 'background: ' + c.seg + '; color: ' + c.ink, col: c, tap: function () { self.say('Ben ist bereit'); } },
-      { init: 'M', name: 'Mila (9 J.)', sub: s.milaReady ? GROUP_OTHERS.mila.join(', ') : 'wählt noch …', status: s.milaReady ? 'bereit' : 'wartet', statusSt: s.milaReady ? readySt : 'color: ' + c.muted, avatar: 'background: ' + c.seg + '; color: ' + c.ink, col: c, tap: tgl('milaReady') }
-    ];
 
     // ---------- Tagebuch ----------
     var d = s.diary || { title: 'Tour', meta: '', stopIds: [], saved: true, label: '' };
@@ -1414,13 +1452,13 @@ class Component extends DCLogic {
     profChips.push({ label: profAud, st: 'background: ' + c.accent + '; color: ' + c.onAccent + '; font-weight: 700' });
 
     var modeTile = function (key) { var on = s.mode === key; return { pressed: pressed(on), st: tileSt(on), icon: on ? c.check : c.ink, pick: setter({ mode: key }) }; };
-    var npTile = function (key) { var on = s.whom === key && !s.group; return { pressed: pressed(on), st: tileSt(on), icon: on ? c.check : c.ink }; };
+    var npTile = function (key) { var on = s.whom === key; return { pressed: pressed(on), st: tileSt(on), icon: on ? c.check : c.ink }; };
     var routeTile = function (key) { var on = s.route === key; return { pressed: pressed(on), st: tileSt(on), icon: on ? c.check : c.ink, subSt: on ? 'color: ' + c.onPrimary + '; opacity: 0.8' : 'color: ' + c.muted, pick: setter({ route: key }) }; };
     var np = { group: npTile('Gruppe'), free: npTile('Frei'), surprise: npTile('Überraschung') };
-    np.group.pick = function () { self.go('group', function () { return { whom: 'Gruppe' }; }); };
-    np.free.pick = setter({ whom: 'Frei', group: false });
-    np.surprise.pick = setter({ whom: 'Überraschung', group: false });
-    var whomHint = s.whom === 'Frei' ? 'Wähle oben die Interessen nur für diese Tour. Dein Profil bleibt, wie es ist.' : s.whom === 'Überraschung' ? 'Bunt gemischt, ganz ohne Vorgaben. Dein Profil bleibt, wie es ist.' : s.whom === 'Ich' ? 'Die Tour richtet sich nach deinem Profil.' : s.whom === 'Gruppe' ? 'Gruppen-Tour: Interessen aller werden gemischt.' : 'Die Tour richtet sich nach dem Profil ' + s.whom + '.';
+    np.group.pick = setter({ whom: 'Gruppe' });
+    np.free.pick = setter({ whom: 'Frei' });
+    np.surprise.pick = setter({ whom: 'Überraschung' });
+    var whomHint = s.whom === 'Frei' ? 'Wähle oben die Interessen nur für diese Tour. Dein Profil bleibt, wie es ist.' : s.whom === 'Überraschung' ? 'Bunt gemischt, ganz ohne Vorgaben. Dein Profil bleibt, wie es ist.' : s.whom === 'Ich' ? 'Die Tour richtet sich nach deinem Profil.' : s.whom === 'Gruppe' ? 'Gruppen-Tour: Die Tour richtet sich nach deinen Einstellungen.' : 'Die Tour richtet sich nach dem Profil ' + s.whom + '.';
 
     var extraRow = function (label, key, last) { var v = sw(!!s[key]); return { label: label, sw: v, divider: last ? 'transparent' : c.divider, toggle: tgl(key) }; };
 
@@ -1437,19 +1475,18 @@ class Component extends DCLogic {
       auds: ['Erwachsene', 'Kinder'].map(function (a) { var on = s.aud === a; return { label: a, pressed: pressed(on), st: segSt(on), pick: function () { self.setState(function (st) { var p = { aud: a }; if (a === 'Erwachsene' && isKidStyle(st.style)) p.style = 'Sachlich'; return p; }); } }; }),
       levelLabel: profKids ? 'Wie alt?' : 'Wie gut kennst du dich aus?',
       levels: profKids
-        ? AGES.map(function (a) { var on = s.age === a; return { label: a + ' J.', pressed: pressed(on), st: segSt(on), pick: setter({ age: a }) }; })
+        ? AGES.map(function (a) { var on = s.age === a; return { label: AGE_LABEL[a], pressed: pressed(on), st: segSt(on), pick: setter({ age: a }) }; })
         : LEVELS.map(function (l) { var on = s.level === l; return { label: l, pressed: pressed(on), st: segSt(on), pick: setter({ level: l }) }; }),
       levelHint: profKids ? 'Gleiche Stile wie für Erwachsene, nur einfachere Sprache und weniger Tiefe. Dazu kommen eigene Kinder-Stile. Ab 15 Jahren passt »Erwachsene«.' : LEVEL_HINTS[s.level] + ' Die Länge hängt davon nicht ab.',
-      styles: STYLES.map(styleTile), kidStyles: KID_STYLES.map(styleTile), profileKids: profKids,
-      sw: { hidden: Object.assign(sw(s.hidden), { toggle: tgl('hidden') }) },
-      goTour: function () { self.go('tour', function (st) { return { tourStyle: st.style, tourAud: st.aud === 'Kinder' ? st.age : 'Erwachsene', tourLen: st.aud === 'Kinder' ? KID_MAX[st.age] : 5, freeInterests: Object.assign({}, st.interests), whom: st.whom === 'Gruppe' ? 'Ich' : st.whom, group: false }; }); },
+      styles: STYLES.map(styleTile), kidStyles: KID_STYLES.map(styleTile), profileKids: profKids, levelCols: profKids ? 2 : 3,
+      goTour: function () { self.go('tour', function (st) { return { tourStyle: st.style, tourAud: st.aud === 'Kinder' ? st.age : 'Erwachsene', freeInterests: Object.assign({}, st.interests), whom: st.whom === 'Gruppe' ? 'Ich' : st.whom, group: false }; }); },
       goExplorer: function () { self.go('explorer', function () { return { exPlaying: true }; }); },
       savedTop: savedRows.slice(0, 2),
       interestSummary: interestSummary, styleName: s.style + ' · ' + profAud,
       editProfile: function () { self.go('profile', function () { return { profileMode: 'edit' }; }); },
       startName: s.whom === 'Gruppe' ? 'Treffpunkt der Gruppe' : 'Mein Standort',
       changeStart: function () { self.say('Startpunkt auf der Karte wählen (im Prototyp fest)'); },
-      whom: ['Ich', 'Familie', 'Freunde'].map(function (w) { var on = s.whom === w && !s.group; return { label: w, on: on, pressed: pressed(on), st: chipSt(on), check: c.check, pick: setter({ whom: w, group: false }) }; }),
+      whom: ['Ich', 'Familie', 'Freunde'].map(function (w) { var on = s.whom === w; return { label: w, on: on, pressed: pressed(on), st: chipSt(on), check: c.check, pick: setter({ whom: w, group: false }) }; }),
       addProfile: function () { self.say('Neues Profil anlegen, z. B. Kollegen'); },
       np: np, isFree: s.whom === 'Frei' && !s.group, freeInts: chipList(s.freeInterests, 'freeInterests'), whomHint: whomHint,
       modes: { walk: modeTile('walk'), bike: modeTile('bike'), transit: modeTile('transit'), car: modeTile('car') },
@@ -1457,44 +1494,58 @@ class Component extends DCLogic {
       durations: DURATIONS.map(function (x) { var on = s.duration === x[0]; return { label: x[0], pressed: pressed(on), st: segSt(on), pick: setter({ duration: x[0] }) }; }),
       tempos: TEMPOS.map(function (x) { var on = s.tempo === x; return { label: x, pressed: pressed(on), st: segSt(on), pick: setter({ tempo: x }) }; }),
       routes: { round: routeTile('Rundtour'), ab: routeTile('Von A nach B') },
-      tourAuds: ['Erwachsene'].concat(AGES).map(function (a) { var on = s.tourAud === a; return { label: a === 'Erwachsene' ? 'Erwachsene' : 'Kinder ' + a, on: on, pressed: pressed(on), st: chipSt(on), check: c.check, pick: function () { self.setState(function (st) { var p = { tourAud: a }; if (a !== 'Erwachsene') p.tourLen = KID_MAX[a]; else if (isKidStyle(st.tourStyle)) p.tourStyle = isKidStyle(st.style) ? 'Sachlich' : st.style; return p; }); } }; }),
+      tourAuds: ['Erwachsene'].concat(AGES).map(function (a) { var on = s.tourAud === a; return { label: a === 'Erwachsene' ? 'Erwachsene' : 'Kinder ' + a, on: on, pressed: pressed(on), st: chipSt(on), check: c.check, pick: function () { self.setState(function (st) { var p = { tourAud: a }; if (a === 'Erwachsene') if (isKidStyle(st.tourStyle)) p.tourStyle = isKidStyle(st.style) ? 'Sachlich' : st.style; return p; }); } }; }),
       tourStyles: (tourKids ? STYLES.concat(KID_STYLES) : STYLES).map(function (x) { var on = s.tourStyle === x[0]; return { label: x[0], on: on, pressed: pressed(on), st: chipSt(on), check: c.check, pick: setter({ tourStyle: x[0] }) }; }),
       tourKids: tourKids,
-      lenLabel: tourKids ? 'Höchstens pro Ort' : 'Textlänge pro Ort',
-      tourLens: LENS.map(function (m) { var on = s.tourLen === m; return { label: m + ' Min.', pressed: pressed(on), st: segSt(on), pick: setter({ tourLen: m }) }; }),
+      lenLabel: 'Textlänge pro Ort',
       lenHint: tourKids
-        ? (s.tourLen > kidMax ? 'Länger als empfohlen: Für ' + s.tourAud + ' Jahre empfehlen wir bis ' + kidMax + ' Min. pro Ort.' : 'Empfohlen für ' + s.tourAud + ' Jahre: bis ' + kidMax + ' Min. Du kannst auch länger wählen.')
+        ? 'Wird automatisch gewählt, kurz und kindgerecht: unter 10 etwa 3 bis 5 Min., 10 bis 14 bis etwa 8 Min. pro Ort.'
         : 'Wird automatisch gewählt, nach Verkehrsmittel, Dauer und Ort. ' + MODES[s.mode].len,
       outputs: OUTPUTS.map(function (x) { var on = s.output === x; return { label: x, pressed: pressed(on), st: segSt(on), pick: setter({ output: x }) }; }),
-      extras: [extraRow('Unbekannte Ecken bevorzugen', 'hidden'), extraRow('Barrierefrei (stufenlos)', 'barrier', true)],
+      extras: [extraRow('Barrierefrei (stufenlos)', 'barrier', true)],
       isCar: s.mode === 'car',
-      carWalks: CARWALK.map(function (x) { var on = s.carWalk === x[0]; return { label: x[1], pressed: pressed(on), st: segSt(on), pick: setter({ carWalk: x[0] }) }; }),
-      carWalkHint: (CARWALK.filter(function (x) { return x[0] === s.carWalk; })[0] || CARWALK[0])[2],
-      showParkOnly: s.carWalk === 'none',
+      isWalk: s.mode === 'walk', isTransit: s.mode === 'transit',
+      showWalkTime: s.mode !== 'walk' && !hop,
+      walkTimes: WALKTIMES.map(function (x) { var on = s.walkTime === x[0]; return { label: x[1], pressed: pressed(on), st: segSt(on), pick: setter({ walkTime: x[0] }) }; }),
+      walkTimeHint: s.walkTime === 0 ? 'Die ganze Tour ' + (s.mode === 'transit' ? 'mit Bus und Bahn' : s.mode === 'car' ? 'im Auto' : 'auf dem Rad oder Scooter') + '.' : 'Die App plant ' + (s.walkTime >= 60 ? 'zwei Etappen' : 'eine Runde') + ' zu Fuß ein, zusammen etwa ' + s.walkTime + ' Min.',
+      walkKm: s.walkKm, walkKmLabel: 'bis ' + String(s.walkKm).replace('.', ',') + ' km',
+      setWalkKm: function (e) { var v = parseFloat(e && e.target ? e.target.value : 4); if (!isNaN(v)) self.setState({ walkKm: v }); },
+      showParkOnly: s.mode === 'car' && s.walkTime === 0,
+      hopSw: Object.assign(sw(!!s.hop), { toggle: tgl('hop') }),
+      tourTypes: TOURTYPES.map(function (x) { var on = s.tourType === x[0]; return { label: x[1], pressed: pressed(on), st: segSt(on), pick: setter({ tourType: x[0] }) }; }),
+      tourTypeHint: (TOURTYPES.filter(function (x) { return x[0] === s.tourType; })[0] || TOURTYPES[0])[2],
+      isGroup: s.whom === 'Gruppe',
       parkSw: Object.assign(sw(!!s.parkOnly), { toggle: tgl('parkOnly') }),
       pauseChips: PAUSES.map(function (x) { var on = !!s.pauses[x[0]]; return { label: x[1], on: on, pressed: pressed(on), st: chipSt(on), check: c.check, toggle: function () { self.setState(function (st) { var o = Object.assign({}, st.pauses); o[x[0]] = !o[x[0]]; return { pauses: o }; }); } }; }),
-      createLabel: s.whom === 'Überraschung' ? 'Überrasch mich' : 'Tour erstellen',
-      createTour: function () { self.go('preview', function (st) { var ns = Object.assign({}, st, { group: false }); return { group: false, stops: buildStops(ns), liveIdx: 0 }; }); },
+      createLabel: s.whom === 'Überraschung' ? 'Überrasch mich' : s.whom === 'Gruppe' ? 'Gruppen-Tour erstellen' : 'Tour erstellen',
+      createTour: function () { self.go('preview', function (st) { var g = st.whom === 'Gruppe'; var ns = Object.assign({}, st, { group: g }); return { group: g, participant: false, stops: buildStops(ns), liveIdx: 0 }; }); },
       shareLink: function () { self.say('Einladungslink kopiert'); },
-      readyCount: (s.milaReady ? 4 : 3) + ' von 4 bereit',
-      members: members, memberHint: s.milaReady ? 'Alle sind bereit.' : 'Tippe auf Mila, um ihre Auswahl zu simulieren.',
-      common: common,
-      groupOpts: [extraRow('Alle hören gleichzeitig', 'hearTogether'), extraRow('Kindgerecht für Mila (8–10)', 'kidFriendly', true)],
-      createGroupTour: function () { self.go('preview', function (st) { var ns = Object.assign({}, st, { group: true }); return { group: true, whom: 'Gruppe', stops: buildStops(ns), liveIdx: 0 }; }); },
+      groupOn: s.group, joinedInfo: '3 sind schon dabei, alle ohne Konto. Teilnehmer brauchen nur die App.',
+      openJoin: function () { self.go('group'); },
+      joinTitle: titleFor(s), joinMeta: s.duration + ' · ' + n + ' Stopps · ' + MODES[s.mode].label,
+      joinLive: function () { self.go('live', function (st) { return { participant: true, liveIdx: Math.min(1, Math.max(0, st.stops.length - 1)), playing: true, showText: st.output !== 'Ton', rating: {}, more: {}, speed: 0 }; }); self.say('Du steigst beim aktuellen Stopp der Gruppe ein'); },
+      startLabel: s.group ? 'Für alle starten' : 'Tour starten',
       shareTour: function () { self.say('Link zur Tour kopiert'); },
       previewLabel: previewLabel, tourTitle: titleFor(s),
-      tourMeta: cw !== 'none' ? s.duration + ' · ' + (n * MODES.walk.km).toFixed(1).replace('.', ',') + ' km zu Fuß · ' + n + ' Stopps · Auto + zu Fuß' : s.duration + ' · ' + kmFor(s, n) + ' km · ' + n + ' Stopps · ' + MODES[s.mode].label,
+      tourMeta: hop ? s.duration + ' · ' + n + ' Stopps · Öffis, Hop-on-Hop-off' : cw !== 'none' ? s.duration + ' · ' + 'etwa ' + Math.max(1, Math.round(s.walkTime / 15)) + ' km zu Fuß · ' + n + ' Stopps · ' + MODES[s.mode].label + ' + zu Fuß' : s.duration + ' · ' + kmFor(s, n) + ' km · ' + n + ' Stopps · ' + MODES[s.mode].label,
       badges: badges.map(function (b) { return { label: b, st: 'border: 1px solid ' + c.border + '; background: ' + c.surface + '; color: ' + c.ink }; }),
       routePts: routePts, markers: markers, youX: pts.length ? pts[0][0] - 26 : 30, youY: pts.length ? pts[0][1] + 18 : 140,
-      parkPins: cw === 'none' || !pts.length ? [] : [{ left: pts[0][0] - 38, top: pts[0][1] + 6 }].concat(cw === 'stages' && n > 1 ? [{ left: Math.min(310, pts[stageSplit(n)][0] + 14), top: Math.max(4, pts[stageSplit(n)][1] - 34) }] : []),
+      parkPins: !pts.length ? [] : hop ? pts.filter(function (p, i) { return i % 2 === 0; }).map(function (p) { return { left: Math.max(2, p[0] + 2), top: Math.min(170, p[1] + 22), label: 'H' }; }) : cw === 'none' ? [] : [{ left: pts[0][0] - 38, top: pts[0][1] + 6, label: V.pin }].concat(cw === 'stages' && n > 1 ? [{ left: Math.min(310, pts[stageSplit(n)][0] + 14), top: Math.max(4, pts[stageSplit(n)][1] - 34), label: V.pin }] : []),
       rows: rows, noStops: n === 0,
       replan: function () { self.setState(function (st) { var ns = Object.assign({}, st, { seed: st.seed + 1 }); return { seed: st.seed + 1, stops: buildStops(ns) }; }); self.say('Neue Stopps zusammengestellt'); },
-      startTour: function () { if (!self.state.stops.length) { self.say('Plane zuerst neu, die Tour hat keine Stopps.'); return; } self.go('live', function (st) { return { liveIdx: 0, playing: true, showText: st.output !== 'Ton', rating: {}, more: {}, speed: 0 }; }); },
+      startTour: function () { if (!self.state.stops.length) { self.say('Plane zuerst neu, die Tour hat keine Stopps.'); return; } self.go('live', function (st) { return { participant: false, liveIdx: 0, playing: true, showText: st.output !== 'Ton', rating: {}, more: {}, speed: 0 }; }); },
       endTour: function () { self.endTour(false); },
       liveNo: Math.min(s.liveIdx + 1, n), liveTotal: n,
       nextInfo: nxt ? 'Danach: ' + nxt.name : 'Letzter Stopp',
       liveMarkers: liveMarkers, liveYouX: curPt[0] + 20, liveYouY: curPt[1] - 16,
-      liveTip: cur.tip, liveStyle: s.tourStyle + (ta !== 'Erwachsene' ? ' · Kinder ' + ta : ''), liveTopic: cur.topic, liveName: cur.name, liveHeard: liveHeard,
+      liveGroupOn: s.group, liveLead: s.group && !s.participant,
+      liveGroupText: s.participant ? 'Gruppen-Tour · die Leitung steuert' : 'Gruppe · 4 hören mit · du leitest',
+      changeRoute: function () { self.say('Route geändert, alle bekommen die neue Version'); },
+      wcOn: s.showWc, wcPressed: pressed(s.showWc), toggleWc: tgl('showWc'), wcSw: sw(s.showWc),
+      wcBtnSt: 'background: ' + c.surface + '; color: ' + c.ink + '; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18)',
+      wcPins: pts.length > 2 ? [{ left: Math.round((pts[0][0] + pts[1][0]) / 2) - 13, top: Math.round((pts[0][1] + pts[1][1]) / 2) + 8 }, { left: Math.round((pts[2][0] + pts[1][0]) / 2) + 4, top: Math.round((pts[2][1] + pts[1][1]) / 2) - 28 }] : [],
+      liveFooter: s.tourType === 'move' ? 'Die Erzählung läuft, während du weitergehst oder weiterfährst.' : 'Die Erzählung startet automatisch, sobald du ankommst.',
+      liveStyle: s.tourStyle + (ta !== 'Erwachsene' ? ' · Kinder ' + ta : ''), liveTopic: cur.topic, liveName: cur.name, liveHeard: liveHeard,
       showText: s.showText, hideText: !s.showText, narration: INTROS[s.tourStyle] + (ta !== 'Erwachsene' ? cur.k : cur.text),
       progress: s.playing ? '38%' : '33%', elapsed: s.playing ? '1:24' : '1:12',
       playing: s.playing, paused: !s.playing, playLabel: s.playing ? 'Pause' : 'Abspielen',
@@ -1513,17 +1564,17 @@ class Component extends DCLogic {
       shareDiary: function () { self.say('Tagebuch als Link kopiert'); },
       diaryCta: d.saved ? 'Fertig' : 'Tour speichern',
       diaryAction: function () { if (self.state.diary && self.state.diary.saved) { self.back(); } else { self.save(); } },
-      exMarkers: exMarkers, exName: exP.name, exDist: ex.dist, exTip: exP.tip, exText: INTROS[s.style] + (profKids ? exP.k : exP.text),
+      exMarkers: exMarkers, exName: exP.name, exDist: ex.dist, exTip: false, exText: INTROS[s.style] + (profKids ? exP.k : exP.text),
       exPlaying: s.exPlaying, exPaused: !s.exPlaying, exPlayLabel: s.exPlaying ? 'Pause' : 'Abspielen', toggleExPlay: tgl('exPlaying'),
       nextPlace: function () { self.setState(function (st) { return { exIdx: (st.exIdx + 1) % EXPLORE.length, exPlaying: true }; }); },
       exModes: [['walk', 'Zu Fuß'], ['bike', 'Rad'], ['car', 'Auto']].map(function (x) { var on = s.exMode === x[0]; return { label: x[1], pressed: pressed(on), st: segSt(on), pick: setter({ exMode: x[0] }) }; }),
       endExplore: function () { self.tab('home'); self.say('Erkundung beendet'); },
       profChips: profChips,
-      learned: 'Aus deinen Bewertungen gelernt: mehr Hinterhöfe und Geheimtipps, weniger Kirchen.',
+      learned: 'Aus deinen Bewertungen gelernt: mehr Hinterhöfe und Kurioses, weniger Kirchen.',
       savedRows: savedRows,
       receiveTour: function () {
         if (self.state.saved.some(function (t) { return t.fromWeb; })) { self.say('Keine neuen Touren vom Rechner'); return; }
-        self.setState(function (st) { return { saved: [{ title: 'Vom Rechner: Abenteuer in der Altstadt', meta: 'Samstag · 3 Std. · 8 Stopps', mode: 'bike', stopIds: [2, 5, 7, 11, 13, 1, 3, 4], fromWeb: true }].concat(st.saved) }; });
+        self.setState(function (st) { return { saved: [{ title: 'Vom Rechner: Rätseljagd durch die Altstadt', meta: 'Samstag · 3 Std. · 8 Stopps', mode: 'bike', stopIds: [2, 5, 7, 11, 13, 1, 3, 4], fromWeb: true }].concat(st.saved) }; });
         self.say('Tour vom Rechner empfangen');
       },
       appearances: [['auto', 'Wie am Handy'], ['light', 'Hell'], ['dark', 'Dunkel']].map(function (x) { var on = s.appearance === x[0]; return { label: x[1], pressed: pressed(on), st: segSt(on), pick: setter({ appearance: x[0] }) }; }),
@@ -1566,19 +1617,18 @@ var PALETTES = {
 
 var INTERESTS = ['Geschichte', 'Kurioses', 'Natur', 'Essen & Trinken', 'Street Art', 'Architektur', 'Krimi', 'Nachtleben', 'Drehorte'];
 var STYLES = [['Sachlich', 'Klare Fakten'], ['Humorvoll', 'Mit Augenzwinkern'], ['Zeitreise', 'Mittendrin um 1890']];
-var KID_STYLES = [['Abenteuer', 'Mutproben und Entdeckungen'], ['Detektivfall', 'Hinweise sammeln, Fall lösen'], ['Märchen & Sagen', 'Legenden vom Ort']];
+var KID_STYLES = [['Rätsel & Entdecken', 'Hinweise suchen, Rätsel lösen'], ['Märchen & Sagen', 'Legenden vom Ort']];
 var LEVELS = ['Einsteiger', 'Interessiert', 'Kenner'];
 var LEVEL_HINTS = {
   'Einsteiger': 'Einsteiger: Alles wird erklärt, kein Vorwissen nötig.',
   'Interessiert': 'Interessiert: Grundwissen wird vorausgesetzt, dafür mehr Hintergründe.',
   'Kenner': 'Kenner: Details, Fachbegriffe und Zusammenhänge für Leute mit Vorwissen.'
 };
-var AGES = ['5–7', '8–10', '11–14'];
-var KID_MAX = { '5–7': 3, '8–10': 5, '11–14': 8 };
-var LENS = [3, 5, 8, 10];
+var AGES = ['unter 10', '10–14'];
+var AGE_LABEL = { 'unter 10': 'Unter 10', '10–14': '10 bis 14' };
 var MODES = {
   walk: { label: 'Zu Fuß', km: 0.6, hint: 'Zu Fuß: viele kurze Stopps mit Text und Bild.', len: 'Zu Fuß: an großen Orten bis etwa 10 Min., an kleinen kürzer.' },
-  bike: { label: 'Fahrrad', km: 1.8, hint: 'Fahrrad: vor allem Ton, Stopps an Abstellplätzen, Radwege.', len: 'Fahrrad: eher kurz, weil du meist nur kurz anhältst.' },
+  bike: { label: 'Rad / E-Scooter', km: 1.8, hint: 'Rad oder E-Scooter: vor allem Ton, Stopps an Abstellplätzen, Radwege. Scooter nur dort abstellen, wo es erlaubt ist.', len: 'Rad und E-Scooter: eher kurz, weil du meist nur kurz anhältst.' },
   transit: { label: 'Öffis', km: 2.5, hint: 'Öffis: Die Erzählung passt zur Fahrzeit, Hinweise aus dem Fenster.', len: 'Öffis: passend zur Fahrzeit zwischen den Haltestellen.' },
   car: { label: 'Auto', km: 6, hint: 'Auto: nur Ton, unterwegs führt Google Maps oder Apple Karten.', len: 'Auto: kurz und passend zur Fahrt.' }
 };
@@ -1592,22 +1642,22 @@ var WHENS = [
 ];
 var POOL = [
   { id: 1, name: 'Alter Marktplatz', topic: 'Geschichte', min: 10, tip: false, text: 'Hier schlug das Herz der Stadt: Händler, Gaukler und jeden Samstag der große Markt.', k: 'Hier war früher jeden Samstag Markt. Es gab Händler, Musiker und sogar Jongleure!' },
-  { id: 2, name: 'Gerberei-Hinterhof', topic: 'Kurioses', min: 8, tip: true, text: 'Hinter diesem Tor wurde Leder gegerbt, und die Nachbarn beschwerten sich über den Geruch.', k: 'Hier hat man früher aus Tierhaut Leder gemacht. Das hat so gestunken, dass sich alle Nachbarn beschwert haben!' },
+  { id: 2, name: 'Gerberei-Hinterhof', topic: 'Kurioses', min: 8, tip: false, text: 'Hinter diesem Tor wurde Leder gegerbt, und die Nachbarn beschwerten sich über den Geruch.', k: 'Hier hat man früher aus Tierhaut Leder gemacht. Das hat so gestunken, dass sich alle Nachbarn beschwert haben!' },
   { id: 3, name: 'Wandbild am Bahnbogen', topic: 'Street Art', min: 6, tip: false, text: 'Das riesige Wandbild haben Leute aus dem Viertel gemeinsam gemalt.', k: 'Dieses riesige Bild haben ganz viele Leute aus der Nachbarschaft zusammen gemalt.' },
   { id: 4, name: 'Markthalle', topic: 'Essen & Trinken', min: 15, tip: false, text: 'Unter dem Glasdach probierst du dich durch Stände mit Spezialitäten aus der Region.', k: 'Unter dem großen Glasdach gibt es ganz viele Stände mit leckerem Essen.' },
-  { id: 5, name: 'Stiller Brunnenhof', topic: 'Geschichte', min: 8, tip: true, text: 'Kaum jemand kennt diesen Hof. Der Brunnen war früher der Treffpunkt der Nachbarschaft.', k: 'Diesen versteckten Hof kennen nur wenige. Früher haben sich hier alle am Brunnen getroffen.' },
+  { id: 5, name: 'Stiller Brunnenhof', topic: 'Geschichte', min: 8, tip: false, text: 'Kaum jemand kennt diesen Hof. Der Brunnen war früher der Treffpunkt der Nachbarschaft.', k: 'Diesen versteckten Hof kennen nur wenige. Früher haben sich hier alle am Brunnen getroffen.' },
   { id: 6, name: 'Turm am Stadtwall', topic: 'Architektur', min: 10, tip: false, text: 'Von hier hielten Wächter Ausschau. Heute hast du den besten Blick über die Dächer.', k: 'Von diesem Turm haben früher Wächter aufgepasst, ob Feinde kommen. Heute siehst du von oben die ganze Stadt.' },
-  { id: 7, name: 'Uhrmacher-Werkstatt', topic: 'Kurioses', min: 7, tip: true, text: 'In der kleinen Werkstatt ticken Hunderte Uhren, manche älter als das Haus selbst.', k: 'In dieser Werkstatt ticken Hunderte Uhren. Manche sind älter als das ganze Haus!' },
+  { id: 7, name: 'Uhrmacher-Werkstatt', topic: 'Kurioses', min: 7, tip: false, text: 'In der kleinen Werkstatt ticken Hunderte Uhren, manche älter als das Haus selbst.', k: 'In dieser Werkstatt ticken Hunderte Uhren. Manche sind älter als das ganze Haus!' },
   { id: 8, name: 'Pavillon im Stadtpark', topic: 'Natur', min: 8, tip: false, text: 'Im Pavillon spielte sonntags die Kapelle, und die halbe Stadt kam zum Zuhören.', k: 'Hier hat sonntags eine Musikkapelle gespielt, und viele Leute kamen zum Zuhören.' },
   { id: 9, name: 'Alte Druckerei', topic: 'Architektur', min: 9, tip: false, text: 'Die Backsteinfassade verrät es: Hier wurden einst Zeitungen gedruckt.', k: 'In diesem Haus aus roten Ziegeln wurden früher Zeitungen gedruckt.' },
-  { id: 10, name: 'Gewölbekeller am Hafen', topic: 'Nachtleben', min: 6, tip: true, text: 'Eine Treppe hinunter, und du stehst in einem Keller, in dem schon vor hundert Jahren gefeiert wurde.', k: 'Unter der Erde ist ein alter Keller. Dort haben die Leute schon vor hundert Jahren gefeiert.' },
-  { id: 11, name: 'Graffiti-Gasse', topic: 'Street Art', min: 6, tip: true, text: 'Die schmale Gasse wird jedes Jahr neu gestaltet, jede Wand erzählt etwas anderes.', k: 'In dieser schmalen Gasse werden die Wände jedes Jahr neu bemalt.' },
+  { id: 10, name: 'Gewölbekeller am Hafen', topic: 'Nachtleben', min: 6, tip: false, text: 'Eine Treppe hinunter, und du stehst in einem Keller, in dem schon vor hundert Jahren gefeiert wurde.', k: 'Unter der Erde ist ein alter Keller. Dort haben die Leute schon vor hundert Jahren gefeiert.' },
+  { id: 11, name: 'Graffiti-Gasse', topic: 'Street Art', min: 6, tip: false, text: 'Die schmale Gasse wird jedes Jahr neu gestaltet, jede Wand erzählt etwas anderes.', k: 'In dieser schmalen Gasse werden die Wände jedes Jahr neu bemalt.' },
   { id: 12, name: 'Brücke am Kanal', topic: 'Drehorte', min: 7, tip: false, text: 'An dieser Brücke wurde ein Film gedreht, Fans kommen bis heute für dasselbe Foto.', k: 'An dieser Brücke wurde ein Film gedreht. Viele Fans machen hier das gleiche Foto.' },
-  { id: 14, name: 'Alte Polizeiwache', topic: 'Krimi', min: 8, tip: true, text: 'In dieser Wache wurde ein berühmter Juwelendiebstahl aufgeklärt, verraten hat den Täter ein Fingerabdruck an der Fensterscheibe.', k: 'In dieser alten Polizeiwache haben Polizisten einen Juwelendieb geschnappt. Der Trick: ein Fingerabdruck am Fenster!' },
-  { id: 13, name: 'Kaffeerösterei', topic: 'Essen & Trinken', min: 10, tip: true, text: 'Schon an der Ecke riechst du es: Hier wird jeden Morgen frisch geröstet.', k: 'Riechst du das? Hier werden jeden Morgen Kaffeebohnen geröstet.' }
+  { id: 14, name: 'Alte Polizeiwache', topic: 'Krimi', min: 8, tip: false, text: 'In dieser Wache wurde ein berühmter Juwelendiebstahl aufgeklärt, verraten hat den Täter ein Fingerabdruck an der Fensterscheibe.', k: 'In dieser alten Polizeiwache haben Polizisten einen Juwelendieb geschnappt. Der Trick: ein Fingerabdruck am Fenster!' },
+  { id: 13, name: 'Kaffeerösterei', topic: 'Essen & Trinken', min: 10, tip: false, text: 'Schon an der Ecke riechst du es: Hier wird jeden Morgen frisch geröstet.', k: 'Riechst du das? Hier werden jeden Morgen Kaffeebohnen geröstet.' }
 ];
-var INTROS = { 'Sachlich': '', 'Humorvoll': 'Kleiner Spoiler: ', 'Zeitreise': 'Wir schreiben das Jahr 1890. ', 'Abenteuer': 'Achtung, Abenteurer! ', 'Detektivfall': 'Neuer Hinweis für dich, Detektiv! ', 'Märchen & Sagen': 'Es war einmal … ' };
-var TITLES = { 'Sachlich': 'Altstadt kompakt', 'Humorvoll': 'Die Altstadt mit Augenzwinkern', 'Zeitreise': 'Zeitreise durch die Altstadt', 'Abenteuer': 'Abenteuer in der Altstadt', 'Detektivfall': 'Detektivfall in der Altstadt', 'Märchen & Sagen': 'Sagenhafte Altstadt' };
+var INTROS = { 'Sachlich': '', 'Humorvoll': 'Kleiner Spoiler: ', 'Zeitreise': 'Wir schreiben das Jahr 1890. ', 'Rätsel & Entdecken': 'Neuer Hinweis für dich, Spürnase! ', 'Märchen & Sagen': 'Es war einmal … ' };
+var TITLES = { 'Sachlich': 'Altstadt kompakt', 'Humorvoll': 'Die Altstadt mit Augenzwinkern', 'Zeitreise': 'Zeitreise durch die Altstadt', 'Rätsel & Entdecken': 'Rätseljagd durch die Altstadt', 'Märchen & Sagen': 'Sagenhafte Altstadt' };
 var COORDS = {
   4: [[60, 120], [150, 160], [270, 130], [180, 60]],
   6: [[60, 118], [118, 156], [200, 164], [284, 140], [262, 80], [160, 72]],
@@ -1615,19 +1665,22 @@ var COORDS = {
   10: [[40, 110], [80, 155], [140, 175], [210, 172], [275, 150], [310, 105], [285, 55], [220, 30], [150, 35], [85, 60]]
 };
 var START = [100, 520];
-var PAUSES = [['cafe', 'Café oder Imbiss'], ['park', 'Bank oder Park'], ['play', 'Spielplatz'], ['wc', 'Toiletten anzeigen']];
-var CARWALK = [
-  ['none', 'Nur Auto', 'Die ganze Tour im Auto, die Erzählung passt zur Fahrt.'],
-  ['loop', 'Eine Runde', 'Mit dem Auto zum Parkplatz, dort eine Runde zu Fuß, die wieder am Auto endet.'],
-  ['stages', 'Etappen', 'Mehrere Etappen, z. B. zu Fuß durch die Altstadt, mit dem Auto weiter zum Hafen und dort wieder zu Fuß.']
-];
-function carWalkOf(s) { return s.mode === 'car' ? s.carWalk : 'none'; }
+var PAUSES = [['cafe', 'Café oder Imbiss'], ['park', 'Bank oder Park'], ['play', 'Spielplatz']];
+var WALKTIMES = [[0, 'Keine'], [15, '15 Min.'], [30, '30 Min.'], [60, '60 Min.']];
+var TOURTYPES = [['stop', 'Stop-and-go', 'An jedem Ort anhalten und in Ruhe zuhören.'], ['move', 'In Bewegung', 'Die Erzählung läuft im Gehen oder Fahren, ohne anzuhalten.']];
+var VEH = {
+  car: { icon: 'car', pin: 'P', go: 'Mit dem Auto zum Parkhaus am Markt', goSub: '12 Min. Fahrt, dann zu Fuß weiter', back: 'Zurück zum Auto', on: 'Weiter zum Hafenparkplatz', onSub: '8 Min. Fahrt, dann zu Fuß weiter', end: 'Hafenparkplatz', start: 'Parkhaus am Markt' },
+  bike: { icon: 'bike', pin: 'P', go: 'Mit dem Rad zum Abstellplatz am Markt', goSub: '10 Min. Fahrt, dann zu Fuß weiter', back: 'Zurück zum Rad', on: 'Weiter zum Abstellplatz am Hafen', onSub: '7 Min. Fahrt, dann zu Fuß weiter', end: 'Abstellplatz am Hafen', start: 'Abstellplatz am Markt' },
+  transit: { icon: 'tram', pin: 'H', go: 'Mit der Tram 4 zum Rathausplatz', goSub: '8 Min. Fahrt, dann zu Fuß weiter', back: 'Zurück zur Haltestelle', on: 'Weiter mit Bus 100 zum Hafen', onSub: '9 Min. Fahrt, dann zu Fuß weiter', end: 'Haltestelle Hafen', start: 'Haltestelle Rathausplatz' }
+};
+var HOP = [['Tram 4 bis Rathausplatz', '6 Min. · Linie mit Blick auf Dom und Fluss'], ['Bus 100 bis Museumsufer', '9 Min. · fährt an den Museen vorbei'], ['Tram 2 bis Hafen', '7 Min. · am Wasser entlang'], ['Bus 42 bis Schlossgarten', '5 Min. · durch die Altstadt'], ['Tram 4 bis Markt', '6 Min.']];
+function carWalkOf(s) { if (s.mode === 'walk' || (s.mode === 'transit' && s.hop)) return 'none'; return s.walkTime >= 60 ? 'stages' : s.walkTime > 0 ? 'loop' : 'none'; }
+function hopOn(s) { return s.mode === 'transit' && s.hop; }
 function stageSplit(n) { return Math.ceil(n / 2); }
 function parkDist(id) { return [50, 100, 150, 80][id % 4]; }
 function pauseAfter(s, i, n) {
   var out = [];
   var p = s.pauses || {};
-  if (p.wc && i === 0 && n > 1) out.push({ key: 'wc', title: 'Öffentliche Toilette', sub: 'Am Weg nach Stopp 1' });
   if (p.play && i === 1 && n > 2) out.push({ key: 'play', title: 'Spielplatz · 15 Min.', sub: 'Zum Toben zwischendurch' });
   if (p.cafe && i === 2 && n > 3) out.push({ key: 'cafe', title: 'Café-Pause · 20 Min.', sub: 'Nach Stopp 3' });
   if (p.park && n > 4 && i === (n > 5 ? 4 : 3)) out.push({ key: 'park', title: 'Bank im Park · 10 Min.', sub: 'Durchatmen mit Aussicht' });
@@ -1652,12 +1705,13 @@ function routeString(len, round) {
 function activeInterests(s) { return s.whom === 'Frei' ? s.freeInterests : s.interests; }
 function buildStops(s) {
   var n = nForDuration(s.duration);
+  if (s.mode === 'walk' && s.walkKm) n = Math.min(n, Math.max(2, Math.floor(s.walkKm / 0.6)));
   var ints = activeInterests(s);
   var surprise = s.whom === 'Überraschung';
   var pool = POOL.slice();
   var rot = (s.seed * 5) % pool.length;
   pool = pool.slice(rot).concat(pool.slice(0, rot));
-  var score = function (p) { return (surprise ? 0 : (ints[p.topic] ? 2 : 0)) + (s.hidden && p.tip ? 1 : 0); };
+  var score = function (p) { return (surprise ? 0 : (ints[p.topic] ? 2 : 0)) ; };
   var ranked = pool.map(function (p, i) { return { p: p, i: i }; }).sort(function (a, b) { return (score(b.p) - score(a.p)) || (a.i - b.i); });
   return ranked.slice(0, n).map(function (r) { return r.p.id; });
 }
@@ -1695,10 +1749,10 @@ class Component extends DCLogic {
     this.state = {
       page: 'plan', tab: 'settings', toast: '',
       interests: { 'Geschichte': true, 'Kurioses': true, 'Essen & Trinken': true, 'Street Art': true },
-      style: 'Zeitreise', aud: 'Erwachsene', level: 'Interessiert', age: '8–10', hidden: true,
+      style: 'Zeitreise', aud: 'Erwachsene', level: 'Interessiert', age: 'unter 10',
       when: 'Morgen', whom: 'Ich', freeInterests: { 'Natur': true, 'Architektur': true },
       mode: 'walk', duration: '2 Std.', tempo: 'Ausgewogen', route: 'Rundtour', output: 'Beides',
-      tourStyle: 'Zeitreise', tourAud: 'Erwachsene', tourLen: 5, barrier: false, pauses: { cafe: true, park: false, play: false, wc: false }, carWalk: 'loop', parkOnly: true,
+      tourStyle: 'Zeitreise', tourAud: 'Erwachsene', tourType: 'stop', walkTime: 0, walkKm: 4, hop: false, showWc: false, barrier: false, pauses: { cafe: true, park: false, play: false }, parkOnly: true,
       custom: null, seed: 0, swapCursor: 0, sel: null, savedSig: '',
       send: false, offline: true,
       saved: [
@@ -1767,7 +1821,6 @@ class Component extends DCLogic {
     var pts = webPts(n);
     var round = s.route === 'Rundtour';
     var tourKids = s.tourAud !== 'Erwachsene';
-    var kidMax = KID_MAX[s.tourAud];
     var markerSt = function (tip, on) {
       var base = tip ? 'border-radius: 8px; background: ' + c.primary + '; border: 2.5px solid ' + c.accent + '; color: ' + c.check : 'border-radius: 17px; background: ' + c.accent + '; border: 2.5px solid ' + c.primary + '; color: ' + c.onAccent;
       return base + (on ? '; box-shadow: 0 0 0 6px ' + c.accent + '66, 0 2px 6px rgba(0, 0, 0, 0.25)' : '; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25)');
@@ -1780,11 +1833,13 @@ class Component extends DCLogic {
       return { no: i + 1, left: pts[i][0] / 10, top: pts[i][1] / 8, st: markerSt(p.tip, on), label: 'Stopp ' + (i + 1) + ': ' + p.name, pick: function () { self.setState(function (st) { return { sel: st.sel === i ? null : i }; }); } };
     });
     var cw = carWalkOf(s);
+    var hop = hopOn(s);
+    var V = VEH[s.mode] || VEH.car;
     var carOnlyPark = s.mode === 'car' && cw === 'none' && s.parkOnly;
     var k = stageSplit(n);
     var noteRow = function (key, title, sub, removable) {
-      var isCarRow = key === 'car' || key === 'walk';
-      return { isStop: false, isNote: true, col: c, ic: { car: key === 'car', walk: key === 'walk', cafe: key === 'cafe', park: key === 'park', play: key === 'play', wc: key === 'wc' }, title: title, sub: sub, removable: removable, removeLabel: title + ' entfernen',
+      var isCarRow = key === 'car' || key === 'walk' || key === 'bike' || key === 'tram';
+      return { isStop: false, isNote: true, col: c, ic: { car: key === 'car', bike: key === 'bike', tram: key === 'tram', walk: key === 'walk', cafe: key === 'cafe', park: key === 'park', play: key === 'play', wc: key === 'wc' }, title: title, sub: sub, removable: removable, removeLabel: title + ' entfernen',
         boxSt: isCarRow ? 'background: ' + c.soft + '; padding-right: 12px' : 'border: 1.5px dashed ' + c.border,
         remove: function () { self.setState(function (st) { var o = Object.assign({}, st.pauses); o[key] = false; return { pauses: o }; }); } };
     };
@@ -1792,7 +1847,7 @@ class Component extends DCLogic {
     var rows = [];
     stops.forEach(function (p, i) {
       var on = s.sel === i;
-      rows.push({ isStop: true, isNote: false, no: i + 1, name: p.name, meta: (p.tip ? 'Geheimtipp' : p.topic) + ' · ' + (carOnlyPark ? 'Parken ' + parkDist(p.id) + ' m' : p.min + ' Min.'), badge: badgeSt(p.tip), col: c,
+      rows.push({ isStop: true, isNote: false, no: i + 1, name: p.name, meta: p.topic + ' · ' + (carOnlyPark ? 'Parken ' + parkDist(p.id) + ' m' : s.tourType === 'move' ? (s.mode === 'walk' || cw !== 'none' || hop ? 'im Vorbeigehen' : 'im Vorbeifahren') : p.min + ' Min.'), badge: badgeSt(p.tip), col: c,
         st: on ? 'background: ' + c.surface + '; box-shadow: 0 0 0 2px ' + c.primary : 'background: ' + c.surface,
         selectLabel: p.name + ' auf der Karte zeigen', select: function () { self.setState(function (st) { return { sel: st.sel === i ? null : i }; }); },
         upLabel: p.name + ' nach oben', downLabel: p.name + ' nach unten', swapLabel: p.name + ' tauschen', removeLabel: p.name + ' entfernen',
@@ -1808,34 +1863,40 @@ class Component extends DCLogic {
         pausePins.push(pin);
       });
       if (cw === 'stages' && i === k - 1 && i < n - 1) {
-        rows.push(noteRow('walk', 'Zurück zum Auto', '4 Min. zu Fuß zum Parkhaus', false));
-        rows.push(noteRow('car', 'Weiter zum Hafenparkplatz', '8 Min. Fahrt, dann zu Fuß weiter', false));
+        rows.push(noteRow('walk', V.back, '4 Min. zu Fuß zum Ausgangspunkt', false));
+        rows.push(noteRow(V.icon, V.on, V.onSub, false));
       }
+      if (hop && i % 2 === 1 && i < n - 1) { var hl = HOP[Math.min(HOP.length - 1, (i + 1) / 2)]; rows.push(noteRow('tram', hl[0], hl[1], false)); }
     });
     if (cw !== 'none' && n) {
-      rows.unshift(noteRow('car', 'Mit dem Auto zum Parkhaus am Markt', '12 Min. Fahrt, dann zu Fuß weiter', false));
-      rows.push(noteRow('walk', 'Zurück zum Auto', cw === 'stages' ? '5 Min. zu Fuß zum Hafenparkplatz' : '5 Min. zu Fuß zum Parkhaus', false));
+      rows.unshift(noteRow(V.icon, V.go, V.goSub, false));
+      rows.push(noteRow('walk', V.back, cw === 'stages' ? '5 Min. zu Fuß zum Ziel: ' + V.end : '5 Min. zu Fuß zum Ausgangspunkt', false));
+    }
+    if (hop && n) {
+      rows.unshift(noteRow('tram', HOP[0][0], HOP[0][1] + ', dann kurze Runde zu Fuß', false));
+      rows.push(noteRow('tram', 'Zurück mit Tram 4', 'Nächste Verbindung in 4 Min.', false));
     }
     var P2 = null;
     if (cw === 'stages' && n > 1) { var rest = pts.slice(k); P2 = [Math.round(rest.reduce(function (a, p) { return a + p[0]; }, 0) / rest.length), Math.round(rest.reduce(function (a, p) { return a + p[1]; }, 0) / rest.length) + 30]; }
-    var walkD = 'M 0 0', driveD = 'M 0 0';
+    var walkD = 'M 0 0', driveD = 'M 0 0', hopPts = [];
     if (s.mode === 'car' && cw === 'none') { driveD = pathD([START].concat(pts, round && n ? [START] : [])); }
+    else if (hop) { hopPts = []; for (var hi = 0; hi < n; hi += 2) { var hseg = pts.slice(hi, hi + 2); var hx = [hseg[0][0] - 40, hseg[0][1] + 45]; hopPts.push(hx); walkD += ' ' + pathD([hx].concat(hseg, [hx])); } driveD = pathD([START].concat(hopPts, [START])); }
     else if (cw === 'loop') { walkD = pathD([START].concat(pts, [START])); driveD = pathD([[-30, 650], START]); }
     else if (cw === 'stages' && P2) { walkD = pathD([START].concat(pts.slice(0, k), [START])) + ' ' + pathD([P2].concat(pts.slice(k), [P2])); driveD = pathD([[-30, 650], START]) + ' ' + pathD([START, P2]); }
     else { walkD = pathD([START].concat(pts, round && n ? [START] : [])); }
-    var parkPins = cw === 'none' ? [] : [{ left: START[0] / 10, top: START[1] / 8, label: 'Parkhaus am Markt' }].concat(P2 ? [{ left: P2[0] / 10, top: P2[1] / 8, label: 'Hafenparkplatz' }] : []);
+    var parkPins = hop ? hopPts.map(function (p) { return { left: p[0] / 10, top: p[1] / 8, label: 'Haltestelle', letter: 'H' }; }) : cw === 'none' ? [] : [{ left: START[0] / 10, top: START[1] / 8, label: V.start, letter: V.pin }].concat(P2 ? [{ left: P2[0] / 10, top: P2[1] / 8, label: V.end, letter: V.pin }] : []);
     var whenInfo = WHENS.filter(function (w) { return w[0] === s.when; })[0] || WHENS[1];
-    var badges = [s.route, s.tempo, s.output === 'Beides' ? 'Text und Ton' : s.output, tourKids ? 'Kinder ' + s.tourAud + ' J.' : s.level];
-    if (tourKids) badges.push('Bis ' + s.tourLen + ' Min. pro Ort');
+    var badges = [s.route, s.tempo, s.output === 'Beides' ? 'Text und Ton' : s.output, s.tourType === 'move' ? 'In Bewegung' : 'Stop-and-go', tourKids ? 'Kinder ' + s.tourAud : s.level];
     if (s.barrier) badges.push('Stufenlos');
-    if (cw === 'loop') badges.push('Parken + Runde zu Fuß');
-    if (cw === 'stages') badges.push('2 Etappen zu Fuß');
+    if (s.whom === 'Gruppe') badges.push('Gruppe, gemeinsamer Start');
+    if (s.mode === 'walk') badges.push('Bis ' + String(s.walkKm).replace('.', ',') + ' km zu Fuß');
+    if (cw !== 'none') badges.push(s.walkTime + ' Min. zu Fuß' + (cw === 'stages' ? ' in 2 Etappen' : ''));
+    if (hop) badges.push('Hop-on-Hop-off');
     if (carOnlyPark) badges.push('Halte mit Parkplatz');
-    if (s.pauses.wc) badges.push('Toiletten an der Strecke');
     badges.push(s.when);
     var selP = s.sel !== null && s.sel < n ? stops[s.sel] : null;
     var sigNow = this.sig(s);
-    var whomHint = s.whom === 'Frei' ? 'Interessen nur für diese Tour. Dein Profil bleibt, wie es ist.' : s.whom === 'Überraschung' ? 'Bunt gemischt, ganz ohne Vorgaben.' : s.whom === 'Ich' ? 'Die Tour richtet sich nach deinem Profil.' : 'Die Tour richtet sich nach dem Profil ' + s.whom + '.';
+    var whomHint = s.whom === 'Frei' ? 'Interessen nur für diese Tour. Dein Profil bleibt, wie es ist.' : s.whom === 'Überraschung' ? 'Bunt gemischt, ganz ohne Vorgaben.' : s.whom === 'Ich' ? 'Die Tour richtet sich nach deinem Profil.' : s.whom === 'Gruppe' ? 'Gruppen-Tour: Die Tour richtet sich nach deinen Einstellungen.' : 'Die Tour richtet sich nach dem Profil ' + s.whom + '.';
     var tileMode = function (key) { var on = s.mode === key; return { pressed: pressed(on), st: tileSt(on), icon: on ? c.check : c.ink, pick: setter({ mode: key }) }; };
     var extraRow = function (label, key, last) { return { label: label, sw: sw(!!s[key]), divider: last ? 'transparent' : c.divider, toggle: tgl(key) }; };
     var chipList = function (obj, key) {
@@ -1861,7 +1922,7 @@ class Component extends DCLogic {
         title: d.title, meta: d.meta + ' · ' + MODES[d.mode].label, kicker: d.onPhone ? 'Auf dem Handy gespeichert' : 'Nur in der Web-Ansicht gespeichert',
         pts: routeString(d.stopIds.length, true),
         markers: dStops.map(function (p, i) { return { no: i + 1, left: dp[i][0] / 10, top: dp[i][1] / 8, st: markerSt(p.tip, false) }; }),
-        stops: dStops.map(function (p, i) { return { no: i + 1, name: p.name, meta: (p.tip ? 'Geheimtipp' : p.topic) + ' · ' + p.min + ' Min.', badge: badgeSt(p.tip), col: c, divider: i === dStops.length - 1 ? 'transparent' : c.divider }; }),
+        stops: dStops.map(function (p, i) { return { no: i + 1, name: p.name, meta: p.topic + ' · ' + p.min + ' Min.', badge: badgeSt(p.tip), col: c, divider: i === dStops.length - 1 ? 'transparent' : c.divider }; }),
         replan: function () { self.setState({ page: 'plan', tab: 'stops', custom: d.stopIds.slice(), mode: d.mode, sel: null, detail: null }); self.say('Tour in den Planer geladen'); },
         send: function () { var saved = s.saved.slice(); saved[s.detail] = Object.assign({}, d, { onPhone: true }); self.setState({ saved: saved }); self.say('Tour liegt in der App bereit'); },
         share: function () { self.say('Link zur Tour kopiert'); }
@@ -1891,29 +1952,35 @@ class Component extends DCLogic {
       whom: ['Ich', 'Familie', 'Freunde', 'Frei', 'Überraschung', 'Gruppe'].map(function (w) {
         var on = s.whom === w;
         var label = w === 'Frei' ? 'Frei wählen' : w;
-        var pick = w === 'Gruppe' ? function () { self.say('Gruppen-Touren startest du in der App, die anderen treten per QR-Code bei.'); } : setter({ whom: w });
+        var pick = setter({ whom: w });
         return { label: label, on: on, pressed: pressed(on), st: chipSt(on), check: c.check, pick: pick };
       }),
-      isFree: s.whom === 'Frei', freeInts: chipList(s.freeInterests, 'freeInterests'), whomHint: whomHint,
+      isGroup: s.whom === 'Gruppe', isFree: s.whom === 'Frei', freeInts: chipList(s.freeInterests, 'freeInterests'), whomHint: whomHint,
       modes: { walk: tileMode('walk'), bike: tileMode('bike'), transit: tileMode('transit'), car: tileMode('car') },
       modeHint: MODES[s.mode].hint,
       durations: seg(DURATIONS.map(function (x) { return x[0]; }), 'duration'),
       tempos: seg(TEMPOS, 'tempo'),
       routes: seg(['Rundtour', 'Von A nach B'], 'route'),
-      tourAuds: ['Erwachsene'].concat(AGES).map(function (a) { var on = s.tourAud === a; return { label: a === 'Erwachsene' ? 'Erwachsene' : 'Kinder ' + a, pressed: pressed(on), st: chipSt(on), pick: function () { self.setState(function (st) { var p = { tourAud: a }; if (a !== 'Erwachsene') p.tourLen = KID_MAX[a]; else if (isKidStyle(st.tourStyle)) p.tourStyle = isKidStyle(st.style) ? 'Sachlich' : st.style; return p; }); } }; }),
+      tourAuds: ['Erwachsene'].concat(AGES).map(function (a) { var on = s.tourAud === a; return { label: a === 'Erwachsene' ? 'Erwachsene' : 'Kinder ' + a, pressed: pressed(on), st: chipSt(on), pick: function () { self.setState(function (st) { var p = { tourAud: a }; if (a === 'Erwachsene') if (isKidStyle(st.tourStyle)) p.tourStyle = isKidStyle(st.style) ? 'Sachlich' : st.style; return p; }); } }; }),
       tourStyles: (tourKids ? STYLES.concat(KID_STYLES) : STYLES).map(function (x) { var on = s.tourStyle === x[0]; return { label: x[0], pressed: pressed(on), st: chipSt(on), pick: setter({ tourStyle: x[0] }) }; }),
       tourKids: tourKids,
-      lenLabel: tourKids ? 'Höchstens pro Ort' : 'Textlänge pro Ort',
-      tourLens: LENS.map(function (m) { var on = s.tourLen === m; return { label: m + ' Min.', pressed: pressed(on), st: segSt(on), pick: setter({ tourLen: m }) }; }),
+      lenLabel: 'Textlänge pro Ort',
       lenHint: tourKids
-        ? (s.tourLen > kidMax ? 'Länger als empfohlen: Für ' + s.tourAud + ' Jahre empfehlen wir bis ' + kidMax + ' Min. pro Ort.' : 'Empfohlen für ' + s.tourAud + ' Jahre: bis ' + kidMax + ' Min. Du kannst auch länger wählen.')
+        ? 'Wird automatisch gewählt, kurz und kindgerecht: unter 10 etwa 3 bis 5 Min., 10 bis 14 bis etwa 8 Min. pro Ort.'
         : 'Wird automatisch gewählt, nach Verkehrsmittel, Dauer und Ort. ' + MODES[s.mode].len,
       outputs: seg(OUTPUTS, 'output'),
-      extras: [extraRow('Unbekannte Ecken bevorzugen', 'hidden'), extraRow('Barrierefrei (stufenlos)', 'barrier', true)],
+      extras: [extraRow('Barrierefrei (stufenlos)', 'barrier', true)],
       isCar: s.mode === 'car',
-      carWalks: CARWALK.map(function (x) { var on = s.carWalk === x[0]; return { label: x[1], pressed: pressed(on), st: segSt(on), pick: setter({ carWalk: x[0] }) }; }),
-      carWalkHint: (CARWALK.filter(function (x) { return x[0] === s.carWalk; })[0] || CARWALK[0])[2],
-      showParkOnly: s.carWalk === 'none',
+      isWalk: s.mode === 'walk', isTransit: s.mode === 'transit',
+      showWalkTime: s.mode !== 'walk' && !hop,
+      walkTimes: WALKTIMES.map(function (x) { var on = s.walkTime === x[0]; return { label: x[1], pressed: pressed(on), st: segSt(on), pick: setter({ walkTime: x[0] }) }; }),
+      walkTimeHint: s.walkTime === 0 ? 'Die ganze Tour ' + (s.mode === 'transit' ? 'mit Bus und Bahn' : s.mode === 'car' ? 'im Auto' : 'auf dem Rad oder Scooter') + '.' : 'Die App plant ' + (s.walkTime >= 60 ? 'zwei Etappen' : 'eine Runde') + ' zu Fuß ein, zusammen etwa ' + s.walkTime + ' Min.',
+      walkKm: s.walkKm, walkKmLabel: 'bis ' + String(s.walkKm).replace('.', ',') + ' km',
+      setWalkKm: function (e) { var v = parseFloat(e && e.target ? e.target.value : 4); if (!isNaN(v)) self.setState({ walkKm: v }); },
+      showParkOnly: s.mode === 'car' && s.walkTime === 0,
+      hopSw: Object.assign(sw(!!s.hop), { toggle: tgl('hop') }),
+      tourTypes: TOURTYPES.map(function (x) { var on = s.tourType === x[0]; return { label: x[1], pressed: pressed(on), st: segSt(on), pick: setter({ tourType: x[0] }) }; }),
+      tourTypeHint: (TOURTYPES.filter(function (x) { return x[0] === s.tourType; })[0] || TOURTYPES[0])[2],
       parkSw: Object.assign(sw(!!s.parkOnly), { toggle: tgl('parkOnly') }),
       pauseChips: PAUSES.map(function (x) { var on = !!s.pauses[x[0]]; return { label: x[1], on: on, pressed: pressed(on), st: chipSt(on), check: c.check, toggle: function () { self.setState(function (st) { var o = Object.assign({}, st.pauses); o[x[0]] = !o[x[0]]; return { pauses: o }; }); } }; }),
 
@@ -1926,12 +1993,12 @@ class Component extends DCLogic {
       walkD: walkD, driveD: driveD, markers: markers, pausePins: pausePins, parkPins: parkPins, startIsFlag: cw === 'none',
       startPos: { left: START[0] / 10, top: START[1] / 8 },
       planLabel: s.custom ? 'Von dir angepasst' : s.whom === 'Überraschung' ? 'Lass dich überraschen' : 'Vorschlag für dich, passt sich live an',
-      tourTitle: titleFor(s), tourMeta: cw !== 'none' ? s.duration + ' · ' + kmFor('walk', n) + ' km zu Fuß · ' + n + ' Stopps · Auto + zu Fuß' : s.duration + ' · ' + kmFor(s.mode, n) + ' km · ' + n + ' Stopps · ' + MODES[s.mode].label,
+      tourTitle: titleFor(s), tourMeta: hop ? s.duration + ' · ' + n + ' Stopps · Öffis, Hop-on-Hop-off' : cw !== 'none' ? s.duration + ' · ' + 'etwa ' + Math.max(1, Math.round(s.walkTime / 15)) + ' km zu Fuß · ' + n + ' Stopps · ' + MODES[s.mode].label + ' + zu Fuß' : s.duration + ' · ' + kmFor(s.mode, n) + ' km · ' + n + ' Stopps · ' + MODES[s.mode].label,
       badges: badges.map(function (b) { return { label: b, st: 'border: 1px solid ' + c.border + '; background: ' + c.bg + '; color: ' + c.ink }; }),
       zoom: function () { self.say('Zoomen (im Prototyp fest)'); },
       selOn: !!selP,
       sel: selP ? {
-        name: selP.name, kicker: 'Stopp ' + (s.sel + 1) + ' · ' + (selP.tip ? 'Geheimtipp' : selP.topic) + ' · ' + selP.min + ' Min.',
+        name: selP.name, kicker: 'Stopp ' + (s.sel + 1) + ' · ' + selP.topic + ' · ' + selP.min + ' Min.',
         text: INTROS[s.tourStyle] + (tourKids ? selP.k : selP.text),
         listen: function () { self.say('Hörprobe (im Prototyp ohne Ton)'); },
         swap: function () { swapAt(s.sel); }, remove: function () { removeAt(s.sel); }
@@ -1939,11 +2006,19 @@ class Component extends DCLogic {
       closeSel: setter({ sel: null }),
 
       sendOn: s.send, closeSend: setter({ send: false }),
+      sendLabel: s.whom === 'Gruppe' ? 'Gruppen-Link teilen' : 'Aufs Handy schicken',
+      sendTitle: s.whom === 'Gruppe' ? 'Gruppen-Link teilen' : 'Aufs Handy schicken',
+      sendSolo: s.whom !== 'Gruppe', sendGroup: s.whom === 'Gruppe',
+      mailLabel: s.whom === 'Gruppe' ? 'Link kopieren' : 'Link per E-Mail',
+      legendPin: hop || (s.mode === 'transit' && cw !== 'none') ? 'H' : 'P', legendPinLabel: hop || (s.mode === 'transit' && cw !== 'none') ? 'Haltestelle' : s.mode === 'bike' ? 'Abstellen' : 'Parken',
+      wcOn: s.showWc, wcPressed: pressed(s.showWc), toggleWc: function () { var on = !self.state.showWc; self.setState({ showWc: on }); self.say(on ? 'Öffentliche Toiletten eingeblendet' : 'Toiletten ausgeblendet'); },
+      wcBtnSt: s.showWc ? 'background: ' + c.primary + '; color: ' + c.onPrimary : 'background: ' + c.surface + '; color: ' + c.ink,
+      wcPins: n > 2 ? [{ left: (pts[0][0] + pts[1][0]) / 20, top: (pts[0][1] + pts[1][1]) / 16 + 5 }, { left: (pts[1][0] + pts[2][0]) / 20, top: (pts[1][1] + pts[2][1]) / 16 - 5 }] : [],
       qr: qrCells('#14202E'),
       offlineSw: Object.assign(sw(s.offline), { toggle: tgl('offline') }),
       offlineSize: s.offline ? 'Karte und Audio, etwa ' + Math.round(12 + n * 2.5) + ' MB über WLAN' : 'Lädt erst, wenn du die Tour in der App öffnest',
-      mailLink: function () { self.say('Link an deine E-Mail-Adresse geschickt'); },
-      confirmSend: function () { self.saveEntry(true); self.setState({ send: false }); self.say('Tour liegt in der App unter „Meine Touren“ bereit'); },
+      mailLink: function () { self.say(self.state.whom === 'Gruppe' ? 'Gruppen-Link kopiert' : 'Link an deine E-Mail-Adresse geschickt'); },
+      confirmSend: function () { self.saveEntry(true); self.setState({ send: false }); self.say(self.state.whom === 'Gruppe' ? 'Gruppen-Tour gespeichert, du startest sie unterwegs in der App' : 'Tour liegt in der App unter „Meine Touren“ bereit'); },
 
       filters: filters.map(function (f) { var on = s.filter === f; return { label: f === 'Alle' ? 'Alle' : MODES[f].label, pressed: pressed(on), st: chipSt(on), pick: setter({ filter: f }) }; }),
       tourCards: cards, noTourCards: cards.length === 0,
@@ -1953,12 +2028,11 @@ class Component extends DCLogic {
       auds: ['Erwachsene', 'Kinder'].map(function (a) { var on = s.aud === a; return { label: a, pressed: pressed(on), st: segSt(on), pick: function () { self.setState(function (st) { var p = { aud: a }; if (a === 'Erwachsene' && isKidStyle(st.style)) p.style = 'Sachlich'; return p; }); } }; }),
       levelLabel: profKids ? 'Wie alt?' : 'Wie gut kennst du dich aus?',
       levels: profKids
-        ? AGES.map(function (a) { var on = s.age === a; return { label: a + ' J.', pressed: pressed(on), st: segSt(on), pick: setter({ age: a }) }; })
+        ? AGES.map(function (a) { var on = s.age === a; return { label: AGE_LABEL[a], pressed: pressed(on), st: segSt(on), pick: setter({ age: a }) }; })
         : LEVELS.map(function (l) { var on = s.level === l; return { label: l, pressed: pressed(on), st: segSt(on), pick: setter({ level: l }) }; }),
       levelHint: profKids ? 'Gleiche Stile wie für Erwachsene, nur einfachere Sprache und weniger Tiefe. Dazu kommen eigene Kinder-Stile. Ab 15 Jahren passt „Erwachsene“.' : LEVEL_HINTS[s.level] + ' Die Länge hängt davon nicht ab.',
-      styles: STYLES.map(styleTile), kidStyles: KID_STYLES.map(styleTile), profileKids: profKids,
-      hiddenSw: Object.assign(sw(s.hidden), { toggle: tgl('hidden') }),
-      profilesList: [['Familie', 'F', 'Kinder 8–10 · Abenteuer'], ['Freunde', 'Fr', 'Erwachsene · Humorvoll']].map(function (p, i, arr) { return { label: p[0], init: p[1], sub: p[2], col: c, divider: i === arr.length - 1 ? 'transparent' : c.divider, edit: function () { self.say('Profil ' + p[0] + ' bearbeiten (im Prototyp fest)'); } }; }),
+      styles: STYLES.map(styleTile), kidStyles: KID_STYLES.map(styleTile), profileKids: profKids, levelCols: profKids ? 2 : 3,
+      profilesList: [['Familie', 'F', 'Kinder unter 10 · Rätsel & Entdecken'], ['Freunde', 'Fr', 'Erwachsene · Humorvoll']].map(function (p, i, arr) { return { label: p[0], init: p[1], sub: p[2], col: c, divider: i === arr.length - 1 ? 'transparent' : c.divider, edit: function () { self.say('Profil ' + p[0] + ' bearbeiten (im Prototyp fest)'); } }; }),
       addProfile: function () { self.say('Neues Profil anlegen, z. B. für Kollegen'); },
       resetLearned: function () { self.say('Gelerntes zurückgesetzt'); },
 
