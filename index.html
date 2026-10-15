@@ -170,6 +170,19 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
       <button type="button" aria-pressed="{{modes.car.pressed}}" onClick="{{modes.car.pick}}" style="font: inherit; font-size: 14px; height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; border-radius: 16px; cursor: pointer; {{modes.car.st}}"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{modes.car.icon}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"></path><path d="M3 12h18"></path><path d="M9 17h6"></path><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle></svg>Auto</button>
     </div>
     <p style="margin: 10px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{modeHint}}</p>
+    <sc-if value="{{isCar}}" hint-placeholder-val="{{ false }}">
+      <span style="display: block; margin: 14px 0 6px; font-size: 13px; color: {{c.muted}}">Unterwegs auch zu Fuß?</span>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
+        <sc-for list="{{carWalks}}" as="w" hint-placeholder-count="3"><button type="button" aria-pressed="{{w.pressed}}" onClick="{{w.pick}}" style="font: inherit; font-size: 14px; height: 44px; border: 0; border-radius: 10px; cursor: pointer; {{w.st}}">{{w.label}}</button></sc-for>
+      </div>
+      <p style="margin: 8px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{carWalkHint}}</p>
+      <sc-if value="{{showParkOnly}}" hint-placeholder-val="{{ true }}">
+        <div style="margin-top: 10px; display: flex; align-items: center; gap: 12px; padding: 6px 8px 6px 14px; background: {{c.surface}}; border-radius: 16px">
+          <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px">Halte nur mit Parkplatz</span><span style="font-size: 13px; color: {{c.muted}}">Stopps nur dort, wo man in der Nähe parken kann</span></span>
+          <button type="button" role="switch" aria-checked="{{parkSw.on}}" aria-label="Halte nur mit Parkplatz" onClick="{{parkSw.toggle}}" style="flex: none; width: 60px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="width: 52px; height: 32px; box-sizing: border-box; border-radius: 16px; padding: 3px; display: flex; {{parkSw.track}}"><span style="width: 26px; height: 26px; border-radius: 13px; {{parkSw.knob}}"></span></span></button>
+        </div>
+      </sc-if>
+    </sc-if>
 
     <h2 style="margin: 20px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 24px">Dauer &amp; Tempo</h2>
     <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
@@ -206,6 +219,12 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
     <span style="display: block; margin: 14px 0 6px; font-size: 13px; color: {{c.muted}}">Ausgabe</span>
     <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
       <sc-for list="{{outputs}}" as="o" hint-placeholder-count="3"><button type="button" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="font: inherit; font-size: 15px; height: 44px; border: 0; border-radius: 10px; cursor: pointer; {{o.st}}">{{o.label}}</button></sc-for>
+    </div>
+
+    <h2 style="margin: 20px 0 4px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 24px">Pausen einplanen</h2>
+    <p style="margin: 0 0 10px; font-size: 13px; line-height: 18px; color: {{c.muted}}">Mehrfachauswahl, die Pausen erscheinen in der Vorschau zwischen den Stopps.</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 8px">
+      <sc-for list="{{pauseChips}}" as="pc" hint-placeholder-count="4"><button type="button" aria-pressed="{{pc.pressed}}" onClick="{{pc.toggle}}" style="font: inherit; font-size: 14px; display: flex; align-items: center; gap: 6px; height: 44px; padding: 0 12px; border-radius: 22px; cursor: pointer; {{pc.st}}"><sc-if value="{{pc.on}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{pc.check}}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>{{pc.label}}</button></sc-for>
     </div>
 
     <h2 style="margin: 20px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 24px">Extras</h2>
@@ -281,6 +300,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
         <polyline points="{{routePts}}" fill="none" stroke="{{c.ink}}" stroke-width="3.5" stroke-linejoin="round"></polyline>
         <circle cx="{{youX}}" cy="{{youY}}" r="8" fill="{{c.you}}" stroke="#FFFFFF" stroke-width="3"></circle>
       </svg>
+      <sc-for list="{{parkPins}}" as="pp" hint-placeholder-count="1"><span style="position: absolute; left: {{pp.left}}px; top: {{pp.top}}px; width: 24px; height: 24px; box-sizing: border-box; border-radius: 6px; background: {{c.you}}; border: 2px solid #FFFFFF; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700">P</span></sc-for>
       <sc-for list="{{markers}}" as="m" hint-placeholder-count="6"><span style="position: absolute; left: {{m.left}}px; top: {{m.top}}px; width: 24px; height: 24px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; {{m.st}}">{{m.no}}</span></sc-for>
     </div>
     <div style="margin-top: 20px; display: flex; align-items: baseline; justify-content: space-between">
@@ -291,7 +311,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
     <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px">
       <sc-for list="{{rows}}" as="r" hint-placeholder-count="6">
         <sc-if value="{{r.isStop}}" hint-placeholder-val="{{ true }}"><div style="height: 64px; box-sizing: border-box; display: flex; align-items: center; gap: 10px; padding: 0 2px 0 12px; background: {{r.col.surface}}; border-radius: 14px"><span style="flex: none; width: 32px; height: 32px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; {{r.badge}}">{{r.no}}</span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{r.name}}</span><span style="font-size: 13px; color: {{r.col.muted}}">{{r.meta}}</span></span><button type="button" aria-label="{{r.swapLabel}}" onClick="{{r.swap}}" style="flex: none; width: 44px; height: 44px; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{r.col.muted}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 3 4 4-4 4"></path><path d="M20 7H4"></path><path d="m8 21-4-4 4-4"></path><path d="M4 17h16"></path></svg></button><button type="button" aria-label="{{r.removeLabel}}" onClick="{{r.remove}}" style="flex: none; width: 44px; height: 44px; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{r.col.muted}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div></sc-if>
-        <sc-if value="{{r.isCafe}}" hint-placeholder-val="{{ false }}"><div style="height: 52px; box-sizing: border-box; display: flex; align-items: center; gap: 10px; padding: 0 2px 0 12px; border: 1.5px dashed {{r.col.off}}; border-radius: 14px"><span style="flex: none; width: 32px; height: 32px; border-radius: 16px; background: {{r.col.surface}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"></path><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path><path d="M6 2v2"></path><path d="M10 2v2"></path><path d="M14 2v2"></path></svg></span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px"><span style="font-weight: 700; font-size: 14px">Café-Pause · 20 Min.</span><span style="font-size: 13px; color: {{r.col.muted}}">Nach Stopp 3</span></span><button type="button" aria-label="Café-Pause entfernen" onClick="{{r.remove}}" style="flex: none; width: 44px; height: 44px; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{r.col.muted}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div></sc-if>
+        <sc-if value="{{r.isNote}}" hint-placeholder-val="{{ false }}"><div style="min-height: 52px; box-sizing: border-box; display: flex; align-items: center; gap: 10px; padding: 6px 2px 6px 12px; border-radius: 14px; {{r.boxSt}}"><span style="flex: none; width: 32px; height: 32px; border-radius: 16px; background: {{r.col.surface}}; display: flex; align-items: center; justify-content: center"><sc-if value="{{r.ic.car}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"></path><path d="M3 12h18"></path><path d="M9 17h6"></path><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle></svg></sc-if><sc-if value="{{r.ic.walk}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"></circle><path d="M12 7l-1 7"></path><path d="M11 14l-3 7"></path><path d="M11 14l3 3 1 4"></path><path d="M8 11l4-3 3 3 2 1"></path></svg></sc-if><sc-if value="{{r.ic.cafe}}" hint-placeholder-val="{{ true }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"></path><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path><path d="M6 2v2"></path><path d="M10 2v2"></path><path d="M14 2v2"></path></svg></sc-if><sc-if value="{{r.ic.park}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-8"></path><path d="M7 14h10L12 3Z"></path><path d="M4 22h16"></path></svg></sc-if><sc-if value="{{r.ic.play}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V3h16v18"></path><path d="M9 3v11"></path><path d="M15 3v11"></path><path d="M8 14h8"></path></svg></sc-if><sc-if value="{{r.ic.wc}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; font-weight: 700; color: {{r.col.ink}}">WC</span></sc-if></span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px"><span style="font-weight: 700; font-size: 14px">{{r.title}}</span><span style="font-size: 13px; color: {{r.col.muted}}">{{r.sub}}</span></span><sc-if value="{{r.removable}}" hint-placeholder-val="{{ true }}"><button type="button" aria-label="{{r.removeLabel}}" onClick="{{r.remove}}" style="flex: none; width: 44px; height: 44px; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{r.col.muted}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></sc-if></div></sc-if>
       </sc-for>
     </div>
   </div>
@@ -583,6 +603,19 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
               <button type="button" aria-pressed="{{modes.car.pressed}}" onClick="{{modes.car.pick}}" style="font: inherit; font-size: 13px; height: 68px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; border-radius: 14px; cursor: pointer; {{modes.car.st}}"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{modes.car.icon}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"></path><path d="M3 12h18"></path><path d="M9 17h6"></path><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle></svg>Auto</button>
             </div>
             <p style="margin: 8px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{modeHint}}</p>
+            <sc-if value="{{isCar}}" hint-placeholder-val="{{ false }}">
+              <span style="display: block; margin: 12px 0 6px; font-size: 13px; color: {{c.muted}}">Unterwegs auch zu Fuß?</span>
+              <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
+                <sc-for list="{{carWalks}}" as="w" hint-placeholder-count="3"><button type="button" aria-pressed="{{w.pressed}}" onClick="{{w.pick}}" style="font: inherit; font-size: 14px; height: 40px; border: 0; border-radius: 10px; cursor: pointer; {{w.st}}">{{w.label}}</button></sc-for>
+              </div>
+              <p style="margin: 8px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{carWalkHint}}</p>
+              <sc-if value="{{showParkOnly}}" hint-placeholder-val="{{ true }}">
+                <div style="margin-top: 8px; display: flex; align-items: center; gap: 12px; padding: 4px 8px 4px 14px; background: {{c.surface}}; border-radius: 16px">
+                  <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px">Halte nur mit Parkplatz</span><span style="font-size: 13px; color: {{c.muted}}">Stopps nur dort, wo man in der Nähe parken kann</span></span>
+                  <button type="button" role="switch" aria-checked="{{parkSw.on}}" aria-label="Halte nur mit Parkplatz" onClick="{{parkSw.toggle}}" style="flex: none; width: 60px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="width: 48px; height: 28px; box-sizing: border-box; border-radius: 14px; padding: 3px; display: flex; {{parkSw.track}}"><span style="width: 22px; height: 22px; border-radius: 11px; {{parkSw.knob}}"></span></span></button>
+                </div>
+              </sc-if>
+            </sc-if>
 
             <h2 style="margin: 22px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 18px; line-height: 24px">Dauer, Tempo und Route</h2>
             <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
@@ -616,6 +649,12 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
               <sc-for list="{{outputs}}" as="o" hint-placeholder-count="3"><button type="button" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="font: inherit; font-size: 14px; height: 40px; border: 0; border-radius: 10px; cursor: pointer; {{o.st}}">{{o.label}}</button></sc-for>
             </div>
 
+            <h2 style="margin: 22px 0 4px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 18px; line-height: 24px">Pausen einplanen</h2>
+            <p style="margin: 0 0 10px; font-size: 13px; line-height: 18px; color: {{c.muted}}">Mehrfachauswahl, die Pausen erscheinen in der Stopp-Liste und auf der Karte.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <sc-for list="{{pauseChips}}" as="pc" hint-placeholder-count="4"><button type="button" aria-pressed="{{pc.pressed}}" onClick="{{pc.toggle}}" style="font: inherit; font-size: 14px; display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; border-radius: 20px; cursor: pointer; {{pc.st}}"><sc-if value="{{pc.on}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{pc.check}}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>{{pc.label}}</button></sc-for>
+            </div>
+
             <h2 style="margin: 22px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 18px; line-height: 24px">Extras</h2>
             <div style="display: flex; flex-direction: column; background: {{c.surface}}; border-radius: 16px; padding: 0 8px 0 14px">
               <sc-for list="{{extras}}" as="x" hint-placeholder-count="3"><div style="height: 52px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid {{x.divider}}"><span style="flex: 1; font-size: 15px">{{x.label}}</span><button type="button" role="switch" aria-checked="{{x.sw.on}}" aria-label="{{x.label}}" onClick="{{x.toggle}}" style="flex: none; width: 60px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="width: 48px; height: 28px; box-sizing: border-box; border-radius: 14px; padding: 3px; display: flex; {{x.sw.track}}"><span style="width: 22px; height: 22px; border-radius: 11px; {{x.sw.knob}}"></span></span></button></div></sc-for>
@@ -635,11 +674,11 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
                     <button type="button" aria-label="{{r.removeLabel}}" onClick="{{r.remove}}" style="flex: none; width: 36px; height: 36px; border: 0; border-radius: 18px; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
                   </div>
                 </sc-if>
-                <sc-if value="{{r.isCafe}}" hint-placeholder-val="{{ false }}">
-                  <div style="display: flex; align-items: center; gap: 10px; padding: 8px 4px 8px 10px; border-radius: 14px; border: 1.5px dashed {{r.col.border}}">
-                    <span style="flex: none; width: 30px; height: 30px; border-radius: 15px; background: {{r.col.surface}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"></path><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path><path d="M6 2v2"></path><path d="M10 2v2"></path><path d="M14 2v2"></path></svg></span>
-                    <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 14px">Café-Pause · 20 Min.</span><span style="font-size: 13px; color: {{r.col.muted}}">Nach Stopp 3</span></span>
-                    <button type="button" aria-label="Café-Pause entfernen" onClick="{{r.remove}}" style="flex: none; width: 36px; height: 36px; border: 0; border-radius: 18px; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+                <sc-if value="{{r.isNote}}" hint-placeholder-val="{{ false }}">
+                  <div style="display: flex; align-items: center; gap: 10px; padding: 8px 4px 8px 10px; border-radius: 14px; {{r.boxSt}}">
+                    <span style="flex: none; width: 30px; height: 30px; border-radius: 15px; background: {{r.col.surface}}; display: flex; align-items: center; justify-content: center"><sc-if value="{{r.ic.car}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"></path><path d="M3 12h18"></path><path d="M9 17h6"></path><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle></svg></sc-if><sc-if value="{{r.ic.walk}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"></circle><path d="M12 7l-1 7"></path><path d="M11 14l-3 7"></path><path d="M11 14l3 3 1 4"></path><path d="M8 11l4-3 3 3 2 1"></path></svg></sc-if><sc-if value="{{r.ic.cafe}}" hint-placeholder-val="{{ true }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"></path><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path><path d="M6 2v2"></path><path d="M10 2v2"></path><path d="M14 2v2"></path></svg></sc-if><sc-if value="{{r.ic.park}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-8"></path><path d="M7 14h10L12 3Z"></path><path d="M4 22h16"></path></svg></sc-if><sc-if value="{{r.ic.play}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V3h16v18"></path><path d="M9 3v11"></path><path d="M15 3v11"></path><path d="M8 14h8"></path></svg></sc-if><sc-if value="{{r.ic.wc}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; font-weight: 700; color: {{r.col.ink}}">WC</span></sc-if></span>
+                    <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 14px">{{r.title}}</span><span style="font-size: 13px; color: {{r.col.muted}}">{{r.sub}}</span></span>
+                    <sc-if value="{{r.removable}}" hint-placeholder-val="{{ true }}"><button type="button" aria-label="{{r.removeLabel}}" onClick="{{r.remove}}" style="flex: none; width: 36px; height: 36px; border: 0; border-radius: 18px; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></sc-if>
                   </div>
                 </sc-if>
               </sc-for>
@@ -679,17 +718,20 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
             <path d="M920 0 V800" stroke-width="7" vector-effect="non-scaling-stroke"></path>
             <path d="M0 730 H1000" stroke-width="7" vector-effect="non-scaling-stroke"></path>
           </g>
-          <polyline points="{{routePts}}" fill="none" stroke="{{c.street}}" stroke-width="12" stroke-linejoin="round" vector-effect="non-scaling-stroke"></polyline>
-          <polyline points="{{routePts}}" fill="none" stroke="{{c.primary}}" stroke-width="4" stroke-dasharray="10 8" stroke-linejoin="round" vector-effect="non-scaling-stroke"></polyline>
+          <path d="{{driveD}}" fill="none" stroke="{{c.street}}" stroke-width="14" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+          <path d="{{driveD}}" fill="none" stroke="{{c.you}}" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+          <path d="{{walkD}}" fill="none" stroke="{{c.street}}" stroke-width="12" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
+          <path d="{{walkD}}" fill="none" stroke="{{c.primary}}" stroke-width="4" stroke-dasharray="10 8" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>
         </svg>
         <span style="position: absolute; left: 30%; top: 12%; font-size: 13px; font-weight: 700; letter-spacing: 1px; color: {{c.muted}}">FLUSS</span>
         <span style="position: absolute; left: 58%; top: 60%; font-size: 13px; font-weight: 700; letter-spacing: 1px; color: {{c.muted}}">STADTPARK</span>
         <span style="position: absolute; left: 30%; top: 38%; font-size: 13px; font-weight: 700; letter-spacing: 1px; color: {{c.muted}}">ALTSTADT</span>
 
-        <span style="position: absolute; left: {{startPos.left}}%; top: {{startPos.top}}%; transform: translate(-50%, -50%); width: 34px; height: 34px; box-sizing: border-box; border-radius: 17px; background: {{c.you}}; border: 3px solid #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25)"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><path d="M4 22V15"></path></svg></span>
-        <sc-if value="{{cafePos.on}}" hint-placeholder-val="{{ false }}">
-          <span style="position: absolute; left: {{cafePos.left}}%; top: {{cafePos.top}}%; transform: translate(-50%, -50%); width: 30px; height: 30px; border-radius: 15px; background: {{c.surface}}; border: 2px solid {{c.ink}}; box-sizing: border-box; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"></path><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path></svg></span>
+        <sc-if value="{{startIsFlag}}" hint-placeholder-val="{{ true }}">
+          <span style="position: absolute; left: {{startPos.left}}%; top: {{startPos.top}}%; transform: translate(-50%, -50%); width: 34px; height: 34px; box-sizing: border-box; border-radius: 17px; background: {{c.you}}; border: 3px solid #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25)"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><path d="M4 22V15"></path></svg></span>
         </sc-if>
+        <sc-for list="{{parkPins}}" as="pp" hint-placeholder-count="1"><span aria-label="{{pp.label}}" style="position: absolute; left: {{pp.left}}%; top: {{pp.top}}%; transform: translate(-50%, -50%); width: 34px; height: 34px; box-sizing: border-box; border-radius: 9px; background: {{c.you}}; border: 3px solid #FFFFFF; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25)">P</span></sc-for>
+        <sc-for list="{{pausePins}}" as="r" hint-placeholder-count="1"><span aria-label="{{r.title}}" style="position: absolute; left: {{r.left}}%; top: {{r.top}}%; transform: translate(-50%, -50%); width: 30px; height: 30px; border-radius: 15px; background: {{c.surface}}; border: 2px solid {{c.ink}}; box-sizing: border-box; display: flex; align-items: center; justify-content: center"><sc-if value="{{r.ic.car}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2-5h14l2 5v5h-2"></path><path d="M3 12h18"></path><path d="M9 17h6"></path><circle cx="7" cy="17" r="2"></circle><circle cx="17" cy="17" r="2"></circle></svg></sc-if><sc-if value="{{r.ic.walk}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"></circle><path d="M12 7l-1 7"></path><path d="M11 14l-3 7"></path><path d="M11 14l3 3 1 4"></path><path d="M8 11l4-3 3 3 2 1"></path></svg></sc-if><sc-if value="{{r.ic.cafe}}" hint-placeholder-val="{{ true }}"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"></path><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path><path d="M6 2v2"></path><path d="M10 2v2"></path><path d="M14 2v2"></path></svg></sc-if><sc-if value="{{r.ic.park}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-8"></path><path d="M7 14h10L12 3Z"></path><path d="M4 22h16"></path></svg></sc-if><sc-if value="{{r.ic.play}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="{{r.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V3h16v18"></path><path d="M9 3v11"></path><path d="M15 3v11"></path><path d="M8 14h8"></path></svg></sc-if><sc-if value="{{r.ic.wc}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; font-weight: 700; color: {{r.col.ink}}">WC</span></sc-if></span></sc-for>
         <sc-for list="{{markers}}" as="m" hint-placeholder-count="6"><button type="button" aria-label="{{m.label}}" onClick="{{m.pick}}" style="position: absolute; left: {{m.left}}%; top: {{m.top}}%; transform: translate(-50%, -50%); width: 34px; height: 34px; box-sizing: border-box; padding: 0; display: flex; align-items: center; justify-content: center; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; {{m.st}}">{{m.no}}</button></sc-for>
 
         <div style="position: absolute; left: 20px; top: 20px; max-width: 440px; box-sizing: border-box; padding: 16px 18px; border-radius: 18px; background: {{c.surface}}; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12)">
@@ -710,6 +752,8 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
           <span style="display: flex; align-items: center; gap: 6px"><span style="width: 16px; height: 16px; border-radius: 8px; background: {{c.accent}}; border: 2px solid {{c.primary}}; box-sizing: border-box"></span>Stopp</span>
           <span style="display: flex; align-items: center; gap: 6px"><span style="width: 16px; height: 16px; border-radius: 4px; background: {{c.primary}}; border: 2px solid {{c.accent}}; box-sizing: border-box"></span>Geheimtipp</span>
           <span style="display: flex; align-items: center; gap: 6px"><span style="width: 16px; height: 16px; border-radius: 8px; background: {{c.you}}; border: 2px solid #FFFFFF; box-sizing: border-box"></span>Start</span>
+          <span style="display: flex; align-items: center; gap: 6px"><span style="width: 16px; height: 16px; border-radius: 5px; background: {{c.you}}; color: #FFFFFF; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center">P</span>Parken</span>
+          <span style="display: flex; align-items: center; gap: 6px"><span style="width: 16px; height: 16px; border-radius: 8px; background: {{c.surface}}; border: 2px solid {{c.ink}}; box-sizing: border-box"></span>Pause</span>
         </div>
 
         <sc-if value="{{selOn}}" hint-placeholder-val="{{ false }}">
@@ -1160,6 +1204,24 @@ function titleFor(s) {
   if (s.whom === 'Überraschung' && !s.group) return 'Überraschungstour';
   return (s.group ? 'Gruppen-Tour: ' : '') + TITLES[s.tourStyle];
 }
+var PAUSES = [['cafe', 'Café oder Imbiss'], ['park', 'Bank oder Park'], ['play', 'Spielplatz'], ['wc', 'Toiletten anzeigen']];
+var CARWALK = [
+  ['none', 'Nur Auto', 'Die ganze Tour im Auto, die Erzählung passt zur Fahrt.'],
+  ['loop', 'Eine Runde', 'Mit dem Auto zum Parkplatz, dort eine Runde zu Fuß, die wieder am Auto endet.'],
+  ['stages', 'Etappen', 'Mehrere Etappen, z. B. zu Fuß durch die Altstadt, mit dem Auto weiter zum Hafen und dort wieder zu Fuß.']
+];
+function carWalkOf(s) { return s.mode === 'car' ? s.carWalk : 'none'; }
+function stageSplit(n) { return Math.ceil(n / 2); }
+function parkDist(id) { return [50, 100, 150, 80][id % 4]; }
+function pauseAfter(s, i, n) {
+  var out = [];
+  var p = s.pauses || {};
+  if (p.wc && i === 0 && n > 1) out.push({ key: 'wc', title: 'Öffentliche Toilette', sub: 'Am Weg nach Stopp 1' });
+  if (p.play && i === 1 && n > 2) out.push({ key: 'play', title: 'Spielplatz · 15 Min.', sub: 'Zum Toben zwischendurch' });
+  if (p.cafe && i === 2 && n > 3) out.push({ key: 'cafe', title: 'Café-Pause · 20 Min.', sub: 'Nach Stopp 3' });
+  if (p.park && n > 4 && i === (n > 5 ? 4 : 3)) out.push({ key: 'park', title: 'Bank im Park · 10 Min.', sub: 'Durchatmen mit Aussicht' });
+  return out;
+}
 function kmFor(s, n) { return (n * MODES[s.mode].km).toFixed(1).replace('.', ','); }
 
 class Component extends DCLogic {
@@ -1171,7 +1233,7 @@ class Component extends DCLogic {
       style: 'Zeitreise', aud: 'Erwachsene', level: 'Interessiert', age: '8–10', hidden: true, profileMode: 'new',
       whom: 'Ich', freeInterests: { 'Natur': true, 'Architektur': true },
       mode: 'walk', duration: '2 Std.', tempo: 'Ausgewogen', route: 'Rundtour', output: 'Beides', tourStyle: 'Zeitreise', tourAud: 'Erwachsene', tourLen: 5,
-      barrier: false, cafe: true,
+      barrier: false, pauses: { cafe: true, park: false, play: false, wc: false }, carWalk: 'loop', parkOnly: true,
       group: false, milaReady: false, hearTogether: true, kidFriendly: true,
       stops: [], seed: 0, swapCursor: 0,
       liveIdx: 0, playing: true, showText: true, speed: 0, rating: {}, more: {}, ask: false,
@@ -1267,13 +1329,30 @@ class Component extends DCLogic {
       var extra = i < s.liveIdx ? '; opacity: 0.45' : i === s.liveIdx ? '; box-shadow: 0 0 0 6px ' + c.accent + '66' : '';
       return { left: pts[i][0] - 12, top: pts[i][1] - 12, no: i + 1, st: markerSt(p.tip) + extra };
     });
+    var cw = carWalkOf(s);
+    var carOnlyPark = s.mode === 'car' && cw === 'none' && s.parkOnly;
+    var noteRow = function (key, title, sub, removable) {
+      var ic = { car: key === 'car', walk: key === 'walk', cafe: key === 'cafe', park: key === 'park', play: key === 'play', wc: key === 'wc' };
+      var isCarRow = key === 'car' || key === 'walk';
+      return { isStop: false, isNote: true, col: c, ic: ic, title: title, sub: sub, removable: removable, removeLabel: title + ' entfernen',
+        boxSt: isCarRow ? 'background: ' + c.soft + '; padding-right: 12px' : 'border: 1.5px dashed ' + c.off,
+        remove: function () { self.setState(function (st) { var o = Object.assign({}, st.pauses); o[key] = false; return { pauses: o }; }); } };
+    };
     var rows = [];
     tourStops.forEach(function (p, i) {
-      rows.push({ isStop: true, isCafe: false, no: i + 1, name: p.name, meta: (p.tip ? 'Geheimtipp' : p.topic) + ' · ' + p.min + ' Min.', badge: p.tip ? 'border-radius: 8px; background: ' + c.primary + '; border: 2px solid ' + c.accent + '; color: ' + c.check : 'border-radius: 16px; background: ' + c.accent + '; border: 2px solid ' + c.primary + '; color: ' + c.onAccent, col: c, swapLabel: p.name + ' tauschen', removeLabel: p.name + ' entfernen',
+      rows.push({ isStop: true, isNote: false, no: i + 1, name: p.name, meta: (p.tip ? 'Geheimtipp' : p.topic) + ' · ' + (carOnlyPark ? 'Parken ' + parkDist(p.id) + ' m' : p.min + ' Min.'), badge: p.tip ? 'border-radius: 8px; background: ' + c.primary + '; border: 2px solid ' + c.accent + '; color: ' + c.check : 'border-radius: 16px; background: ' + c.accent + '; border: 2px solid ' + c.primary + '; color: ' + c.onAccent, col: c, swapLabel: p.name + ' tauschen', removeLabel: p.name + ' entfernen',
         swap: function () { self.setState(function (st) { var used = {}; st.stops.forEach(function (id) { used[id] = true; }); var cands = POOL.filter(function (q) { return !used[q.id]; }); if (!cands.length) return null; var pick = cands[st.swapCursor % cands.length]; var ns = st.stops.slice(); ns[i] = pick.id; return { stops: ns, swapCursor: st.swapCursor + 1 }; }); },
         remove: function () { self.setState(function (st) { return { stops: st.stops.filter(function (id, j) { return j !== i; }) }; }); } });
-      if (s.cafe && i === 2 && tourStops.length > 3) rows.push({ isStop: false, isCafe: true, col: c, remove: setter({ cafe: false }) });
+      pauseAfter(s, i, tourStops.length).forEach(function (q) { rows.push(noteRow(q.key, q.title, q.sub, true)); });
+      if (cw === 'stages' && i === stageSplit(tourStops.length) - 1 && i < tourStops.length - 1) {
+        rows.push(noteRow('walk', 'Zurück zum Auto', '4 Min. zu Fuß zum Parkhaus', false));
+        rows.push(noteRow('car', 'Weiter zum Hafenparkplatz', '8 Min. Fahrt, dann zu Fuß weiter', false));
+      }
     });
+    if (cw !== 'none' && tourStops.length) {
+      rows.unshift(noteRow('car', 'Mit dem Auto zum Parkhaus am Markt', '12 Min. Fahrt, dann zu Fuß weiter', false));
+      rows.push(noteRow('walk', 'Zurück zum Auto', cw === 'stages' ? '5 Min. zu Fuß zum Hafenparkplatz' : '5 Min. zu Fuß zum Parkhaus', false));
+    }
     var n = tourStops.length;
     var badges = [s.route, s.tempo, s.output === 'Beides' ? 'Text und Ton' : s.output];
     if (s.barrier) badges.push('Stufenlos');
@@ -1281,6 +1360,10 @@ class Component extends DCLogic {
     badges.push(ta === 'Erwachsene' ? s.level : 'Kinder ' + ta + ' J.');
     if (ta !== 'Erwachsene') badges.push('Bis ' + lenFor(s) + ' Min. pro Ort');
     if (s.group && s.hearTogether) badges.push('Alle hören gleichzeitig');
+    if (cw === 'loop') badges.push('Parken + Runde zu Fuß');
+    if (cw === 'stages') badges.push('2 Etappen zu Fuß');
+    if (carOnlyPark) badges.push('Halte mit Parkplatz');
+    if (s.pauses.wc) badges.push('Toiletten an der Strecke');
     var previewLabel = s.group ? 'Für eure Gruppe zusammengestellt' : s.whom === 'Überraschung' ? 'Lass dich überraschen' : s.whom === 'Frei' ? 'Frei zusammengestellt' : s.whom === 'Ich' ? 'Für dich zusammengestellt' : 'Für das Profil ' + s.whom;
     var cur = tourStops[Math.min(s.liveIdx, Math.max(0, n - 1))] || POOL[0];
     var curPt = pts[Math.min(s.liveIdx, Math.max(0, n - 1))] || [60, 118];
@@ -1383,7 +1466,13 @@ class Component extends DCLogic {
         ? (s.tourLen > kidMax ? 'Länger als empfohlen: Für ' + s.tourAud + ' Jahre empfehlen wir bis ' + kidMax + ' Min. pro Ort.' : 'Empfohlen für ' + s.tourAud + ' Jahre: bis ' + kidMax + ' Min. Du kannst auch länger wählen.')
         : 'Wird automatisch gewählt, nach Verkehrsmittel, Dauer und Ort. ' + MODES[s.mode].len,
       outputs: OUTPUTS.map(function (x) { var on = s.output === x; return { label: x, pressed: pressed(on), st: segSt(on), pick: setter({ output: x }) }; }),
-      extras: [extraRow('Unbekannte Ecken bevorzugen', 'hidden'), extraRow('Barrierefrei (stufenlos)', 'barrier'), extraRow('Café-Pause einplanen', 'cafe', true)],
+      extras: [extraRow('Unbekannte Ecken bevorzugen', 'hidden'), extraRow('Barrierefrei (stufenlos)', 'barrier', true)],
+      isCar: s.mode === 'car',
+      carWalks: CARWALK.map(function (x) { var on = s.carWalk === x[0]; return { label: x[1], pressed: pressed(on), st: segSt(on), pick: setter({ carWalk: x[0] }) }; }),
+      carWalkHint: (CARWALK.filter(function (x) { return x[0] === s.carWalk; })[0] || CARWALK[0])[2],
+      showParkOnly: s.carWalk === 'none',
+      parkSw: Object.assign(sw(!!s.parkOnly), { toggle: tgl('parkOnly') }),
+      pauseChips: PAUSES.map(function (x) { var on = !!s.pauses[x[0]]; return { label: x[1], on: on, pressed: pressed(on), st: chipSt(on), check: c.check, toggle: function () { self.setState(function (st) { var o = Object.assign({}, st.pauses); o[x[0]] = !o[x[0]]; return { pauses: o }; }); } }; }),
       createLabel: s.whom === 'Überraschung' ? 'Überrasch mich' : 'Tour erstellen',
       createTour: function () { self.go('preview', function (st) { var ns = Object.assign({}, st, { group: false }); return { group: false, stops: buildStops(ns), liveIdx: 0 }; }); },
       shareLink: function () { self.say('Einladungslink kopiert'); },
@@ -1394,11 +1483,12 @@ class Component extends DCLogic {
       createGroupTour: function () { self.go('preview', function (st) { var ns = Object.assign({}, st, { group: true }); return { group: true, whom: 'Gruppe', stops: buildStops(ns), liveIdx: 0 }; }); },
       shareTour: function () { self.say('Link zur Tour kopiert'); },
       previewLabel: previewLabel, tourTitle: titleFor(s),
-      tourMeta: s.duration + ' · ' + kmFor(s, n) + ' km · ' + n + ' Stopps · ' + MODES[s.mode].label,
+      tourMeta: cw !== 'none' ? s.duration + ' · ' + (n * MODES.walk.km).toFixed(1).replace('.', ',') + ' km zu Fuß · ' + n + ' Stopps · Auto + zu Fuß' : s.duration + ' · ' + kmFor(s, n) + ' km · ' + n + ' Stopps · ' + MODES[s.mode].label,
       badges: badges.map(function (b) { return { label: b, st: 'border: 1px solid ' + c.border + '; background: ' + c.surface + '; color: ' + c.ink }; }),
       routePts: routePts, markers: markers, youX: pts.length ? pts[0][0] - 26 : 30, youY: pts.length ? pts[0][1] + 18 : 140,
+      parkPins: cw === 'none' || !pts.length ? [] : [{ left: pts[0][0] - 38, top: pts[0][1] + 6 }].concat(cw === 'stages' && n > 1 ? [{ left: Math.min(310, pts[stageSplit(n)][0] + 14), top: Math.max(4, pts[stageSplit(n)][1] - 34) }] : []),
       rows: rows, noStops: n === 0,
-      replan: function () { self.setState(function (st) { var ns = Object.assign({}, st, { seed: st.seed + 1, cafe: st.cafe }); return { seed: st.seed + 1, stops: buildStops(ns) }; }); self.say('Neue Stopps zusammengestellt'); },
+      replan: function () { self.setState(function (st) { var ns = Object.assign({}, st, { seed: st.seed + 1 }); return { seed: st.seed + 1, stops: buildStops(ns) }; }); self.say('Neue Stopps zusammengestellt'); },
       startTour: function () { if (!self.state.stops.length) { self.say('Plane zuerst neu, die Tour hat keine Stopps.'); return; } self.go('live', function (st) { return { liveIdx: 0, playing: true, showText: st.output !== 'Ton', rating: {}, more: {}, speed: 0 }; }); },
       endTour: function () { self.endTour(false); },
       liveNo: Math.min(s.liveIdx + 1, n), liveTotal: n,
@@ -1525,6 +1615,25 @@ var COORDS = {
   10: [[40, 110], [80, 155], [140, 175], [210, 172], [275, 150], [310, 105], [285, 55], [220, 30], [150, 35], [85, 60]]
 };
 var START = [100, 520];
+var PAUSES = [['cafe', 'Café oder Imbiss'], ['park', 'Bank oder Park'], ['play', 'Spielplatz'], ['wc', 'Toiletten anzeigen']];
+var CARWALK = [
+  ['none', 'Nur Auto', 'Die ganze Tour im Auto, die Erzählung passt zur Fahrt.'],
+  ['loop', 'Eine Runde', 'Mit dem Auto zum Parkplatz, dort eine Runde zu Fuß, die wieder am Auto endet.'],
+  ['stages', 'Etappen', 'Mehrere Etappen, z. B. zu Fuß durch die Altstadt, mit dem Auto weiter zum Hafen und dort wieder zu Fuß.']
+];
+function carWalkOf(s) { return s.mode === 'car' ? s.carWalk : 'none'; }
+function stageSplit(n) { return Math.ceil(n / 2); }
+function parkDist(id) { return [50, 100, 150, 80][id % 4]; }
+function pauseAfter(s, i, n) {
+  var out = [];
+  var p = s.pauses || {};
+  if (p.wc && i === 0 && n > 1) out.push({ key: 'wc', title: 'Öffentliche Toilette', sub: 'Am Weg nach Stopp 1' });
+  if (p.play && i === 1 && n > 2) out.push({ key: 'play', title: 'Spielplatz · 15 Min.', sub: 'Zum Toben zwischendurch' });
+  if (p.cafe && i === 2 && n > 3) out.push({ key: 'cafe', title: 'Café-Pause · 20 Min.', sub: 'Nach Stopp 3' });
+  if (p.park && n > 4 && i === (n > 5 ? 4 : 3)) out.push({ key: 'park', title: 'Bank im Park · 10 Min.', sub: 'Durchatmen mit Aussicht' });
+  return out;
+}
+function pathD(list) { return list.length ? 'M ' + list.map(function (p) { return p[0] + ' ' + p[1]; }).join(' L ') : 'M 0 0'; }
 var MODE_KEYS = ['walk', 'bike', 'transit', 'car'];
 
 function byId(id) { for (var i = 0; i < POOL.length; i++) { if (POOL[i].id === id) return POOL[i]; } return POOL[0]; }
@@ -1589,7 +1698,7 @@ class Component extends DCLogic {
       style: 'Zeitreise', aud: 'Erwachsene', level: 'Interessiert', age: '8–10', hidden: true,
       when: 'Morgen', whom: 'Ich', freeInterests: { 'Natur': true, 'Architektur': true },
       mode: 'walk', duration: '2 Std.', tempo: 'Ausgewogen', route: 'Rundtour', output: 'Beides',
-      tourStyle: 'Zeitreise', tourAud: 'Erwachsene', tourLen: 5, barrier: false, cafe: true,
+      tourStyle: 'Zeitreise', tourAud: 'Erwachsene', tourLen: 5, barrier: false, pauses: { cafe: true, park: false, play: false, wc: false }, carWalk: 'loop', parkOnly: true,
       custom: null, seed: 0, swapCursor: 0, sel: null, savedSig: '',
       send: false, offline: true,
       saved: [
@@ -1670,10 +1779,20 @@ class Component extends DCLogic {
       var on = s.sel === i;
       return { no: i + 1, left: pts[i][0] / 10, top: pts[i][1] / 8, st: markerSt(p.tip, on), label: 'Stopp ' + (i + 1) + ': ' + p.name, pick: function () { self.setState(function (st) { return { sel: st.sel === i ? null : i }; }); } };
     });
+    var cw = carWalkOf(s);
+    var carOnlyPark = s.mode === 'car' && cw === 'none' && s.parkOnly;
+    var k = stageSplit(n);
+    var noteRow = function (key, title, sub, removable) {
+      var isCarRow = key === 'car' || key === 'walk';
+      return { isStop: false, isNote: true, col: c, ic: { car: key === 'car', walk: key === 'walk', cafe: key === 'cafe', park: key === 'park', play: key === 'play', wc: key === 'wc' }, title: title, sub: sub, removable: removable, removeLabel: title + ' entfernen',
+        boxSt: isCarRow ? 'background: ' + c.soft + '; padding-right: 12px' : 'border: 1.5px dashed ' + c.border,
+        remove: function () { self.setState(function (st) { var o = Object.assign({}, st.pauses); o[key] = false; return { pauses: o }; }); } };
+    };
+    var pausePins = [];
     var rows = [];
     stops.forEach(function (p, i) {
       var on = s.sel === i;
-      rows.push({ isStop: true, isCafe: false, no: i + 1, name: p.name, meta: (p.tip ? 'Geheimtipp' : p.topic) + ' · ' + p.min + ' Min.', badge: badgeSt(p.tip), col: c,
+      rows.push({ isStop: true, isNote: false, no: i + 1, name: p.name, meta: (p.tip ? 'Geheimtipp' : p.topic) + ' · ' + (carOnlyPark ? 'Parken ' + parkDist(p.id) + ' m' : p.min + ' Min.'), badge: badgeSt(p.tip), col: c,
         st: on ? 'background: ' + c.surface + '; box-shadow: 0 0 0 2px ' + c.primary : 'background: ' + c.surface,
         selectLabel: p.name + ' auf der Karte zeigen', select: function () { self.setState(function (st) { return { sel: st.sel === i ? null : i }; }); },
         upLabel: p.name + ' nach oben', downLabel: p.name + ' nach unten', swapLabel: p.name + ' tauschen', removeLabel: p.name + ' entfernen',
@@ -1681,14 +1800,38 @@ class Component extends DCLogic {
         up: function () { if (i === 0) return; self.editStops(function (a) { var t = a[i - 1]; a[i - 1] = a[i]; a[i] = t; return { sel: i - 1 }; }); },
         down: function () { if (i === n - 1) return; self.editStops(function (a) { var t = a[i + 1]; a[i + 1] = a[i]; a[i] = t; return { sel: i + 1 }; }); },
         swap: function () { swapAt(i); }, remove: function () { removeAt(i); } });
-      if (s.cafe && i === 2 && n > 3) rows.push({ isStop: false, isCafe: true, col: c, remove: setter({ cafe: false }) });
+      pauseAfter(s, i, n).forEach(function (q) {
+        rows.push(noteRow(q.key, q.title, q.sub, true));
+        var pin = noteRow(q.key, q.title, q.sub, false);
+        var nextPt = cw === 'stages' && i === k - 1 ? START : pts[i + 1];
+        pin.left = (pts[i][0] + nextPt[0]) / 20; pin.top = (pts[i][1] + nextPt[1]) / 16 + (q.key === 'wc' ? 3 : 0);
+        pausePins.push(pin);
+      });
+      if (cw === 'stages' && i === k - 1 && i < n - 1) {
+        rows.push(noteRow('walk', 'Zurück zum Auto', '4 Min. zu Fuß zum Parkhaus', false));
+        rows.push(noteRow('car', 'Weiter zum Hafenparkplatz', '8 Min. Fahrt, dann zu Fuß weiter', false));
+      }
     });
-    var cafeOn = s.cafe && n > 3;
-    var cafePos = cafeOn ? { on: true, left: (pts[2][0] + pts[3][0]) / 20, top: (pts[2][1] + pts[3][1]) / 16 } : { on: false, left: 0, top: 0 };
+    if (cw !== 'none' && n) {
+      rows.unshift(noteRow('car', 'Mit dem Auto zum Parkhaus am Markt', '12 Min. Fahrt, dann zu Fuß weiter', false));
+      rows.push(noteRow('walk', 'Zurück zum Auto', cw === 'stages' ? '5 Min. zu Fuß zum Hafenparkplatz' : '5 Min. zu Fuß zum Parkhaus', false));
+    }
+    var P2 = null;
+    if (cw === 'stages' && n > 1) { var rest = pts.slice(k); P2 = [Math.round(rest.reduce(function (a, p) { return a + p[0]; }, 0) / rest.length), Math.round(rest.reduce(function (a, p) { return a + p[1]; }, 0) / rest.length) + 30]; }
+    var walkD = 'M 0 0', driveD = 'M 0 0';
+    if (s.mode === 'car' && cw === 'none') { driveD = pathD([START].concat(pts, round && n ? [START] : [])); }
+    else if (cw === 'loop') { walkD = pathD([START].concat(pts, [START])); driveD = pathD([[-30, 650], START]); }
+    else if (cw === 'stages' && P2) { walkD = pathD([START].concat(pts.slice(0, k), [START])) + ' ' + pathD([P2].concat(pts.slice(k), [P2])); driveD = pathD([[-30, 650], START]) + ' ' + pathD([START, P2]); }
+    else { walkD = pathD([START].concat(pts, round && n ? [START] : [])); }
+    var parkPins = cw === 'none' ? [] : [{ left: START[0] / 10, top: START[1] / 8, label: 'Parkhaus am Markt' }].concat(P2 ? [{ left: P2[0] / 10, top: P2[1] / 8, label: 'Hafenparkplatz' }] : []);
     var whenInfo = WHENS.filter(function (w) { return w[0] === s.when; })[0] || WHENS[1];
     var badges = [s.route, s.tempo, s.output === 'Beides' ? 'Text und Ton' : s.output, tourKids ? 'Kinder ' + s.tourAud + ' J.' : s.level];
     if (tourKids) badges.push('Bis ' + s.tourLen + ' Min. pro Ort');
     if (s.barrier) badges.push('Stufenlos');
+    if (cw === 'loop') badges.push('Parken + Runde zu Fuß');
+    if (cw === 'stages') badges.push('2 Etappen zu Fuß');
+    if (carOnlyPark) badges.push('Halte mit Parkplatz');
+    if (s.pauses.wc) badges.push('Toiletten an der Strecke');
     badges.push(s.when);
     var selP = s.sel !== null && s.sel < n ? stops[s.sel] : null;
     var sigNow = this.sig(s);
@@ -1766,7 +1909,13 @@ class Component extends DCLogic {
         ? (s.tourLen > kidMax ? 'Länger als empfohlen: Für ' + s.tourAud + ' Jahre empfehlen wir bis ' + kidMax + ' Min. pro Ort.' : 'Empfohlen für ' + s.tourAud + ' Jahre: bis ' + kidMax + ' Min. Du kannst auch länger wählen.')
         : 'Wird automatisch gewählt, nach Verkehrsmittel, Dauer und Ort. ' + MODES[s.mode].len,
       outputs: seg(OUTPUTS, 'output'),
-      extras: [extraRow('Unbekannte Ecken bevorzugen', 'hidden'), extraRow('Barrierefrei (stufenlos)', 'barrier'), extraRow('Café-Pause einplanen', 'cafe', true)],
+      extras: [extraRow('Unbekannte Ecken bevorzugen', 'hidden'), extraRow('Barrierefrei (stufenlos)', 'barrier', true)],
+      isCar: s.mode === 'car',
+      carWalks: CARWALK.map(function (x) { var on = s.carWalk === x[0]; return { label: x[1], pressed: pressed(on), st: segSt(on), pick: setter({ carWalk: x[0] }) }; }),
+      carWalkHint: (CARWALK.filter(function (x) { return x[0] === s.carWalk; })[0] || CARWALK[0])[2],
+      showParkOnly: s.carWalk === 'none',
+      parkSw: Object.assign(sw(!!s.parkOnly), { toggle: tgl('parkOnly') }),
+      pauseChips: PAUSES.map(function (x) { var on = !!s.pauses[x[0]]; return { label: x[1], on: on, pressed: pressed(on), st: chipSt(on), check: c.check, toggle: function () { self.setState(function (st) { var o = Object.assign({}, st.pauses); o[x[0]] = !o[x[0]]; return { pauses: o }; }); } }; }),
 
       rows: rows, noStops: n === 0,
       addStop: function () { self.editStops(function (a, st) { var used = {}; a.forEach(function (id) { used[id] = true; }); var cands = POOL.filter(function (q) { return !used[q.id]; }); if (!cands.length || a.length >= 10) return null; a.push(cands[st.swapCursor % cands.length].id); return { swapCursor: st.swapCursor + 1, sel: a.length - 1 }; }); },
@@ -1774,10 +1923,10 @@ class Component extends DCLogic {
       savePlan: function () { if (self.state.savedSig === self.sig(self.state)) { self.say('Schon in „Meine Touren“'); return; } self.saveEntry(false); self.say('In „Meine Touren“ gespeichert'); },
       openSend: function () { if (!currentStops(self.state).length) { self.say('Die Tour hat noch keine Stopps.'); return; } self.setState({ send: true }); },
 
-      routePts: routeString(n, round), markers: markers, cafePos: cafePos,
+      walkD: walkD, driveD: driveD, markers: markers, pausePins: pausePins, parkPins: parkPins, startIsFlag: cw === 'none',
       startPos: { left: START[0] / 10, top: START[1] / 8 },
       planLabel: s.custom ? 'Von dir angepasst' : s.whom === 'Überraschung' ? 'Lass dich überraschen' : 'Vorschlag für dich, passt sich live an',
-      tourTitle: titleFor(s), tourMeta: s.duration + ' · ' + kmFor(s.mode, n) + ' km · ' + n + ' Stopps · ' + MODES[s.mode].label,
+      tourTitle: titleFor(s), tourMeta: cw !== 'none' ? s.duration + ' · ' + kmFor('walk', n) + ' km zu Fuß · ' + n + ' Stopps · Auto + zu Fuß' : s.duration + ' · ' + kmFor(s.mode, n) + ' km · ' + n + ' Stopps · ' + MODES[s.mode].label,
       badges: badges.map(function (b) { return { label: b, st: 'border: 1px solid ' + c.border + '; background: ' + c.bg + '; color: ' + c.ink }; }),
       zoom: function () { self.say('Zoomen (im Prototyp fest)'); },
       selOn: !!selP,
