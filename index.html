@@ -798,7 +798,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
         <div style="position: absolute; left: 20px; bottom: 20px; padding: 10px 14px; border-radius: 14px; background: {{c.surface}}; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12); display: flex; align-items: center; gap: 14px; font-size: 13px">
           <span style="display: flex; align-items: center; gap: 6px"><span style="width: 16px; height: 16px; border-radius: 8px; background: {{c.accent}}; border: 2px solid {{c.primary}}; box-sizing: border-box"></span>Stopp</span>
                     <span style="display: flex; align-items: center; gap: 6px"><span style="width: 16px; height: 16px; border-radius: 8px; background: {{c.you}}; border: 2px solid #FFFFFF; box-sizing: border-box"></span>Start</span>
-          <span style="display: flex; align-items: center; gap: 6px"><span style="width: 16px; height: 16px; border-radius: 5px; background: {{c.you}}; color: #FFFFFF; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center">{{legendPin}}</span>{{legendPinLabel}}</span>
+          <sc-if value="{{hasPins}}" hint-placeholder-val="{{ true }}"><span style="display: flex; align-items: center; gap: 6px"><span style="width: 16px; height: 16px; border-radius: 5px; background: {{c.you}}; color: #FFFFFF; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center">{{legendPin}}</span>{{legendPinLabel}}</span></sc-if>
           <span style="display: flex; align-items: center; gap: 6px"><span style="width: 16px; height: 16px; border-radius: 8px; background: {{c.surface}}; border: 2px solid {{c.ink}}; box-sizing: border-box"></span>Pause</span>
         </div>
 
@@ -2010,6 +2010,7 @@ class Component extends DCLogic {
       sendTitle: s.whom === 'Gruppe' ? 'Gruppen-Link teilen' : 'Aufs Handy schicken',
       sendSolo: s.whom !== 'Gruppe', sendGroup: s.whom === 'Gruppe',
       mailLabel: s.whom === 'Gruppe' ? 'Link kopieren' : 'Link per E-Mail',
+      hasPins: parkPins.length > 0,
       legendPin: hop || (s.mode === 'transit' && cw !== 'none') ? 'H' : 'P', legendPinLabel: hop || (s.mode === 'transit' && cw !== 'none') ? 'Haltestelle' : s.mode === 'bike' ? 'Abstellen' : 'Parken',
       wcOn: s.showWc, wcPressed: pressed(s.showWc), toggleWc: function () { var on = !self.state.showWc; self.setState({ showWc: on }); self.say(on ? 'Öffentliche Toiletten eingeblendet' : 'Toiletten ausgeblendet'); },
       wcBtnSt: s.showWc ? 'background: ' + c.primary + '; color: ' + c.onPrimary : 'background: ' + c.surface + '; color: ' + c.ink,
