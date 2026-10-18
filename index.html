@@ -129,10 +129,6 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
         <span style="flex: none; font-size: 13px; font-weight: 700">{{p.dist}}</span>
       </button></sc-for>
     </div>
-    <button type="button" onClick="{{receiveTour}}" style="font: inherit; text-align: left; margin-top: 12px; width: 100%; border: 1.5px solid {{c.border}}; border-radius: 20px; background: {{c.surface}}; color: {{c.ink}}; padding: 14px 20px; display: flex; align-items: center; gap: 14px; cursor: pointer">
-      <span style="flex: none; width: 48px; height: 48px; border-radius: 24px; background: {{c.soft}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><path d="M14 14h3v3h-3z"></path><path d="M21 14v7h-7"></path></svg></span>
-      <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 17px">Tour empfangen</span><span style="font-size: 14px; line-height: 20px; color: {{c.muted}}">Vom Rechner oder per Gruppen-Link</span></span>
-    </button>
     <h2 style="margin: 24px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 24px">Zuletzt unterwegs</h2>
     <div style="display: flex; flex-direction: column; gap: 8px">
       <sc-for list="{{savedTop}}" as="t" hint-placeholder-count="2"><button type="button" onClick="{{t.open}}" style="font: inherit; text-align: left; width: 100%; height: 68px; box-sizing: border-box; border: 0; border-radius: 16px; background: {{t.col.surface}}; color: {{t.col.ink}}; padding: 0 14px; display: flex; align-items: center; gap: 12px; cursor: pointer"><span style="flex: none; width: 40px; height: 40px; border-radius: 20px; background: {{t.col.bg}}; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">{{t.modeShort}}</span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{t.title}}</span><span style="font-size: 13px; color: {{t.col.muted}}">{{t.meta}}</span></span><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{t.col.muted}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg></button></sc-for>
@@ -251,10 +247,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
       <sc-for list="{{tourStyles}}" as="s" hint-placeholder-count="3"><button type="button" aria-pressed="{{s.pressed}}" onClick="{{s.pick}}" style="font: inherit; font-size: 14px; display: flex; align-items: center; gap: 6px; height: 44px; padding: 0 12px; border-radius: 22px; cursor: pointer; {{s.st}}"><sc-if value="{{s.on}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{s.check}}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>{{s.label}}</button></sc-for>
     </div>
     <span style="display: block; margin: 14px 0 6px; font-size: 13px; color: {{c.muted}}">{{lenLabel}}</span>
-    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
-      <sc-for list="{{textLens}}" as="l" hint-placeholder-count="3"><button type="button" aria-pressed="{{l.pressed}}" onClick="{{l.pick}}" style="font: inherit; font-size: 15px; height: 44px; border: 0; border-radius: 10px; cursor: pointer; {{l.st}}">{{l.label}}</button></sc-for>
-    </div>
-    <p style="margin: 8px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{lenHint}}</p>
+    <p style="margin: 2px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{lenHint}}</p>
     <span style="display: block; margin: 14px 0 6px; font-size: 13px; color: {{c.muted}}">Ausgabe</span>
     <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
       <sc-for list="{{outputs}}" as="o" hint-placeholder-count="3"><button type="button" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="font: inherit; font-size: 15px; height: 44px; border: 0; border-radius: 10px; cursor: pointer; {{o.st}}">{{o.label}}</button></sc-for>
@@ -502,6 +495,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
 <div style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; display: flex; flex-direction: column; background: {{c.bg}}">
   <div style="flex: none; box-sizing: border-box; padding: 16px 16px 8px 24px; display: flex; align-items: center; justify-content: space-between">
     <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 28px; letter-spacing: -0.5px">Meine Touren</span>
+    <button type="button" aria-label="Tour empfangen" onClick="{{openScan}}" style="flex: none; height: 44px; padding: 0 14px 0 12px; border-radius: 22px; border: 0; background: {{c.primary}}; color: {{c.onPrimary}}; display: flex; align-items: center; gap: 7px; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{c.onPrimary}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><path d="M14 14h3v3h-3z"></path><path d="M21 14v7h-7"></path></svg>Empfangen</button>
   </div>
   <div style="flex: 1; min-height: 0; overflow-y: auto; padding: 8px 24px 24px">
 <h2 style="margin: 4px 0 4px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 24px">Geplant</h2>
@@ -667,6 +661,26 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
     <button type="button" onClick="{{buyAbo}}" style="margin-top: 16px; font: inherit; width: 100%; height: 54px; border: 0; border-radius: 27px; background: {{c.accent}}; color: {{c.onAccent}}; font-weight: 700; font-size: 17px; cursor: pointer">{{aboCta}}</button>
     <button type="button" onClick="{{closeAbo}}" style="margin-top: 6px; font: inherit; width: 100%; height: 44px; border: 0; background: transparent; color: {{c.ink}}; font-size: 15px; text-decoration: underline; cursor: pointer">Später</button>
   </div>
+</div>
+</sc-if>
+
+<sc-if value="{{scanOn}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; background: #0B0F14; color: #FFFFFF; display: flex; flex-direction: column; align-items: center; padding: 24px">
+  <div style="align-self: stretch; height: 44px; display: flex; align-items: center; justify-content: space-between">
+    <button type="button" aria-label="Schließen" onClick="{{closeScan}}" style="width: 44px; height: 44px; border-radius: 22px; border: 0; background: rgba(255, 255, 255, 0.14); display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+    <span style="font-weight: 700; font-size: 17px">Tour empfangen</span>
+    <span style="width: 44px"></span>
+  </div>
+  <div style="margin-top: 80px; position: relative; width: 240px; height: 240px">
+    <span style="position: absolute; left: 0; top: 0; width: 44px; height: 44px; border-left: 4px solid {{c.accent}}; border-top: 4px solid {{c.accent}}; border-radius: 12px 0 0 0"></span>
+    <span style="position: absolute; right: 0; top: 0; width: 44px; height: 44px; border-right: 4px solid {{c.accent}}; border-top: 4px solid {{c.accent}}; border-radius: 0 12px 0 0"></span>
+    <span style="position: absolute; left: 0; bottom: 0; width: 44px; height: 44px; border-left: 4px solid {{c.accent}}; border-bottom: 4px solid {{c.accent}}; border-radius: 0 0 0 12px"></span>
+    <span style="position: absolute; right: 0; bottom: 0; width: 44px; height: 44px; border-right: 4px solid {{c.accent}}; border-bottom: 4px solid {{c.accent}}; border-radius: 0 0 12px 0"></span>
+    <span style="position: absolute; left: 70px; top: 70px; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; opacity: 0.35"><svg aria-hidden="true" width="84" height="84" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><path d="M14 14h3v3h-3z"></path><path d="M21 14v7h-7"></path></svg></span>
+  </div>
+  <p style="margin: 32px 0 0; max-width: 280px; text-align: center; font-size: 16px; line-height: 24px">Halte die Kamera auf den QR-Code vom Rechner oder auf eine Gruppen-Einladung.</p>
+  <p style="margin: 8px 0 0; max-width: 280px; text-align: center; font-size: 14px; line-height: 20px; opacity: 0.7">Einen Gruppen-Link kannst du auch einfach antippen, dann öffnet er sich hier.</p>
+  <button type="button" onClick="{{receiveTour}}" style="margin-top: auto; font: inherit; width: 100%; height: 54px; border: 0; border-radius: 27px; background: {{c.accent}}; color: {{c.onAccent}}; font-weight: 700; font-size: 17px; cursor: pointer">Code scannen (Vorschau)</button>
 </div>
 </sc-if>
 
@@ -950,10 +964,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
               <sc-for list="{{tourStyles}}" as="s" hint-placeholder-count="3"><button type="button" aria-pressed="{{s.pressed}}" onClick="{{s.pick}}" style="font: inherit; font-size: 14px; height: 40px; padding: 0 12px; border-radius: 20px; cursor: pointer; {{s.st}}">{{s.label}}</button></sc-for>
             </div>
             <span style="display: block; margin: 12px 0 6px; font-size: 13px; color: {{c.muted}}">{{lenLabel}}</span>
-            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
-              <sc-for list="{{textLens}}" as="l" hint-placeholder-count="3"><button type="button" aria-pressed="{{l.pressed}}" onClick="{{l.pick}}" style="font: inherit; font-size: 14px; height: 40px; border: 0; border-radius: 10px; cursor: pointer; {{l.st}}">{{l.label}}</button></sc-for>
-            </div>
-            <p style="margin: 8px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{lenHint}}</p>
+            <p style="margin: 2px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{lenHint}}</p>
             <span style="display: block; margin: 12px 0 6px; font-size: 13px; color: {{c.muted}}">Ausgabe</span>
             <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
               <sc-for list="{{outputs}}" as="o" hint-placeholder-count="3"><button type="button" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="font: inherit; font-size: 14px; height: 40px; border: 0; border-radius: 10px; cursor: pointer; {{o.st}}">{{o.label}}</button></sc-for>
@@ -1351,7 +1362,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
             <sc-if value="{{sendSolo}}" hint-placeholder-val="{{ true }}">
             <ol style="margin: 0; padding-left: 20px; font-size: 15px; line-height: 23px">
               <li>Öffne die App auf deinem Handy.</li>
-              <li>Tippe auf der Startseite auf „Tour empfangen“ und scanne den Code.</li>
+              <li>Tippe unter „Touren“ oben rechts auf „Empfangen“ und scanne den Code.</li>
               <li>Fertig. Die Tour läuft unterwegs auch ohne Internet.</li>
             </ol>
             <p style="margin: 12px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">Bist du in der App mit demselben Konto angemeldet, liegt die Tour auch ohne Scannen dort bereit.</p>
@@ -1628,7 +1639,7 @@ class Component extends DCLogic {
       whom: 'Ich', freeInterests: { 'Natur': true, 'Architektur': true }, groupInterests: {}, textLen: 'auto', presetTitle: '', planKey: '',
       mode: 'walk', duration: '2 Std.', tempo: 'Ausgewogen', route: 'Rundtour', output: 'Beides', tourStyle: 'Zeitreise', tourAud: 'Erwachsene', tourType: 'stop', footKm: 0, hop: false, showWc: false, participant: false,
       barrier: false, pauses: { cafe: true, park: false, play: false },
-      premium: false, abo: false, card: 0, cards: [1, 3, 5, 4, 6, 9, 11, 13], newCard: 0,
+      premium: false, abo: false, scan: false, card: 0, cards: [1, 3, 5, 4, 6, 9, 11, 13], newCard: 0,
       group: false,
       stops: [], seed: 0, swapCursor: 0,
       liveIdx: 0, playing: true, showText: true, speed: 0, rating: {}, more: {}, ask: false,
@@ -1771,7 +1782,6 @@ class Component extends DCLogic {
     badges.push(ta === 'Erwachsene' ? s.level : 'Kinder ' + ta);
     if (s.group) badges.push('Gruppe, gemeinsamer Start');
     if (cw !== 'none') badges.push('Bis ' + kmText(s.footKm) + ' km zu Fuß' + (cw === 'stages' ? ' in 2 Etappen' : ''));
-    if (s.textLen !== 'auto') badges.push(s.textLen === 'long' ? 'Lange Texte' : 'Kurze Texte');
     if (hop) badges.push('Hop-on-Hop-off' + (s.footKm ? ', bis ' + kmText(s.footKm) + ' km zu Fuß' : ''));
     var previewLabel = s.group ? 'Gruppen-Tour · du leitest' : s.whom === 'Überraschung' ? 'Lass dich überraschen' : s.whom === 'Frei' ? 'Frei zusammengestellt' : s.whom === 'Ich' ? 'Für dich zusammengestellt' : 'Für das Profil ' + s.whom;
     var cur = tourStops[Math.min(s.liveIdx, Math.max(0, n - 1))] || POOL[0];
@@ -1864,7 +1874,7 @@ class Component extends DCLogic {
       tourKids: tourKids,
       lenLabel: 'Textlänge pro Ort',
       textLens: TEXTLENS.map(function (x) { var on = s.textLen === x[0]; return { label: x[1], pressed: pressed(on), st: segSt(on), pick: setter({ textLen: x[0] }) }; }),
-      lenHint: s.textLen === 'short' ? 'Alle Orte mit kurzem Text, etwa 1,5 bis 2 Minuten.' : s.textLen === 'long' ? 'Alle Orte mit langem Text, etwa 3,5 bis 4,5 Minuten.' : 'Die App wählt pro Ort: kurz (1,5 bis 2 Min.) oder lang (3,5 bis 4,5 Min.), je nach Ort, Verkehrsmittel und Dauer.',
+      lenHint: 'Wird automatisch pro Ort gewählt: kurz (1,5 bis 2 Min.) oder lang (3,5 bis 4,5 Min.), je nach Ort, Verkehrsmittel und Dauer.',
       outputs: OUTPUTS.map(function (x) { var on = s.output === x; return { label: x, pressed: pressed(on), st: segSt(on), pick: setter({ output: x }) }; }),
       extras: [extraRow('Barrierefrei (stufenlos)', 'barrier', true)],
       isCar: s.mode === 'car',
@@ -1971,7 +1981,9 @@ class Component extends DCLogic {
         self.setState({ saved: [{ title: title, meta: 'Gespeichert · ' + st.duration + ' · ' + st.stops.length + ' Stopps', mode: st.mode, stopIds: st.stops.slice(), done: false }].concat(st.saved), planKey: title });
         self.say('Gespeichert unter „Touren“ bei „Geplant“');
       },
+      scanOn: s.scan, openScan: function () { self.setState({ scan: true }); }, closeScan: function () { self.setState({ scan: false }); },
       receiveTour: function () {
+        self.setState({ scan: false });
         if (self.state.saved.some(function (t) { return t.fromWeb; })) { self.say('Keine neuen Touren vom Rechner'); return; }
         self.setState(function (st) { return { saved: [{ title: 'Vom Rechner: Rätseljagd durch die Altstadt', meta: 'Samstag · 3 Std. · 8 Stopps', mode: 'bike', stopIds: [2, 5, 7, 11, 13, 1, 3, 4], fromWeb: true, done: false }].concat(st.saved) }; });
         self.say('Tour vom Rechner empfangen');
@@ -2302,7 +2314,6 @@ class Component extends DCLogic {
     if (s.barrier) badges.push('Stufenlos');
     if (s.whom === 'Gruppe') badges.push('Gruppe, gemeinsamer Start');
     if (cw !== 'none') badges.push('Bis ' + kmText(s.footKm) + ' km zu Fuß' + (cw === 'stages' ? ' in 2 Etappen' : ''));
-    if (s.textLen !== 'auto') badges.push(s.textLen === 'long' ? 'Lange Texte' : 'Kurze Texte');
     if (hop) badges.push('Hop-on-Hop-off' + (s.footKm ? ', bis ' + kmText(s.footKm) + ' km zu Fuß' : ''));
     badges.push(s.when);
     var selP = s.sel !== null && s.sel < n ? stops[s.sel] : null;
@@ -2395,7 +2406,7 @@ class Component extends DCLogic {
       tourKids: tourKids,
       lenLabel: 'Textlänge pro Ort',
       textLens: TEXTLENS.map(function (x) { var on = s.textLen === x[0]; return { label: x[1], pressed: pressed(on), st: segSt(on), pick: setter({ textLen: x[0] }) }; }),
-      lenHint: s.textLen === 'short' ? 'Alle Orte mit kurzem Text, etwa 1,5 bis 2 Minuten.' : s.textLen === 'long' ? 'Alle Orte mit langem Text, etwa 3,5 bis 4,5 Minuten.' : 'Die App wählt pro Ort: kurz (1,5 bis 2 Min.) oder lang (3,5 bis 4,5 Min.), je nach Ort, Verkehrsmittel und Dauer.',
+      lenHint: 'Wird automatisch pro Ort gewählt: kurz (1,5 bis 2 Min.) oder lang (3,5 bis 4,5 Min.), je nach Ort, Verkehrsmittel und Dauer.',
       outputs: seg(OUTPUTS, 'output'),
       extras: [extraRow('Barrierefrei (stufenlos)', 'barrier', true)],
       isCar: s.mode === 'car',
