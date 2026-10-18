@@ -103,10 +103,32 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
       <span style="font-size: 15px; line-height: 21px">Nach deinen Interessen, für jedes Verkehrsmittel</span>
       <span style="margin-top: 8px; display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 15px">Los geht's<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{c.onAccent}}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span>
     </button>
-    <button type="button" onClick="{{goExplorer}}" style="font: inherit; text-align: left; margin-top: 12px; width: 100%; border: 1.5px solid {{c.border}}; border-radius: 20px; background: {{c.surface}}; color: {{c.ink}}; padding: 18px 20px; display: flex; align-items: center; gap: 14px; cursor: pointer">
-      <span style="flex: none; width: 48px; height: 48px; border-radius: 24px; background: {{c.soft}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9 16.2 7.8"></polygon></svg></span>
-      <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 17px">Einfach loslaufen</span><span style="font-size: 14px; line-height: 20px; color: {{c.muted}}">Entdecker-Modus: Die App erzählt, was um dich herum ist</span></span>
-    </button>
+    <div style="margin: 22px 0 10px; display: flex; align-items: baseline; justify-content: space-between; gap: 8px">
+      <h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 24px">In deiner Nähe</h2>
+      <span style="font-size: 13px; color: {{c.muted}}">[Deine Stadt], Innenstadt</span>
+    </div>
+    <div style="margin: 0 -24px; padding: 0 24px 4px; display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 24px">
+      <sc-for list="{{nearTours}}" as="t" hint-placeholder-count="3"><button type="button" onClick="{{t.open}}" style="flex: none; width: 232px; scroll-snap-align: start; font: inherit; text-align: left; border: 0; border-radius: 18px; background: {{c.surface}}; color: {{c.ink}}; padding: 0; overflow: hidden; display: flex; flex-direction: column; cursor: pointer">
+        <svg aria-hidden="true" width="232" height="96" viewBox="0 0 232 96" style="display: block; background: {{c.mapBg}}"><path d="M-10 16 C 60 30, 120 4, 242 20" stroke="{{c.water}}" stroke-width="12" fill="none"></path><g stroke="{{c.street}}" stroke-width="6" fill="none"><path d="M0 58 H232"></path><path d="M60 0 V96"></path><path d="M150 0 L158 96"></path></g><polyline points="{{t.pts}}" fill="none" stroke="{{c.primary}}" stroke-width="3" stroke-linejoin="round" stroke-dasharray="5 4"></polyline><sc-for list="{{t.dots}}" as="d" hint-placeholder-count="4"><circle cx="{{d.x}}" cy="{{d.y}}" r="6" fill="{{c.accent}}" stroke="{{c.primary}}" stroke-width="1.5"></circle></sc-for></svg>
+        <span style="padding: 10px 14px 14px; display: flex; flex-direction: column; gap: 3px">
+          <span style="font-size: 12px; font-weight: 700; color: {{c.muted}}">{{t.tag}}</span>
+          <span style="font-weight: 700; font-size: 16px; line-height: 21px">{{t.title}}</span>
+          <span style="font-size: 13px; color: {{c.muted}}">{{t.meta}}</span>
+        </span>
+      </button></sc-for>
+    </div>
+
+    <div style="margin: 22px 0 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px">
+      <h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 24px">Orte in der Nähe</h2>
+      <button type="button" onClick="{{goExplorer}}" style="flex: none; font: inherit; font-size: 14px; font-weight: 700; height: 40px; padding: 0 12px; border-radius: 20px; border: 1.5px solid {{c.ink}}; background: transparent; color: {{c.ink}}; display: flex; align-items: center; gap: 6px; cursor: pointer"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9 16.2 7.8"></polygon></svg>Einfach loslaufen</button>
+    </div>
+    <div style="display: flex; flex-direction: column; background: {{c.surface}}; border-radius: 16px; padding: 0 14px">
+      <sc-for list="{{nearPlaces}}" as="p" hint-placeholder-count="3"><button type="button" onClick="{{p.open}}" style="font: inherit; text-align: left; min-height: 60px; border: 0; border-bottom: 1px solid {{p.divider}}; background: transparent; color: {{c.ink}}; padding: 8px 0; display: flex; align-items: center; gap: 12px; cursor: pointer">
+        <span style="flex: none; width: 36px; height: 36px; border-radius: 18px; background: {{c.soft}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg></span>
+        <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 15px">{{p.name}}</span><span style="font-size: 13px; color: {{c.muted}}">{{p.topic}}</span></span>
+        <span style="flex: none; font-size: 13px; font-weight: 700">{{p.dist}}</span>
+      </button></sc-for>
+    </div>
     <button type="button" onClick="{{receiveTour}}" style="font: inherit; text-align: left; margin-top: 12px; width: 100%; border: 1.5px solid {{c.border}}; border-radius: 20px; background: {{c.surface}}; color: {{c.ink}}; padding: 14px 20px; display: flex; align-items: center; gap: 14px; cursor: pointer">
       <span style="flex: none; width: 48px; height: 48px; border-radius: 24px; background: {{c.soft}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><path d="M14 14h3v3h-3z"></path><path d="M21 14v7h-7"></path></svg></span>
       <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 17px">Tour empfangen</span><span style="font-size: 14px; line-height: 20px; color: {{c.muted}}">Vom Rechner oder per Gruppen-Link</span></span>
@@ -150,6 +172,12 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
       <span style="display: block; margin: 14px 0 8px; font-size: 13px; color: {{c.muted}}">Interessen nur für diese Tour</span>
       <div style="display: flex; flex-wrap: wrap; gap: 8px">
         <sc-for list="{{freeInts}}" as="i" hint-placeholder-count="8"><button type="button" aria-pressed="{{i.pressed}}" onClick="{{i.toggle}}" style="font: inherit; font-size: 14px; display: flex; align-items: center; gap: 6px; height: 44px; padding: 0 12px; border-radius: 22px; cursor: pointer; {{i.st}}"><sc-if value="{{i.on}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{i.check}}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>{{i.label}}</button></sc-for>
+      </div>
+    </sc-if>
+    <sc-if value="{{isGroup}}" hint-placeholder-val="{{ false }}">
+      <span style="display: block; margin: 14px 0 8px; font-size: 13px; color: {{c.muted}}">Interessen der Gruppe</span>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px">
+        <sc-for list="{{groupInts}}" as="i" hint-placeholder-count="8"><button type="button" aria-pressed="{{i.pressed}}" onClick="{{i.toggle}}" style="font: inherit; font-size: 14px; display: flex; align-items: center; gap: 6px; height: 44px; padding: 0 12px; border-radius: 22px; cursor: pointer; {{i.st}}"><sc-if value="{{i.on}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{i.check}}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>{{i.label}}</button></sc-for>
       </div>
     </sc-if>
     <p style="margin: 10px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{whomHint}}</p>
@@ -223,7 +251,10 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
       <sc-for list="{{tourStyles}}" as="s" hint-placeholder-count="3"><button type="button" aria-pressed="{{s.pressed}}" onClick="{{s.pick}}" style="font: inherit; font-size: 14px; display: flex; align-items: center; gap: 6px; height: 44px; padding: 0 12px; border-radius: 22px; cursor: pointer; {{s.st}}"><sc-if value="{{s.on}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{s.check}}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>{{s.label}}</button></sc-for>
     </div>
     <span style="display: block; margin: 14px 0 6px; font-size: 13px; color: {{c.muted}}">{{lenLabel}}</span>
-    <p style="margin: 6px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{lenHint}}</p>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
+      <sc-for list="{{textLens}}" as="l" hint-placeholder-count="3"><button type="button" aria-pressed="{{l.pressed}}" onClick="{{l.pick}}" style="font: inherit; font-size: 15px; height: 44px; border: 0; border-radius: 10px; cursor: pointer; {{l.st}}">{{l.label}}</button></sc-for>
+    </div>
+    <p style="margin: 8px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{lenHint}}</p>
     <span style="display: block; margin: 14px 0 6px; font-size: 13px; color: {{c.muted}}">Ausgabe</span>
     <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
       <sc-for list="{{outputs}}" as="o" hint-placeholder-count="3"><button type="button" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="font: inherit; font-size: 15px; height: 44px; border: 0; border-radius: 10px; cursor: pointer; {{o.st}}">{{o.label}}</button></sc-for>
@@ -281,8 +312,8 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
 <div style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; display: flex; flex-direction: column; background: {{c.bg}}">
   <div style="flex: none; height: 60px; box-sizing: border-box; padding: 8px 16px; display: flex; align-items: center; justify-content: space-between">
     <button type="button" aria-label="Zurück" onClick="{{back}}" style="width: 44px; height: 44px; border-radius: 22px; border: 0; background: {{c.surface}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
-    <span style="font-weight: 700; font-size: 17px">Deine Tour</span>
-    <button type="button" aria-label="Tour teilen" onClick="{{shareTour}}" style="width: 44px; height: 44px; border-radius: 22px; border: 0; background: {{c.surface}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.6 13.5 6.8 4"></path><path d="m15.4 6.5-6.8 4"></path></svg></button>
+    <span style="margin-left: 52px; font-weight: 700; font-size: 17px">Deine Tour</span>
+    <span style="display: flex; gap: 8px"><button type="button" aria-label="Für später speichern" aria-pressed="{{planSaved}}" onClick="{{savePlan}}" style="width: 44px; height: 44px; border-radius: 22px; border: 0; background: {{c.surface}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="{{planFill}}" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z"></path></svg></button><button type="button" aria-label="Tour teilen" onClick="{{shareTour}}" style="width: 44px; height: 44px; border-radius: 22px; border: 0; background: {{c.surface}}; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.6 13.5 6.8 4"></path><path d="m15.4 6.5-6.8 4"></path></svg></button></span>
   </div>
   <div style="flex: 1; min-height: 0; overflow-y: auto; padding: 4px 24px 24px">
     <span style="font-size: 13px; color: {{c.muted}}">{{previewLabel}}</span>
@@ -373,7 +404,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
     <sc-if value="{{hideText}}" hint-placeholder-val="{{ false }}"><p style="margin: 8px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">Nur Ton. Der Text ist ausgeblendet.</p></sc-if>
     <div style="margin-top: 16px">
       <div style="height: 4px; border-radius: 2px; background: {{c.seg}}"><div style="height: 4px; border-radius: 2px; background: {{c.ink}}; width: {{progress}}"></div></div>
-      <div style="margin-top: 6px; display: flex; justify-content: space-between; font-size: 13px; color: {{c.muted}}"><span>{{elapsed}}</span><span>3:40</span></div>
+      <div style="margin-top: 6px; display: flex; justify-content: space-between; font-size: 13px; color: {{c.muted}}"><span>{{elapsed}}</span><span>{{liveLen}}</span></div>
     </div>
     <div style="margin-top: 8px; height: 64px; display: flex; align-items: center; justify-content: space-between">
       <button type="button" aria-label="Geschwindigkeit ändern" onClick="{{cycleSpeed}}" style="font: inherit; font-size: 14px; font-weight: 700; width: 56px; height: 44px; border: 0; border-radius: 22px; background: {{c.surface}}; color: {{c.ink}}; cursor: pointer">{{speedLabel}}</button>
@@ -473,9 +504,20 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
     <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 28px; letter-spacing: -0.5px">Meine Touren</span>
   </div>
   <div style="flex: 1; min-height: 0; overflow-y: auto; padding: 8px 24px 24px">
-<h2 style="margin: 4px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 24px">Gespeicherte Touren</h2>
+<h2 style="margin: 4px 0 4px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 24px">Geplant</h2>
+    <p style="margin: 0 0 10px; font-size: 13px; line-height: 18px; color: {{c.muted}}">Noch nicht gemacht. Mit einem Tipp öffnest du die Vorschau.</p>
+    <sc-if value="{{hasPlanned}}" hint-placeholder-val="{{ true }}">
     <div style="display: flex; flex-direction: column; gap: 8px">
-      <sc-for list="{{savedRows}}" as="t" hint-placeholder-count="3"><div style="height: 72px; box-sizing: border-box; display: flex; align-items: center; gap: 4px; padding: 0 4px 0 0; background: {{t.col.surface}}; border-radius: 16px"><button type="button" onClick="{{t.open}}" style="flex: 1; min-width: 0; font: inherit; text-align: left; height: 72px; border: 0; background: transparent; color: {{t.col.ink}}; padding: 0 0 0 14px; display: flex; align-items: center; gap: 12px; cursor: pointer"><span style="flex: none; width: 44px; height: 44px; border-radius: 22px; background: {{t.col.bg}}; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">{{t.modeShort}}</span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{t.title}}</span><span style="font-size: 13px; color: {{t.col.muted}}">{{t.meta}}</span></span></button><button type="button" aria-label="{{t.shareLabel}}" onClick="{{t.share}}" style="flex: none; width: 44px; height: 44px; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{t.col.muted}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.6 13.5 6.8 4"></path><path d="m15.4 6.5-6.8 4"></path></svg></button></div></sc-for>
+      <sc-for list="{{plannedRows}}" as="t" hint-placeholder-count="3"><div style="height: 72px; box-sizing: border-box; display: flex; align-items: center; gap: 4px; padding: 0 4px 0 0; background: {{t.col.surface}}; border-radius: 16px"><button type="button" onClick="{{t.open}}" style="flex: 1; min-width: 0; font: inherit; text-align: left; height: 72px; border: 0; background: transparent; color: {{t.col.ink}}; padding: 0 0 0 14px; display: flex; align-items: center; gap: 12px; cursor: pointer"><span style="flex: none; width: 44px; height: 44px; border-radius: 22px; background: {{t.col.bg}}; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">{{t.modeShort}}</span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{t.title}}</span><span style="font-size: 13px; color: {{t.col.muted}}">{{t.meta}}</span></span></button><button type="button" aria-label="{{t.shareLabel}}" onClick="{{t.share}}" style="flex: none; width: 44px; height: 44px; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{t.col.muted}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.6 13.5 6.8 4"></path><path d="m15.4 6.5-6.8 4"></path></svg></button></div></sc-for>
+    </div>
+    </sc-if>
+    <sc-if value="{{noPlanned}}" hint-placeholder-val="{{ false }}">
+      <p style="margin: 0; padding: 14px; border-radius: 16px; border: 1.5px dashed {{c.off}}; font-size: 14px; line-height: 20px; color: {{c.muted}}">Noch nichts geplant. Speichere eine Tour in der Vorschau oder schick sie vom Rechner.</p>
+    </sc-if>
+    <h2 style="margin: 26px 0 4px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 24px">Erlebt</h2>
+    <p style="margin: 0 0 10px; font-size: 13px; line-height: 18px; color: {{c.muted}}">Schon gemacht, mit Tagebuch aus Fotos, Notizen und Bewertungen.</p>
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <sc-for list="{{doneRows}}" as="t" hint-placeholder-count="3"><button type="button" onClick="{{t.open}}" style="font: inherit; text-align: left; width: 100%; min-height: 76px; box-sizing: border-box; border: 0; border-radius: 16px; background: {{t.col.surface}}; color: {{t.col.ink}}; padding: 10px 12px 10px 14px; display: flex; align-items: center; gap: 12px; cursor: pointer"><span style="flex: none; width: 44px; height: 44px; border-radius: 22px; background: {{t.col.soft}}; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">{{t.modeShort}}</span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{t.title}}</span><span style="font-size: 13px; color: {{t.col.muted}}">{{t.meta}}</span><span style="display: flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 700"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{t.col.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path></svg>{{t.diaryInfo}}</span></span><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{t.col.muted}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg></button></sc-for>
     </div>
   </div>
   <div style="flex: none; height: 76px; box-sizing: border-box; padding: 6px 8px 10px; background: {{c.surface}}; border-top: 1px solid {{c.divider}}; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr))">
@@ -637,11 +679,117 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
 <template id="tpl-web">
 <div style="height: 100%; min-height: 0; display: flex; flex-direction: column; overflow: hidden; font-family: 'Atkinson Hyperlegible', sans-serif; font-size: 15px; background: {{c.bg}}; color: {{c.ink}}">
 
-  <header style="flex: none; height: 64px; box-sizing: border-box; padding: 0 20px 0 24px; display: flex; align-items: center; gap: 24px; background: {{c.surface}}; border-bottom: 1px solid {{c.divider}}">
-    <div style="flex: none; display: flex; align-items: center; gap: 10px">
+  <sc-if value="{{guest}}" hint-placeholder-val="{{ false }}">
+  <header style="flex: none; height: 64px; box-sizing: border-box; padding: 0 20px 0 24px; display: flex; align-items: center; gap: 12px; background: {{c.surface}}; border-bottom: 1px solid {{c.divider}}">
+    <button type="button" aria-label="Zur Startseite" onClick="{{goHome}}" style="flex: none; display: flex; align-items: center; gap: 10px; font: inherit; border: 0; background: transparent; color: inherit; padding: 0; cursor: pointer">
       <span style="width: 36px; height: 36px; border-radius: 18px; background: {{c.accent}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{c.onAccent}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9 16.2 7.8"></polygon></svg></span>
       <span style="font-weight: 700; font-size: 16px">[App-Name]</span>
+    </button>
+    <span style="flex: 1"></span>
+    <button type="button" onClick="{{toApp}}" style="flex: none; font: inherit; font-size: 14px; height: 40px; padding: 0 14px; border-radius: 20px; border: 1.5px solid {{c.border}}; background: transparent; color: {{c.ink}}; cursor: pointer">App-Ansicht</button>
+    <button type="button" onClick="{{login}}" style="flex: none; height: 40px; padding: 0 16px; font-size: 14px; font: inherit; font-weight: 700; border-radius: 24px; border: 1.5px solid {{c.ink}}; background: transparent; color: {{c.ink}}; cursor: pointer; border-radius: 20px">Anmelden</button>
+    <button type="button" onClick="{{login}}" style="flex: none; height: 40px; padding: 0 16px; font-size: 14px; font: inherit; font-weight: 700; border: 0; border-radius: 24px; background: {{c.accent}}; color: {{c.onAccent}}; cursor: pointer; border-radius: 20px">Kostenlos starten</button>
+  </header>
+  <main style="flex: 1; min-height: 0; overflow-y: auto">
+    <div style="max-width: 1160px; margin: 0 auto; padding: 56px 40px 40px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center">
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <span style="align-self: flex-start; height: 30px; box-sizing: border-box; padding: 0 12px; border-radius: 15px; background: {{c.soft}}; font-size: 13px; font-weight: 700; display: flex; align-items: center">Stadtführungen, die zu dir passen</span>
+        <h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 50px; line-height: 56px; letter-spacing: -1px">Deine Stadtführung, genau für dich.</h1>
+        <p style="margin: 0; font-size: 18px; line-height: 28px; color: {{c.muted}}">Die App plant Touren nach deinen Interessen, deiner Zeit und deinem Verkehrsmittel. Unterwegs erzählt sie automatisch an den richtigen Stellen, als Text oder Ton.</p>
+        <div style="margin-top: 8px; display: flex; flex-wrap: wrap; gap: 10px">
+          <button type="button" onClick="{{login}}" style="height: 52px; padding: 0 24px; font-size: 16px; font: inherit; font-weight: 700; border: 0; border-radius: 24px; background: {{c.accent}}; color: {{c.onAccent}}; cursor: pointer; border-radius: 26px">Kostenlos starten</button>
+          <button type="button" onClick="{{getApp}}" style="height: 52px; padding: 0 22px; font-size: 16px; font: inherit; font-weight: 700; border-radius: 24px; border: 1.5px solid {{c.ink}}; background: transparent; color: {{c.ink}}; cursor: pointer; border-radius: 26px">App laden</button>
+        </div>
+        <span style="font-size: 14px; color: {{c.muted}}">Für iPhone und Android. Touren laufen unterwegs auch ohne Internet.</span>
+      </div>
+      <div style="position: relative; height: 420px; border-radius: 28px; overflow: hidden; background: {{c.mapBg}}; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12)">
+        <svg aria-hidden="true" width="100%" height="100%" viewBox="0 0 560 420" preserveAspectRatio="xMidYMid slice" style="position: absolute; left: 0; top: 0">
+          <rect x="330" y="150" width="110" height="70" rx="12" fill="{{c.park}}"></rect>
+          <path d="M-20 40 C 140 70, 260 10, 580 46" stroke="{{c.water}}" stroke-width="26" fill="none"></path>
+          <g stroke="{{c.street}}" stroke-width="12" stroke-linecap="round" fill="none"><path d="M0 130 H560"></path><path d="M0 290 L560 250"></path><path d="M140 0 V420"></path><path d="M300 0 L320 420"></path><path d="M470 0 L480 420"></path></g>
+          <polyline points="90,180 170,240 300,240 420,200 400,110 260,90 90,180" fill="none" stroke="{{c.primary}}" stroke-width="5" stroke-linejoin="round" stroke-dasharray="10 8"></polyline>
+          <g font-family="Atkinson Hyperlegible, sans-serif" font-size="14" font-weight="700" text-anchor="middle">
+            <circle cx="90" cy="180" r="15" fill="{{c.accent}}" stroke="{{c.primary}}" stroke-width="2.5"></circle><text x="90" y="185" fill="{{c.onAccent}}">1</text>
+            <circle cx="170" cy="240" r="15" fill="{{c.accent}}" stroke="{{c.primary}}" stroke-width="2.5"></circle><text x="170" y="245" fill="{{c.onAccent}}">2</text>
+            <circle cx="300" cy="240" r="15" fill="{{c.accent}}" stroke="{{c.primary}}" stroke-width="2.5"></circle><text x="300" y="245" fill="{{c.onAccent}}">3</text>
+            <circle cx="420" cy="200" r="15" fill="{{c.accent}}" stroke="{{c.primary}}" stroke-width="2.5"></circle><text x="420" y="205" fill="{{c.onAccent}}">4</text>
+            <circle cx="400" cy="110" r="15" fill="{{c.accent}}" stroke="{{c.primary}}" stroke-width="2.5"></circle><text x="400" y="115" fill="{{c.onAccent}}">5</text>
+            <circle cx="260" cy="90" r="15" fill="{{c.accent}}" stroke="{{c.primary}}" stroke-width="2.5"></circle><text x="260" y="95" fill="{{c.onAccent}}">6</text>
+          </g>
+        </svg>
+        <div style="position: absolute; left: 24px; right: 24px; bottom: 24px; padding: 16px 18px; border-radius: 18px; background: {{c.surface}}; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 13px; color: {{c.muted}}">Stopp 2 von 6 · Zeitreise</span>
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 20px">Gerberei-Hinterhof</span>
+          <span style="font-size: 15px; line-height: 22px">Wir schreiben das Jahr 1890. Hinter diesem Tor wurde Leder gegerbt, und die Nachbarn beschwerten sich über den Geruch.</span>
+        </div>
+      </div>
     </div>
+    <div style="max-width: 1160px; margin: 0 auto; padding: 8px 40px 40px">
+      <h2 style="margin: 0 0 16px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 28px">Was die App besonders macht</h2>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px">
+              <div style="padding: 22px; border-radius: 20px; background: {{c.surface}}; display: flex; flex-direction: column; gap: 8px">
+                <span style="width: 44px; height: 44px; border-radius: 22px; background: {{c.soft}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg></span>
+                <span style="margin-top: 4px; font-weight: 700; font-size: 17px">Für dich gemacht</span>
+                <span style="font-size: 15px; line-height: 22px; color: {{c.muted}}">Interessen, Wissensstand und Erzählstil bestimmen die Tour. Jede Tour entsteht neu.</span>
+              </div>
+              <div style="padding: 22px; border-radius: 20px; background: {{c.surface}}; display: flex; flex-direction: column; gap: 8px">
+                <span style="width: 44px; height: 44px; border-radius: 22px; background: {{c.soft}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="3.5"></circle><circle cx="18.5" cy="17.5" r="3.5"></circle><circle cx="15" cy="5" r="1"></circle><path d="M12 17.5V14l-3-3 4-3 2 3h2"></path></svg></span>
+                <span style="margin-top: 4px; font-weight: 700; font-size: 17px">Für jedes Verkehrsmittel</span>
+                <span style="font-size: 15px; line-height: 22px; color: {{c.muted}}">Zu Fuß, mit Rad oder E-Scooter, mit Öffis oder mit dem Auto.</span>
+              </div>
+              <div style="padding: 22px; border-radius: 20px; background: {{c.surface}}; display: flex; flex-direction: column; gap: 8px">
+                <span style="width: 44px; height: 44px; border-radius: 22px; background: {{c.soft}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span>
+                <span style="margin-top: 4px; font-weight: 700; font-size: 17px">Gemeinsam unterwegs</span>
+                <span style="font-size: 15px; line-height: 22px; color: {{c.muted}}">Eine Person plant, die anderen machen per Link mit, ganz ohne Konto.</span>
+              </div>
+              <div style="padding: 22px; border-radius: 20px; background: {{c.surface}}; display: flex; flex-direction: column; gap: 8px">
+                <span style="width: 44px; height: 44px; border-radius: 22px; background: {{c.soft}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{c.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="13" height="17" rx="2"></rect><path d="M5 6v13a3 3 0 0 0 3 3h9"></path><path d="m14.5 7.5.9 1.9 2.1.3-1.5 1.5.3 2.1-1.8-1-1.9 1 .4-2.1-1.5-1.5 2.1-.3z"></path></svg></span>
+                <span style="margin-top: 4px; font-weight: 700; font-size: 17px">Sammeln</span>
+                <span style="font-size: 15px; line-height: 22px; color: {{c.muted}}">Jeder besuchte Ort wird eine Sammelkarte, dazu kommen Saison-Aktionen.</span>
+              </div>
+      </div>
+    </div>
+    <div style="max-width: 1160px; margin: 0 auto; padding: 8px 40px 40px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: start">
+      <div>
+        <h2 style="margin: 0 0 18px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 28px">So funktioniert's</h2>
+        <div style="display: flex; flex-direction: column; gap: 18px">
+              <div style="display: flex; gap: 14px; align-items: flex-start">
+                <span style="flex: none; width: 40px; height: 40px; border-radius: 20px; background: {{c.accent}}; color: {{c.onAccent}}; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 17px">1</span>
+                <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 700; font-size: 17px">Planen</span><span style="font-size: 15px; line-height: 22px; color: {{c.muted}}">Am Rechner auf der großen Karte oder direkt in der App, in wenigen Klicks.</span></span>
+              </div>
+              <div style="display: flex; gap: 14px; align-items: flex-start">
+                <span style="flex: none; width: 40px; height: 40px; border-radius: 20px; background: {{c.accent}}; color: {{c.onAccent}}; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 17px">2</span>
+                <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 700; font-size: 17px">Aufs Handy</span><span style="font-size: 15px; line-height: 22px; color: {{c.muted}}">Per QR-Code oder über dein Konto. Karte und Audio lassen sich offline speichern.</span></span>
+              </div>
+              <div style="display: flex; gap: 14px; align-items: flex-start">
+                <span style="flex: none; width: 40px; height: 40px; border-radius: 20px; background: {{c.accent}}; color: {{c.onAccent}}; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 17px">3</span>
+                <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 700; font-size: 17px">Losgehen</span><span style="font-size: 15px; line-height: 22px; color: {{c.muted}}">Die App erzählt automatisch, sobald du an einem Ort ankommst.</span></span>
+              </div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+        <div style="padding: 20px; border-radius: 20px; background: {{c.surface}}">
+          <span style="font-weight: 700; font-size: 17px">Gratis</span>
+          <span style="display: block; margin-top: 2px; font-size: 13px; color: {{c.muted}}">0 €</span>
+          <ul style="margin: 12px 0 0; padding-left: 18px; font-size: 14px; line-height: 22px"><li>[x] Touren pro Monat</li><li>Standard-Erzähler</li><li>Gruppen-Touren mitmachen</li></ul>
+        </div>
+        <div style="padding: 20px; border-radius: 20px; background: {{c.primary}}; color: {{c.onPrimary}}">
+          <span style="font-weight: 700; font-size: 17px">Premium</span>
+          <span style="display: block; margin-top: 2px; font-size: 13px; opacity: 0.8">[Preis] pro Monat</span>
+          <ul style="margin: 12px 0 0; padding-left: 18px; font-size: 14px; line-height: 22px"><li>Unbegrenzt Touren</li><li>Gruppen-Touren leiten</li><li>Offline-Modus</li></ul>
+        </div>
+        <p style="grid-column: 1 / -1; margin: 0; font-size: 13px; color: {{c.muted}}">Preise und Grenzen sind noch offen.</p>
+      </div>
+    </div>
+    <footer style="margin-top: 16px; padding: 24px 40px; border-top: 1px solid {{c.divider}}; display: flex; gap: 20px; font-size: 13px; color: {{c.muted}}"><span>[App-Name]</span><span>Impressum</span><span>Datenschutz</span><span>Kontakt</span></footer>
+  </main>
+  </sc-if>
+  <sc-if value="{{loggedIn}}" hint-placeholder-val="{{ true }}">
+  <header style="flex: none; height: 64px; box-sizing: border-box; padding: 0 20px 0 24px; display: flex; align-items: center; gap: 24px; background: {{c.surface}}; border-bottom: 1px solid {{c.divider}}">
+    <button type="button" aria-label="Zur Startseite" onClick="{{goHome}}" style="flex: none; display: flex; align-items: center; gap: 10px; font: inherit; border: 0; background: transparent; color: inherit; padding: 0; cursor: pointer">
+      <span style="width: 36px; height: 36px; border-radius: 18px; background: {{c.accent}}; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{c.onAccent}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.2 7.8 14.1 14.1 7.8 16.2 9.9 9.9 16.2 7.8"></polygon></svg></span>
+      <span style="font-weight: 700; font-size: 16px">[App-Name]</span>
+    </button>
     <nav aria-label="Hauptnavigation" style="flex: 1; min-width: 0; display: flex; gap: 4px">
       <sc-for list="{{nav}}" as="n" hint-placeholder-count="4"><button type="button" aria-current="{{n.current}}" onClick="{{n.go}}" style="font: inherit; font-size: 15px; height: 40px; padding: 0 16px; border: 0; border-radius: 20px; cursor: pointer; {{n.st}}">{{n.label}}</button></sc-for>
     </nav>
@@ -652,7 +800,49 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
 
   <div style="flex: 1; min-height: 0; display: flex">
 
-    <sc-if value="{{is.plan}}" hint-placeholder-val="{{ true }}">
+    <sc-if value="{{is.home}}" hint-placeholder-val="{{ false }}">
+      <main style="flex: 1; min-width: 0; overflow-y: auto">
+        <div style="max-width: 1160px; margin: 0 auto; padding: 32px 40px 48px">
+          <h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 32px; line-height: 38px; letter-spacing: -0.5px">Hallo!</h1>
+          <p style="margin: 6px 0 0; color: {{c.muted}}">Wohin geht's als Nächstes?</p>
+          <div style="margin-top: 20px; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 20px; align-items: stretch">
+            <div style="padding: 26px 28px; border-radius: 22px; background: {{c.accent}}; color: {{c.onAccent}}; display: flex; flex-direction: column; gap: 10px">
+              <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 28px; line-height: 32px">Neue Tour planen</span>
+              <span style="font-size: 15px; line-height: 22px">Wähle eine Stadt. Auf der großen Karte stellst du dann alles in Ruhe ein und schickst die Tour aufs Handy.</span>
+              <span style="margin-top: 6px; font-size: 13px; font-weight: 700">Stadt</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px">
+                <sc-for list="{{homeCities}}" as="x" hint-placeholder-count="4"><button type="button" aria-pressed="{{x.pressed}}" onClick="{{x.pick}}" style="font: inherit; font-size: 14px; height: 40px; padding: 0 14px; border-radius: 20px; cursor: pointer; {{x.st}}">{{x.label}}</button></sc-for>
+                <button type="button" onClick="{{searchCity}}" style="font: inherit; font-size: 14px; height: 40px; padding: 0 14px; border-radius: 20px; border: 1.5px dashed {{c.onAccent}}; background: transparent; color: {{c.onAccent}}; cursor: pointer">Andere Stadt suchen …</button>
+              </div>
+              <button type="button" onClick="{{planCity}}" style="margin-top: 8px; align-self: flex-start; font: inherit; font-weight: 700; font-size: 16px; height: 50px; padding: 0 22px; border: 0; border-radius: 25px; background: {{c.primary}}; color: {{c.onPrimary}}; cursor: pointer">Tour planen</button>
+            </div>
+            <div style="padding: 22px 24px; border-radius: 22px; background: {{c.primary}}; color: {{c.onPrimary}}; display: flex; flex-direction: column; gap: 8px">
+              <span style="align-self: flex-start; height: 26px; box-sizing: border-box; padding: 0 10px; border-radius: 13px; background: {{c.accent}}; color: {{c.onAccent}}; font-size: 12px; font-weight: 700; display: flex; align-items: center">Saison-Aktion · {{season.until}}</span>
+              <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 22px; line-height: 28px">{{season.title}}</span>
+              <div style="height: 8px; border-radius: 4px; background: rgba(127, 127, 127, 0.35)"><div style="height: 8px; border-radius: 4px; background: {{c.accent}}; width: {{season.pct}}"></div></div>
+              <span style="font-size: 14px; font-weight: 700">{{season.progress}}</span>
+              <span style="font-size: 14px; line-height: 20px; opacity: 0.85">{{homeCollect}}</span>
+              <button type="button" onClick="{{goCollection}}" style="margin-top: auto; align-self: flex-start; font: inherit; font-weight: 700; font-size: 14px; height: 42px; padding: 0 16px; border: 0; border-radius: 21px; background: {{c.accent}}; color: {{c.onAccent}}; cursor: pointer">Zur Sammlung</button>
+            </div>
+          </div>
+          <div style="margin-top: 20px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start">
+            <div style="padding: 20px 24px; border-radius: 20px; background: {{c.surface}}">
+              <div style="display: flex; align-items: baseline; justify-content: space-between"><h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px">Geplant</h2><button type="button" onClick="{{goTours}}" style="font: inherit; font-size: 14px; border: 0; background: transparent; color: {{c.ink}}; text-decoration: underline; cursor: pointer">Alle Touren</button></div>
+              <p style="margin: 4px 0 6px; font-size: 13px; color: {{c.muted}}">Noch nicht gemacht</p>
+              <sc-for list="{{homePlanned}}" as="t" hint-placeholder-count="2"><button type="button" onClick="{{t.open}}" style="font: inherit; text-align: left; width: 100%; min-height: 60px; border: 0; border-bottom: 1px solid {{t.divider}}; background: transparent; color: {{c.ink}}; padding: 8px 0; display: flex; align-items: center; gap: 12px; cursor: pointer"><span style="flex: none; width: 40px; height: 40px; border-radius: 20px; background: {{c.bg}}; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">{{t.modeShort}}</span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 15px">{{t.title}}</span><span style="font-size: 13px; color: {{c.muted}}">{{t.meta}}</span></span><sc-if value="{{t.onPhone}}" hint-placeholder-val="{{ false }}"><span style="flex: none; height: 26px; box-sizing: border-box; padding: 0 10px; border-radius: 13px; font-size: 12px; font-weight: 700; display: flex; align-items: center; background: {{c.soft}}">Auf dem Handy</span></sc-if></button></sc-for>
+              <sc-if value="{{homeNoPlanned}}" hint-placeholder-val="{{ false }}"><p style="margin: 8px 0 0; font-size: 14px; color: {{c.muted}}">Noch nichts geplant.</p></sc-if>
+            </div>
+            <div style="padding: 20px 24px; border-radius: 20px; background: {{c.surface}}">
+              <div style="display: flex; align-items: baseline; justify-content: space-between"><h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px">Erlebt</h2><button type="button" onClick="{{goTours}}" style="font: inherit; font-size: 14px; border: 0; background: transparent; color: {{c.ink}}; text-decoration: underline; cursor: pointer">Tagebuch</button></div>
+              <p style="margin: 4px 0 6px; font-size: 13px; color: {{c.muted}}">Schon gemacht, mit Tagebuch</p>
+              <sc-for list="{{homeDone}}" as="t" hint-placeholder-count="2"><button type="button" onClick="{{t.open}}" style="font: inherit; text-align: left; width: 100%; min-height: 60px; border: 0; border-bottom: 1px solid {{t.divider}}; background: transparent; color: {{c.ink}}; padding: 8px 0; display: flex; align-items: center; gap: 12px; cursor: pointer"><span style="flex: none; width: 40px; height: 40px; border-radius: 20px; background: {{c.bg}}; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700">{{t.modeShort}}</span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 15px">{{t.title}}</span><span style="font-size: 13px; color: {{c.muted}}">{{t.meta}} · {{t.diaryInfo}}</span></span></button></sc-for>
+            </div>
+          </div>
+        </div>
+      </main>
+    </sc-if>
+
+    <sc-if value="{{is.plan}}" hint-placeholder-val="{{ false }}">
       <section aria-label="Tour planen" style="flex: none; width: 440px; min-height: 0; display: flex; flex-direction: column; background: {{c.bg}}; border-right: 1px solid {{c.divider}}">
         <div style="flex: none; padding: 16px 24px 12px">
           <h1 style="margin: 0 0 12px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 26px; line-height: 32px; letter-spacing: -0.4px">Tour vorbereiten</h1>
@@ -673,7 +863,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
 
             <h2 style="margin: 12px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 18px; line-height: 24px">Wohin und wann?</h2>
             <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
-              <button type="button" onClick="{{pickCity}}" style="font: inherit; text-align: left; height: 56px; padding: 0 12px; border-radius: 12px; border: 1.5px solid {{c.border}}; background: {{c.surface}}; color: {{c.ink}}; display: flex; flex-direction: column; justify-content: center; gap: 2px; cursor: pointer"><span style="font-size: 12px; color: {{c.muted}}">Stadt</span><span style="font-weight: 700; font-size: 15px">[Deine Stadt]</span></button>
+              <button type="button" onClick="{{pickCity}}" style="font: inherit; text-align: left; height: 56px; padding: 0 12px; border-radius: 12px; border: 1.5px solid {{c.border}}; background: {{c.surface}}; color: {{c.ink}}; display: flex; flex-direction: column; justify-content: center; gap: 2px; cursor: pointer"><span style="font-size: 12px; color: {{c.muted}}">Stadt</span><span style="font-weight: 700; font-size: 15px">{{cityName}}</span></button>
               <button type="button" onClick="{{pickStart}}" style="font: inherit; text-align: left; height: 56px; padding: 0 12px; border-radius: 12px; border: 1.5px solid {{c.border}}; background: {{c.surface}}; color: {{c.ink}}; display: flex; flex-direction: column; justify-content: center; gap: 2px; cursor: pointer"><span style="font-size: 12px; color: {{c.muted}}">Start</span><span style="font-weight: 700; font-size: 15px">Hauptbahnhof</span></button>
             </div>
             <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px">
@@ -689,6 +879,12 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
               <span style="display: block; margin: 12px 0 8px; font-size: 13px; color: {{c.muted}}">Interessen nur für diese Tour</span>
               <div style="display: flex; flex-wrap: wrap; gap: 8px">
                 <sc-for list="{{freeInts}}" as="i" hint-placeholder-count="9"><button type="button" aria-pressed="{{i.pressed}}" onClick="{{i.toggle}}" style="font: inherit; font-size: 14px; height: 40px; padding: 0 12px; border-radius: 20px; cursor: pointer; {{i.st}}">{{i.label}}</button></sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{isGroup}}" hint-placeholder-val="{{ false }}">
+              <span style="display: block; margin: 12px 0 8px; font-size: 13px; color: {{c.muted}}">Interessen der Gruppe</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px">
+                <sc-for list="{{groupInts}}" as="i" hint-placeholder-count="9"><button type="button" aria-pressed="{{i.pressed}}" onClick="{{i.toggle}}" style="font: inherit; font-size: 14px; height: 40px; padding: 0 12px; border-radius: 20px; cursor: pointer; {{i.st}}">{{i.label}}</button></sc-for>
               </div>
             </sc-if>
             <p style="margin: 8px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{whomHint}}</p>
@@ -754,7 +950,10 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
               <sc-for list="{{tourStyles}}" as="s" hint-placeholder-count="3"><button type="button" aria-pressed="{{s.pressed}}" onClick="{{s.pick}}" style="font: inherit; font-size: 14px; height: 40px; padding: 0 12px; border-radius: 20px; cursor: pointer; {{s.st}}">{{s.label}}</button></sc-for>
             </div>
             <span style="display: block; margin: 12px 0 6px; font-size: 13px; color: {{c.muted}}">{{lenLabel}}</span>
-            <p style="margin: 6px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{lenHint}}</p>
+            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
+              <sc-for list="{{textLens}}" as="l" hint-placeholder-count="3"><button type="button" aria-pressed="{{l.pressed}}" onClick="{{l.pick}}" style="font: inherit; font-size: 14px; height: 40px; border: 0; border-radius: 10px; cursor: pointer; {{l.st}}">{{l.label}}</button></sc-for>
+            </div>
+            <p style="margin: 8px 0 0; font-size: 14px; line-height: 20px; color: {{c.muted}}">{{lenHint}}</p>
             <span style="display: block; margin: 12px 0 6px; font-size: 13px; color: {{c.muted}}">Ausgabe</span>
             <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
               <sc-for list="{{outputs}}" as="o" hint-placeholder-count="3"><button type="button" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="font: inherit; font-size: 14px; height: 40px; border: 0; border-radius: 10px; cursor: pointer; {{o.st}}">{{o.label}}</button></sc-for>
@@ -899,11 +1098,19 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
             <div style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px">
               <sc-for list="{{filters}}" as="f" hint-placeholder-count="5"><button type="button" aria-pressed="{{f.pressed}}" onClick="{{f.pick}}" style="font: inherit; font-size: 14px; height: 40px; padding: 0 14px; border-radius: 20px; cursor: pointer; {{f.st}}">{{f.label}}</button></sc-for>
             </div>
-            <div style="margin-top: 20px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
-              <sc-for list="{{tourCards}}" as="t" hint-placeholder-count="3"><button type="button" onClick="{{t.open}}" style="font: inherit; text-align: left; padding: 0; border: 0; border-radius: 20px; overflow: hidden; background: {{t.col.surface}}; color: {{t.col.ink}}; display: flex; flex-direction: column; cursor: pointer; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08)"><span style="display: block; width: 100%; height: 150px; background: {{t.col.mapBg}}"><svg aria-hidden="true" width="100%" height="150" viewBox="-300 140 1600 580" preserveAspectRatio="xMidYMid slice"><defs><marker id="{{t.markerId}}" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5"><circle cx="5" cy="5" r="4" fill="{{t.col.accent}}" stroke="{{t.col.primary}}" stroke-width="1.5"></circle></marker></defs><rect x="560" y="430" width="160" height="120" rx="14" fill="{{t.col.park}}"></rect><path d="M-320 190 C 220 260, 430 120, 1320 210" stroke="{{t.col.water}}" stroke-width="44" fill="none"></path><path d="M-300 340 H1300 M-300 660 L1300 540 M250 0 V800 M520 0 L560 800 M800 0 L830 800 M-60 0 V800 M1080 0 V800" stroke="{{t.col.street}}" stroke-width="16" fill="none"></path><polyline points="{{t.pts}}" fill="none" stroke="{{t.col.primary}}" stroke-width="10" stroke-linejoin="round" marker-start="{{t.markerUrl}}" marker-mid="{{t.markerUrl}}" marker-end="{{t.markerUrl}}"></polyline></svg></span><span style="padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 700; font-size: 16px">{{t.title}}</span><span style="font-size: 13px; color: {{t.col.muted}}">{{t.meta}}</span><span style="display: flex; flex-wrap: wrap; gap: 6px"><span style="height: 26px; box-sizing: border-box; padding: 0 10px; border-radius: 13px; font-size: 12px; display: flex; align-items: center; border: 1px solid {{t.col.border}}">{{t.modeLabel}}</span><sc-if value="{{t.onPhone}}" hint-placeholder-val="{{ false }}"><span style="height: 26px; box-sizing: border-box; padding: 0 10px; border-radius: 13px; font-size: 12px; font-weight: 700; display: flex; align-items: center; background: {{t.col.soft}}">Auf dem Handy</span></sc-if></span></span></button></sc-for>
+            <h2 style="margin: 24px 0 2px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 21px">Geplant</h2>
+            <p style="margin: 0 0 12px; font-size: 14px; color: {{c.muted}}">Noch nicht gemacht. Öffnen, ändern oder aufs Handy schicken.</p>
+            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
+              <sc-for list="{{plannedCards}}" as="t" hint-placeholder-count="3"><button type="button" onClick="{{t.open}}" style="font: inherit; text-align: left; padding: 0; border: 0; border-radius: 20px; overflow: hidden; background: {{t.col.surface}}; color: {{t.col.ink}}; display: flex; flex-direction: column; cursor: pointer; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08)"><span style="display: block; width: 100%; height: 150px; background: {{t.col.mapBg}}"><svg aria-hidden="true" width="100%" height="150" viewBox="-300 140 1600 580" preserveAspectRatio="xMidYMid slice"><defs><marker id="{{t.markerId}}" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5"><circle cx="5" cy="5" r="4" fill="{{t.col.accent}}" stroke="{{t.col.primary}}" stroke-width="1.5"></circle></marker></defs><rect x="560" y="430" width="160" height="120" rx="14" fill="{{t.col.park}}"></rect><path d="M-320 190 C 220 260, 430 120, 1320 210" stroke="{{t.col.water}}" stroke-width="44" fill="none"></path><path d="M-300 340 H1300 M-300 660 L1300 540 M250 0 V800 M520 0 L560 800 M800 0 L830 800 M-60 0 V800 M1080 0 V800" stroke="{{t.col.street}}" stroke-width="16" fill="none"></path><polyline points="{{t.pts}}" fill="none" stroke="{{t.col.primary}}" stroke-width="10" stroke-linejoin="round" marker-start="{{t.markerUrl}}" marker-mid="{{t.markerUrl}}" marker-end="{{t.markerUrl}}"></polyline></svg></span><span style="padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 700; font-size: 16px">{{t.title}}</span><span style="font-size: 13px; color: {{t.col.muted}}">{{t.meta}}</span><span style="display: flex; flex-wrap: wrap; gap: 6px"><span style="height: 26px; box-sizing: border-box; padding: 0 10px; border-radius: 13px; font-size: 12px; display: flex; align-items: center; border: 1px solid {{t.col.border}}">{{t.modeLabel}}</span><sc-if value="{{t.done}}" hint-placeholder-val="{{ false }}"><span style="height: 26px; box-sizing: border-box; padding: 0 10px; border-radius: 13px; font-size: 12px; font-weight: 700; display: flex; align-items: center; background: {{t.col.soft}}">{{t.diaryInfo}}</span></sc-if><sc-if value="{{t.onPhone}}" hint-placeholder-val="{{ false }}"><span style="height: 26px; box-sizing: border-box; padding: 0 10px; border-radius: 13px; font-size: 12px; font-weight: 700; display: flex; align-items: center; background: {{t.col.soft}}">Auf dem Handy</span></sc-if></span></span></button></sc-for>
+            </div>
+            <sc-if value="{{noPlannedCards}}" hint-placeholder-val="{{ false }}"><p style="margin: 0; color: {{c.muted}}">Keine geplanten Touren mit diesem Verkehrsmittel.</p></sc-if>
+            <h2 style="margin: 32px 0 2px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 21px">Erlebt</h2>
+            <p style="margin: 0 0 12px; font-size: 14px; color: {{c.muted}}">Schon gemacht, mit Tagebuch aus Fotos, Notizen und Bewertungen.</p>
+            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
+              <sc-for list="{{doneCards}}" as="t" hint-placeholder-count="3"><button type="button" onClick="{{t.open}}" style="font: inherit; text-align: left; padding: 0; border: 0; border-radius: 20px; overflow: hidden; background: {{t.col.surface}}; color: {{t.col.ink}}; display: flex; flex-direction: column; cursor: pointer; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08)"><span style="display: block; width: 100%; height: 150px; background: {{t.col.mapBg}}"><svg aria-hidden="true" width="100%" height="150" viewBox="-300 140 1600 580" preserveAspectRatio="xMidYMid slice"><defs><marker id="{{t.markerId}}" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5"><circle cx="5" cy="5" r="4" fill="{{t.col.accent}}" stroke="{{t.col.primary}}" stroke-width="1.5"></circle></marker></defs><rect x="560" y="430" width="160" height="120" rx="14" fill="{{t.col.park}}"></rect><path d="M-320 190 C 220 260, 430 120, 1320 210" stroke="{{t.col.water}}" stroke-width="44" fill="none"></path><path d="M-300 340 H1300 M-300 660 L1300 540 M250 0 V800 M520 0 L560 800 M800 0 L830 800 M-60 0 V800 M1080 0 V800" stroke="{{t.col.street}}" stroke-width="16" fill="none"></path><polyline points="{{t.pts}}" fill="none" stroke="{{t.col.primary}}" stroke-width="10" stroke-linejoin="round" marker-start="{{t.markerUrl}}" marker-mid="{{t.markerUrl}}" marker-end="{{t.markerUrl}}"></polyline></svg></span><span style="padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 700; font-size: 16px">{{t.title}}</span><span style="font-size: 13px; color: {{t.col.muted}}">{{t.meta}}</span><span style="display: flex; flex-wrap: wrap; gap: 6px"><span style="height: 26px; box-sizing: border-box; padding: 0 10px; border-radius: 13px; font-size: 12px; display: flex; align-items: center; border: 1px solid {{t.col.border}}">{{t.modeLabel}}</span><sc-if value="{{t.done}}" hint-placeholder-val="{{ false }}"><span style="height: 26px; box-sizing: border-box; padding: 0 10px; border-radius: 13px; font-size: 12px; font-weight: 700; display: flex; align-items: center; background: {{t.col.soft}}">{{t.diaryInfo}}</span></sc-if><sc-if value="{{t.onPhone}}" hint-placeholder-val="{{ false }}"><span style="height: 26px; box-sizing: border-box; padding: 0 10px; border-radius: 13px; font-size: 12px; font-weight: 700; display: flex; align-items: center; background: {{t.col.soft}}">Auf dem Handy</span></sc-if></span></span></button></sc-for>
             </div>
             <sc-if value="{{noTourCards}}" hint-placeholder-val="{{ false }}">
-              <p style="margin: 20px 0 0; color: {{c.muted}}">Keine Touren mit diesem Verkehrsmittel.</p>
+              <p style="margin: 12px 0 0; color: {{c.muted}}">Keine erlebten Touren mit diesem Verkehrsmittel.</p>
             </sc-if>
           </sc-if>
 
@@ -1113,6 +1320,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
               <div style="padding: 22px 24px; border-radius: 20px; background: {{c.surface}}">
                 <h2 style="margin: 0 0 8px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px">Daten</h2>
                 <div style="display: flex; flex-wrap: wrap; gap: 8px">
+                  <button type="button" onClick="{{logout}}" style="font: inherit; font-size: 14px; font-weight: 700; height: 40px; padding: 0 14px; border-radius: 20px; border: 1.5px solid {{c.ink}}; background: transparent; color: {{c.ink}}; cursor: pointer">Abmelden</button>
                   <button type="button" onClick="{{exportData}}" style="font: inherit; font-size: 14px; height: 40px; padding: 0 14px; border-radius: 20px; border: 1.5px solid {{c.border}}; background: transparent; color: {{c.ink}}; cursor: pointer">Meine Daten herunterladen</button>
                   <button type="button" onClick="{{deleteAccount}}" style="font: inherit; font-size: 14px; height: 40px; padding: 0 14px; border-radius: 20px; border: 1.5px solid {{c.border}}; background: transparent; color: {{c.ink}}; cursor: pointer">Konto löschen</button>
                 </div>
@@ -1123,6 +1331,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
       </main>
     </sc-if>
   </div>
+  </sc-if>
 
   <sc-if value="{{sendOn}}" hint-placeholder-val="{{ false }}">
     <div style="position: fixed; left: 0; right: 0; top: 0; bottom: 0; background: rgba(0, 0, 0, 0.45); display: flex; align-items: center; justify-content: center; z-index: 20">
@@ -1348,6 +1557,7 @@ function coordsFor(len) { var k = len <= 4 ? 4 : len <= 6 ? 6 : len <= 8 ? 8 : 1
 function selected(obj) { return INTERESTS.filter(function (k) { return !!obj[k]; }); }
 function activeInterests(s) {
   if (s.whom === 'Frei') return s.freeInterests;
+  if (s.whom === 'Gruppe') return s.groupInterests || {};
   return s.interests;
 }
 function buildStops(s) {
@@ -1362,6 +1572,7 @@ function buildStops(s) {
   return ranked.slice(0, n).map(function (r) { return r.p.id; });
 }
 function titleFor(s) {
+  if (s.presetTitle) return s.presetTitle;
   if (s.whom === 'Überraschung' && !s.group) return 'Überraschungstour';
   return (s.group ? 'Gruppen-Tour: ' : '') + TITLES[s.tourStyle];
 }
@@ -1378,6 +1589,14 @@ function carWalkOf(s) { if (s.mode !== 'car' || !s.footKm) return 'none'; return
 function typeOf(s) { if (s.mode === 'car') return s.footKm > 0 ? 'mixed' : 'move'; if (s.mode === 'transit' && !s.hop) return 'move'; return s.tourType; }
 function kmText(v) { return String(v).replace('.', ','); }
 var RARE = { 2: true, 5: true, 7: true, 12: true };
+// Textlänge: kurz 1,5–2 Min., lang 3,5–4,5 Min.; automatisch nach Ort und Verkehrsmittel
+var TEXTLENS = [['auto', 'Automatisch'], ['short', 'Kurz'], ['long', 'Lang']];
+function isLong(s, p) { if (s.textLen === 'short') return false; if (s.textLen === 'long') return true; return p.min >= 9 && s.mode !== 'bike'; }
+var NEAR_TOURS = [
+  { tag: 'Kurztour · zu Fuß', title: 'Altstadt in einer Stunde', meta: '1 Std. · 1,6 km · 4 Stopps', duration: '1 Std.', stops: [1, 2, 5, 6] },
+  { tag: 'Kurztour · zu Fuß', title: 'Street Art am Bahnbogen', meta: '45 Min. · 1,2 km · 3 Stopps', duration: '1 Std.', stops: [3, 11, 9] },
+  { tag: 'Tour · zu Fuß', title: 'Kurioses am Hafen', meta: '1,5 Std. · 2,4 km · 5 Stopps', duration: '2 Std.', stops: [10, 7, 12, 14, 13] }
+];
 var CARD_TOTAL = 48;
 var THEMES = [
   { name: 'Brunnen der Stadt', short: 'Br', have: 4, total: 10, reward: 'Abzeichen „Wasserträger“' },
@@ -1406,7 +1625,7 @@ class Component extends DCLogic {
       screen: 'welcome', history: [], toast: '',
       interests: { 'Geschichte': true, 'Kurioses': true, 'Essen & Trinken': true, 'Street Art': true },
       style: 'Zeitreise', aud: 'Erwachsene', level: 'Interessiert', age: 'unter 10', profileMode: 'new',
-      whom: 'Ich', freeInterests: { 'Natur': true, 'Architektur': true },
+      whom: 'Ich', freeInterests: { 'Natur': true, 'Architektur': true }, groupInterests: {}, textLen: 'auto', presetTitle: '', planKey: '',
       mode: 'walk', duration: '2 Std.', tempo: 'Ausgewogen', route: 'Rundtour', output: 'Beides', tourStyle: 'Zeitreise', tourAud: 'Erwachsene', tourType: 'stop', footKm: 0, hop: false, showWc: false, participant: false,
       barrier: false, pauses: { cafe: true, park: false, play: false },
       premium: false, abo: false, card: 0, cards: [1, 3, 5, 4, 6, 9, 11, 13], newCard: 0,
@@ -1414,9 +1633,10 @@ class Component extends DCLogic {
       stops: [], seed: 0, swapCursor: 0,
       liveIdx: 0, playing: true, showText: true, speed: 0, rating: {}, more: {}, ask: false,
       saved: [
-        { title: 'Zeitreise Altstadt', meta: 'Gestern · 2 Std. · 6 Stopps', mode: 'walk', stopIds: [1, 2, 3, 4, 5, 6] },
-        { title: 'Street Art per Rad', meta: '3. Okt. · 1 Std. · 4 Stopps', mode: 'bike', stopIds: [3, 11, 13, 9] },
-        { title: 'Krimi-Abend am Hafen', meta: '21. Sep. · 3 Std. · 8 Stopps', mode: 'transit', stopIds: [10, 12, 6, 2, 5, 7, 9, 1] }
+        { title: 'Sagenhafte Altstadt', meta: 'Samstag · 2 Std. · 6 Stopps', mode: 'walk', stopIds: [5, 1, 6, 2, 8, 4], done: false },
+        { title: 'Zeitreise Altstadt', meta: 'Gestern · 2 Std. · 6 Stopps', mode: 'walk', stopIds: [1, 2, 3, 4, 5, 6], done: true, photos: 4, rating: 'up' },
+        { title: 'Street Art per Rad', meta: '3. Okt. · 1 Std. · 4 Stopps', mode: 'bike', stopIds: [3, 11, 13, 9], done: true, photos: 2, rating: 'up' },
+        { title: 'Krimi-Abend am Hafen', meta: '21. Sep. · 3 Std. · 8 Stopps', mode: 'transit', stopIds: [10, 12, 6, 2, 5, 7, 9, 1], done: true, photos: 0, rating: '' }
       ],
       diary: null, photos: 0, notes: {}, diaryRating: '',
       exIdx: 0, exPlaying: true, exMode: 'walk',
@@ -1464,8 +1684,9 @@ class Component extends DCLogic {
   save() {
     var s = this.state;
     var d = s.diary;
-    var entry = { title: d.title, meta: 'Heute · ' + s.duration + ' · ' + d.stopIds.length + ' Stopps', mode: s.mode, stopIds: d.stopIds };
-    this.setState({ saved: [entry].concat(s.saved), diary: Object.assign({}, d, { saved: true }), screen: 'mytours', history: [] });
+    var entry = { title: d.title, meta: 'Heute · ' + s.duration + ' · ' + d.stopIds.length + ' Stopps', mode: s.mode, stopIds: d.stopIds, done: true, photos: s.photos || 0, rating: s.diaryRating || '' };
+    var rest = s.saved.filter(function (t) { return t.done || !s.planKey || t.title !== s.planKey; });
+    this.setState({ saved: [entry].concat(rest), diary: Object.assign({}, d, { saved: true }), screen: 'mytours', history: [], planKey: '' });
     this.say('Tour gespeichert');
   }
 
@@ -1525,7 +1746,7 @@ class Component extends DCLogic {
     };
     var rows = [];
     tourStops.forEach(function (p, i) {
-      rows.push({ isStop: true, isNote: false, no: i + 1, name: p.name, meta: p.topic + ' · ' + (tt === 'move' ? (s.mode === 'walk' || hop ? 'im Vorbeigehen' : 'im Vorbeifahren') : p.min + ' Min.'), badge: p.tip ? 'border-radius: 8px; background: ' + c.primary + '; border: 2px solid ' + c.accent + '; color: ' + c.check : 'border-radius: 16px; background: ' + c.accent + '; border: 2px solid ' + c.primary + '; color: ' + c.onAccent, col: c, swapLabel: p.name + ' tauschen', removeLabel: p.name + ' entfernen',
+      rows.push({ isStop: true, isNote: false, no: i + 1, name: p.name, meta: p.topic + ' · ' + (tt === 'move' ? (s.mode === 'walk' || hop ? 'im Vorbeigehen' : 'im Vorbeifahren') : p.min + ' Min.') + ' · Text ' + (isLong(s, p) ? 'lang' : 'kurz'), badge: p.tip ? 'border-radius: 8px; background: ' + c.primary + '; border: 2px solid ' + c.accent + '; color: ' + c.check : 'border-radius: 16px; background: ' + c.accent + '; border: 2px solid ' + c.primary + '; color: ' + c.onAccent, col: c, swapLabel: p.name + ' tauschen', removeLabel: p.name + ' entfernen',
         swap: function () { self.setState(function (st) { var used = {}; st.stops.forEach(function (id) { used[id] = true; }); var cands = POOL.filter(function (q) { return !used[q.id]; }); if (!cands.length) return null; var pick = cands[st.swapCursor % cands.length]; var ns = st.stops.slice(); ns[i] = pick.id; return { stops: ns, swapCursor: st.swapCursor + 1 }; }); },
         remove: function () { self.setState(function (st) { return { stops: st.stops.filter(function (id, j) { return j !== i; }) }; }); } });
       pauseAfter(s, i, tourStops.length).forEach(function (q) { rows.push(noteRow(q.key, q.title, q.sub, true)); });
@@ -1550,6 +1771,7 @@ class Component extends DCLogic {
     badges.push(ta === 'Erwachsene' ? s.level : 'Kinder ' + ta);
     if (s.group) badges.push('Gruppe, gemeinsamer Start');
     if (cw !== 'none') badges.push('Bis ' + kmText(s.footKm) + ' km zu Fuß' + (cw === 'stages' ? ' in 2 Etappen' : ''));
+    if (s.textLen !== 'auto') badges.push(s.textLen === 'long' ? 'Lange Texte' : 'Kurze Texte');
     if (hop) badges.push('Hop-on-Hop-off' + (s.footKm ? ', bis ' + kmText(s.footKm) + ' km zu Fuß' : ''));
     var previewLabel = s.group ? 'Gruppen-Tour · du leitest' : s.whom === 'Überraschung' ? 'Lass dich überraschen' : s.whom === 'Frei' ? 'Frei zusammengestellt' : s.whom === 'Ich' ? 'Für dich zusammengestellt' : 'Für das Profil ' + s.whom;
     var cur = tourStops[Math.min(s.liveIdx, Math.max(0, n - 1))] || POOL[0];
@@ -1579,10 +1801,15 @@ class Component extends DCLogic {
     });
 
     // ---------- Gespeichert ----------
-    var savedRows = s.saved.map(function (t, i) {
+    var plannedRows = s.saved.filter(function (t) { return !t.done; }).map(function (t) {
       return { title: t.title, meta: t.meta, modeShort: MODES[t.mode].short, col: c, shareLabel: t.title + ' teilen',
         share: function () { self.say('Link zur Tour kopiert'); },
-        open: function () { self.go('diary', function () { return { diary: { title: t.title, meta: t.meta, stopIds: t.stopIds, saved: true, label: 'Aus deinen Touren' }, photos: 2, notes: {}, diaryRating: 'up' }; }); } };
+        open: function () { self.go('preview', function () { return { stops: t.stopIds.slice(), mode: t.mode, presetTitle: t.title.replace('Vom Rechner: ', ''), planKey: t.title, group: false, whom: 'Ich', participant: false, liveIdx: 0 }; }); } };
+    });
+    var doneRows = s.saved.filter(function (t) { return t.done; }).map(function (t) {
+      var info = 'Tagebuch' + (t.photos ? ' · ' + t.photos + (t.photos === 1 ? ' Foto' : ' Fotos') : '') + (t.rating === 'up' ? ' · hat gefallen' : t.rating === 'down' ? ' · war nicht so gut' : '');
+      return { title: t.title, meta: t.meta, modeShort: MODES[t.mode].short, col: c, diaryInfo: info,
+        open: function () { self.go('diary', function () { return { diary: { title: t.title, meta: t.meta, stopIds: t.stopIds, saved: true, label: 'Erlebt' }, photos: t.photos || 0, notes: {}, diaryRating: t.rating || '' }; }); } };
     });
     var profChips = selInts.map(function (k) { return { label: k, st: 'background: rgba(127, 127, 127, 0.22); color: ' + c.onPrimary }; });
     profChips.push({ label: 'Stil: ' + s.style, st: 'background: ' + c.accent + '; color: ' + c.onAccent + '; font-weight: 700' });
@@ -1596,7 +1823,7 @@ class Component extends DCLogic {
     np.group.pick = setter({ whom: 'Gruppe' });
     np.free.pick = setter({ whom: 'Frei' });
     np.surprise.pick = setter({ whom: 'Überraschung' });
-    var whomHint = s.whom === 'Frei' ? 'Wähle oben die Interessen nur für diese Tour. Dein Profil bleibt, wie es ist.' : s.whom === 'Überraschung' ? 'Bunt gemischt, ganz ohne Vorgaben. Dein Profil bleibt, wie es ist.' : s.whom === 'Ich' ? 'Die Tour richtet sich nach deinem Profil.' : s.whom === 'Gruppe' ? 'Gruppen-Tour: Die Tour richtet sich nach deinen Einstellungen.' : 'Die Tour richtet sich nach dem Profil ' + s.whom + '.';
+    var whomHint = s.whom === 'Frei' ? 'Wähle oben die Interessen nur für diese Tour. Dein Profil bleibt, wie es ist.' : s.whom === 'Überraschung' ? 'Bunt gemischt, ganz ohne Vorgaben. Dein Profil bleibt, wie es ist.' : s.whom === 'Ich' ? 'Die Tour richtet sich nach deinem Profil.' : s.whom === 'Gruppe' ? (selected(s.groupInterests || {}).length ? 'Gruppen-Tour mit den Interessen, die du für die Gruppe gewählt hast.' : 'Wähle die Interessen für die Gruppe. Ohne Auswahl wird bunt gemischt.') : 'Die Tour richtet sich nach dem Profil ' + s.whom + '.';
 
     var extraRow = function (label, key, last) { var v = sw(!!s[key]); return { label: label, sw: v, divider: last ? 'transparent' : c.divider, toggle: tgl(key) }; };
 
@@ -1617,16 +1844,16 @@ class Component extends DCLogic {
         : LEVELS.map(function (l) { var on = s.level === l; return { label: l, pressed: pressed(on), st: segSt(on), pick: setter({ level: l }) }; }),
       levelHint: profKids ? 'Gleiche Stile wie für Erwachsene, nur einfachere Sprache und weniger Tiefe. Dazu kommen eigene Kinder-Stile. Ab 15 Jahren passt »Erwachsene«.' : LEVEL_HINTS[s.level] + ' Die Länge hängt davon nicht ab.',
       styles: STYLES.map(styleTile), kidStyles: KID_STYLES.map(styleTile), profileKids: profKids, levelCols: profKids ? 2 : 3,
-      goTour: function () { self.go('tour', function (st) { return { tourStyle: st.style, tourAud: st.aud === 'Kinder' ? st.age : 'Erwachsene', freeInterests: Object.assign({}, st.interests), whom: st.whom === 'Gruppe' ? 'Ich' : st.whom, group: false }; }); },
+      goTour: function () { self.go('tour', function (st) { return { presetTitle: '', planKey: '', tourStyle: st.style, tourAud: st.aud === 'Kinder' ? st.age : 'Erwachsene', freeInterests: Object.assign({}, st.interests), whom: st.whom === 'Gruppe' ? 'Ich' : st.whom, group: false }; }); },
       goExplorer: function () { self.go('explorer', function () { return { exPlaying: true }; }); },
-      savedTop: savedRows.slice(0, 2),
+      savedTop: doneRows.slice(0, 2),
       interestSummary: interestSummary, styleName: s.style + ' · ' + profAud,
       editProfile: function () { self.go('profile', function () { return { profileMode: 'edit' }; }); },
       startName: s.whom === 'Gruppe' ? 'Treffpunkt der Gruppe' : 'Mein Standort',
       changeStart: function () { self.say('Startpunkt auf der Karte wählen (im Prototyp fest)'); },
       whom: ['Ich', 'Familie', 'Freunde'].map(function (w) { var on = s.whom === w; return { label: w, on: on, pressed: pressed(on), st: chipSt(on), check: c.check, pick: setter({ whom: w, group: false }) }; }),
       addProfile: function () { self.say('Neues Profil anlegen, z. B. Kollegen'); },
-      np: np, isFree: s.whom === 'Frei' && !s.group, freeInts: chipList(s.freeInterests, 'freeInterests'), whomHint: whomHint,
+      np: np, isFree: s.whom === 'Frei' && !s.group, freeInts: chipList(s.freeInterests, 'freeInterests'), groupInts: chipList(s.groupInterests || {}, 'groupInterests'), whomHint: whomHint,
       modes: { walk: modeTile('walk'), bike: modeTile('bike'), transit: modeTile('transit'), car: modeTile('car') },
       modeHint: MODES[s.mode].hint,
       durations: DURATIONS.map(function (x) { var on = s.duration === x[0]; return { label: x[0], pressed: pressed(on), st: segSt(on), pick: setter({ duration: x[0] }) }; }),
@@ -1636,9 +1863,8 @@ class Component extends DCLogic {
       tourStyles: (tourKids ? STYLES.concat(KID_STYLES) : STYLES).map(function (x) { var on = s.tourStyle === x[0]; return { label: x[0], on: on, pressed: pressed(on), st: chipSt(on), check: c.check, pick: setter({ tourStyle: x[0] }) }; }),
       tourKids: tourKids,
       lenLabel: 'Textlänge pro Ort',
-      lenHint: tourKids
-        ? 'Wird automatisch gewählt, kurz und kindgerecht: unter 10 etwa 3 bis 5 Min., 10 bis 14 bis etwa 8 Min. pro Ort.'
-        : 'Wird automatisch gewählt, nach Verkehrsmittel, Dauer und Ort. ' + MODES[s.mode].len,
+      textLens: TEXTLENS.map(function (x) { var on = s.textLen === x[0]; return { label: x[1], pressed: pressed(on), st: segSt(on), pick: setter({ textLen: x[0] }) }; }),
+      lenHint: s.textLen === 'short' ? 'Alle Orte mit kurzem Text, etwa 1,5 bis 2 Minuten.' : s.textLen === 'long' ? 'Alle Orte mit langem Text, etwa 3,5 bis 4,5 Minuten.' : 'Die App wählt pro Ort: kurz (1,5 bis 2 Min.) oder lang (3,5 bis 4,5 Min.), je nach Ort, Verkehrsmittel und Dauer.',
       outputs: OUTPUTS.map(function (x) { var on = s.output === x; return { label: x, pressed: pressed(on), st: segSt(on), pick: setter({ output: x }) }; }),
       extras: [extraRow('Barrierefrei (stufenlos)', 'barrier', true)],
       isCar: s.mode === 'car',
@@ -1661,7 +1887,7 @@ class Component extends DCLogic {
       isGroup: s.whom === 'Gruppe',
       pauseChips: PAUSES.map(function (x) { var on = !!s.pauses[x[0]]; return { label: x[1], on: on, pressed: pressed(on), st: chipSt(on), check: c.check, toggle: function () { self.setState(function (st) { var o = Object.assign({}, st.pauses); o[x[0]] = !o[x[0]]; return { pauses: o }; }); } }; }),
       createLabel: s.whom === 'Überraschung' ? 'Überrasch mich' : s.whom === 'Gruppe' ? 'Gruppen-Tour erstellen' : 'Tour erstellen',
-      createTour: function () { self.go('preview', function (st) { var g = st.whom === 'Gruppe'; var ns = Object.assign({}, st, { group: g }); return { group: g, participant: false, stops: buildStops(ns), liveIdx: 0 }; }); },
+      createTour: function () { self.go('preview', function (st) { var g = st.whom === 'Gruppe'; var ns = Object.assign({}, st, { group: g, presetTitle: '' }); return { group: g, participant: false, stops: buildStops(ns), liveIdx: 0, presetTitle: '', planKey: '' }; }); },
       shareLink: function () { self.say('Einladungslink kopiert'); },
       groupOn: s.group, joinedInfo: '3 sind schon dabei, alle ohne Konto. Teilnehmer brauchen nur die App.',
       openJoin: function () { self.go('group'); },
@@ -1690,7 +1916,7 @@ class Component extends DCLogic {
       liveFooter: tt === 'mixed' ? 'Im Auto läuft die Erzählung während der Fahrt, zu Fuß startet sie, sobald du ankommst.' : tt === 'move' ? 'Die Erzählung läuft, während du weitergehst oder weiterfährst.' : 'Die Erzählung startet automatisch, sobald du ankommst.',
       liveStyle: s.tourStyle + (ta !== 'Erwachsene' ? ' · Kinder ' + ta : ''), liveTopic: cur.topic, liveName: cur.name, liveHeard: liveHeard,
       showText: s.showText, hideText: !s.showText, narration: INTROS[s.tourStyle] + (ta !== 'Erwachsene' ? cur.k : cur.text),
-      progress: s.playing ? '38%' : '33%', elapsed: s.playing ? '1:24' : '1:12',
+      progress: s.playing ? '38%' : '33%', elapsed: isLong(s, cur) ? (s.playing ? '1:32' : '1:20') : (s.playing ? '0:41' : '0:35'), liveLen: isLong(s, cur) ? '4:05' : '1:50',
       playing: s.playing, paused: !s.playing, playLabel: s.playing ? 'Pause' : 'Abspielen',
       togglePlay: tgl('playing'),
       rewind: function () { self.say('15 Sekunden zurück'); },
@@ -1725,7 +1951,7 @@ class Component extends DCLogic {
       cardCount: s.cards.length + ' von ' + CARD_TOTAL + ' Orten in [Deine Stadt] gesammelt',
       rareCount: (function (r) { return r === 1 ? '1 seltene Karte' : r + ' seltene Karten'; })(s.cards.filter(function (id) { return RARE[id]; }).length),
       season: { until: SEASON.until, title: SEASON.title, text: SEASON.text, progress: SEASON.have + ' von ' + SEASON.total + ' gefunden', pct: Math.round(SEASON.have / SEASON.total * 100) + '%', next: SEASON.next,
-        go: function () { self.go('tour', function (st) { return { tourStyle: 'Märchen & Sagen', tourAud: st.aud === 'Kinder' ? st.age : 'Erwachsene', whom: 'Ich', group: false }; }); self.say('Tour mit Orten der Gruselwoche'); } },
+        go: function () { self.go('tour', function (st) { return { presetTitle: '', planKey: '', tourStyle: 'Märchen & Sagen', tourAud: st.aud === 'Kinder' ? st.age : 'Erwachsene', whom: 'Ich', group: false }; }); self.say('Tour mit Orten der Gruselwoche'); } },
       collThemes: THEMES.map(function (t, i) { var done = t.have >= t.total; return { name: t.name, short: t.short, count: t.have + ' / ' + t.total, pct: Math.round(t.have / t.total * 100) + '%', reward: t.reward, bar: done ? c.accent : c.ink, divider: i === THEMES.length - 1 ? 'transparent' : c.divider, badgeSt: done ? 'background: ' + c.accent + '; color: ' + c.onAccent : 'background: ' + c.seg + '; color: ' + c.ink }; }),
       cardsGrid: s.cards.map(function (id, i) { var p = byId(id); var rare = !!RARE[id]; return { no: '#' + (i + 1), name: p.name, mark: p.name.charAt(0), rare: rare, aria: 'Sammelkarte ' + p.name + (rare ? ', selten' : ''), st: rare ? 'border: 2px solid ' + c.accent + '; background: ' + c.primary + '; color: ' + c.onPrimary : 'border: 1.5px solid ' + c.border + '; background: ' + c.surface + '; color: ' + c.ink, open: function () { self.setState({ card: id }); } }; })
         .concat([0, 1, 2].map(function (k) { return { no: '?', name: 'Noch offen', mark: '?', rare: false, aria: 'Noch nicht gesammelt', st: 'border: 1.5px dashed ' + c.off + '; background: transparent; color: ' + c.muted, open: function () { self.say('Besuche neue Orte, um diese Karte zu bekommen'); } }; })),
@@ -1734,10 +1960,20 @@ class Component extends DCLogic {
       liveNewCard: !!s.newCard && s.newCard === s.stops[s.liveIdx], liveCardLabel: s.newCard && RARE[s.newCard] ? 'Neue Karte, selten' : 'Neue Sammelkarte',
       openLiveCard: function () { self.setState({ card: self.state.newCard }); },
       learned: 'Aus deinen Bewertungen gelernt: mehr Hinterhöfe und Kurioses, weniger Kirchen.',
-      savedRows: savedRows,
+      plannedRows: plannedRows, doneRows: doneRows, hasPlanned: plannedRows.length > 0, noPlanned: plannedRows.length === 0,
+      nearTours: NEAR_TOURS.map(function (t) { var pts = coordsFor(t.stops.length).map(function (p) { return [Math.round(p[0] * 0.62 + 6), Math.round(p[1] * 0.42 + 6)]; }); return { tag: t.tag, title: t.title, meta: t.meta, pts: pts.map(function (p) { return p.join(','); }).join(' '), dots: pts.map(function (p) { return { x: p[0], y: p[1] }; }),
+        open: function () { self.go('preview', function (st) { return { stops: t.stops.slice(), mode: 'walk', duration: t.duration, presetTitle: t.title, planKey: '', group: false, whom: 'Ich', participant: false, liveIdx: 0, tourStyle: st.style, tourAud: st.aud === 'Kinder' ? st.age : 'Erwachsene' }; }); } }; }),
+      nearPlaces: EXPLORE.slice(0, 3).map(function (x, i) { var p = byId(x.id); return { name: p.name, topic: p.topic, dist: x.dist, divider: i === 2 ? 'transparent' : c.divider, open: function () { self.go('explorer', function () { return { exPlaying: true }; }); } }; }),
+      planSaved: pressed(s.saved.some(function (t) { return !t.done && t.title === titleFor(s); })), planFill: s.saved.some(function (t) { return !t.done && t.title === titleFor(s); }) ? c.ink : 'none',
+      savePlan: function () {
+        var st = self.state; var title = titleFor(st);
+        if (st.saved.some(function (t) { return !t.done && t.title === title; })) { self.say('Liegt schon unter „Touren“ bei „Geplant“'); return; }
+        self.setState({ saved: [{ title: title, meta: 'Gespeichert · ' + st.duration + ' · ' + st.stops.length + ' Stopps', mode: st.mode, stopIds: st.stops.slice(), done: false }].concat(st.saved), planKey: title });
+        self.say('Gespeichert unter „Touren“ bei „Geplant“');
+      },
       receiveTour: function () {
         if (self.state.saved.some(function (t) { return t.fromWeb; })) { self.say('Keine neuen Touren vom Rechner'); return; }
-        self.setState(function (st) { return { saved: [{ title: 'Vom Rechner: Rätseljagd durch die Altstadt', meta: 'Samstag · 3 Std. · 8 Stopps', mode: 'bike', stopIds: [2, 5, 7, 11, 13, 1, 3, 4], fromWeb: true }].concat(st.saved) }; });
+        self.setState(function (st) { return { saved: [{ title: 'Vom Rechner: Rätseljagd durch die Altstadt', meta: 'Samstag · 3 Std. · 8 Stopps', mode: 'bike', stopIds: [2, 5, 7, 11, 13, 1, 3, 4], fromWeb: true, done: false }].concat(st.saved) }; });
         self.say('Tour vom Rechner empfangen');
       },
       appearances: [['auto', 'Wie am Handy'], ['light', 'Hell'], ['dark', 'Dunkel']].map(function (x) { var on = s.appearance === x[0]; return { label: x[1], pressed: pressed(on), st: segSt(on), pick: setter({ appearance: x[0] }) }; }),
@@ -1840,6 +2076,9 @@ function carWalkOf(s) { if (s.mode !== 'car' || !s.footKm) return 'none'; return
 function typeOf(s) { if (s.mode === 'car') return s.footKm > 0 ? 'mixed' : 'move'; if (s.mode === 'transit' && !s.hop) return 'move'; return s.tourType; }
 function kmText(v) { return String(v).replace('.', ','); }
 var RARE = { 2: true, 5: true, 7: true, 12: true };
+var TEXTLENS = [['auto', 'Automatisch'], ['short', 'Kurz'], ['long', 'Lang']];
+function isLong(s, p) { if (s.textLen === 'short') return false; if (s.textLen === 'long') return true; return p.min >= 9 && s.mode !== 'bike'; }
+var CITIES = ['[Deine Stadt]', 'Hamburg', 'Köln', 'Leipzig'];
 var CARD_TOTAL = 48;
 var THEMES = [
   { name: 'Brunnen der Stadt', short: 'Br', have: 4, total: 10, reward: 'Abzeichen „Wasserträger“' },
@@ -1875,7 +2114,7 @@ function routeString(len, round) {
   if (round && len) pts.push(START);
   return pts.map(function (p) { return p.join(','); }).join(' ');
 }
-function activeInterests(s) { return s.whom === 'Frei' ? s.freeInterests : s.interests; }
+function activeInterests(s) { return s.whom === 'Frei' ? s.freeInterests : s.whom === 'Gruppe' ? (s.groupInterests || {}) : s.interests; }
 function buildStops(s) {
   var n = nForDuration(s.duration);
   var ints = activeInterests(s);
@@ -1919,7 +2158,7 @@ class Component extends DCLogic {
   constructor(props) {
     super(props);
     this.state = {
-      page: 'plan', tab: 'settings', toast: '',
+      page: 'home', loggedIn: false, city: '[Deine Stadt]', groupInterests: {}, textLen: 'auto', tab: 'settings', toast: '',
       interests: { 'Geschichte': true, 'Kurioses': true, 'Essen & Trinken': true, 'Street Art': true },
       style: 'Zeitreise', aud: 'Erwachsene', level: 'Interessiert', age: 'unter 10',
       when: 'Morgen', whom: 'Ich', freeInterests: { 'Natur': true, 'Architektur': true },
@@ -1928,9 +2167,10 @@ class Component extends DCLogic {
       custom: null, seed: 0, swapCursor: 0, sel: null, savedSig: '',
       send: false, offline: true,
       saved: [
-        { title: 'Zeitreise Altstadt', meta: 'Gestern · 2 Std. · 6 Stopps', mode: 'walk', stopIds: [1, 2, 3, 4, 5, 6], onPhone: true },
-        { title: 'Street Art per Rad', meta: '3. Okt. · 1 Std. · 4 Stopps', mode: 'bike', stopIds: [3, 11, 13, 9], onPhone: true },
-        { title: 'Krimi-Abend am Hafen', meta: '21. Sep. · 3 Std. · 8 Stopps', mode: 'transit', stopIds: [10, 12, 6, 2, 5, 7, 9, 14], onPhone: false }
+        { title: 'Sagenhafte Altstadt', meta: 'Samstag · 2 Std. · 6 Stopps', mode: 'walk', stopIds: [5, 1, 6, 2, 8, 4], onPhone: true, done: false },
+        { title: 'Zeitreise Altstadt', meta: 'Gestern · 2 Std. · 6 Stopps', mode: 'walk', stopIds: [1, 2, 3, 4, 5, 6], onPhone: true, done: true, photos: 4 },
+        { title: 'Street Art per Rad', meta: '3. Okt. · 1 Std. · 4 Stopps', mode: 'bike', stopIds: [3, 11, 13, 9], onPhone: true, done: true, photos: 2 },
+        { title: 'Krimi-Abend am Hafen', meta: '21. Sep. · 3 Std. · 8 Stopps', mode: 'transit', stopIds: [10, 12, 6, 2, 5, 7, 9, 14], onPhone: false, done: true, photos: 0 }
       ],
       detail: null, filter: 'Alle',
       theme: 'Wegweiser', appearance: 'auto', premium: false
@@ -1957,7 +2197,7 @@ class Component extends DCLogic {
     if (s.savedSig === sig) {
       if (onPhone) saved[0] = Object.assign({}, saved[0], { onPhone: true });
     } else {
-      saved.unshift({ title: titleFor(s), meta: s.when + ' · ' + s.duration + ' · ' + stops.length + ' Stopps', mode: s.mode, stopIds: stops.slice(), onPhone: !!onPhone });
+      saved.unshift({ title: titleFor(s), meta: s.when + ' · ' + s.duration + ' · ' + stops.length + ' Stopps', mode: s.mode, stopIds: stops.slice(), onPhone: !!onPhone, done: false });
     }
     this.setState({ saved: saved, savedSig: sig });
   }
@@ -1979,9 +2219,9 @@ class Component extends DCLogic {
     var seg = function (list, key, labelFn) { return list.map(function (x) { var on = s[key] === x; var p = {}; p[key] = x; return { label: labelFn ? labelFn(x) : x, pressed: pressed(on), st: segSt(on), pick: setter(p) }; }); };
 
     var is = {};
-    ['plan', 'tours', 'collection', 'profile', 'account'].forEach(function (k) { is[k] = s.page === k; });
+    ['home', 'plan', 'tours', 'collection', 'profile', 'account'].forEach(function (k) { is[k] = s.page === k; });
     var go = function (page) { return function () { self.setState({ page: page, detail: null, send: false }); }; };
-    var nav = [['plan', 'Planen'], ['tours', 'Meine Touren'], ['collection', 'Sammlung'], ['profile', 'Profil'], ['account', 'Konto und Abo']].map(function (x) {
+    var nav = [['home', 'Start'], ['plan', 'Planen'], ['tours', 'Meine Touren'], ['collection', 'Sammlung'], ['profile', 'Profil'], ['account', 'Konto und Abo']].map(function (x) {
       var on = s.page === x[0];
       return { label: x[1], current: on ? 'page' : 'false', go: go(x[0]), st: on ? 'background: ' + c.seg + '; color: ' + c.ink + '; font-weight: 700' : 'background: transparent; color: ' + c.ink };
     });
@@ -2019,7 +2259,7 @@ class Component extends DCLogic {
     var rows = [];
     stops.forEach(function (p, i) {
       var on = s.sel === i;
-      rows.push({ isStop: true, isNote: false, no: i + 1, name: p.name, meta: p.topic + ' · ' + (tt === 'move' ? (s.mode === 'walk' || hop ? 'im Vorbeigehen' : 'im Vorbeifahren') : p.min + ' Min.'), badge: badgeSt(p.tip), col: c,
+      rows.push({ isStop: true, isNote: false, no: i + 1, name: p.name, meta: p.topic + ' · ' + (tt === 'move' ? (s.mode === 'walk' || hop ? 'im Vorbeigehen' : 'im Vorbeifahren') : p.min + ' Min.') + ' · Text ' + (isLong(s, p) ? 'lang' : 'kurz'), badge: badgeSt(p.tip), col: c,
         st: on ? 'background: ' + c.surface + '; box-shadow: 0 0 0 2px ' + c.primary : 'background: ' + c.surface,
         selectLabel: p.name + ' auf der Karte zeigen', select: function () { self.setState(function (st) { return { sel: st.sel === i ? null : i }; }); },
         upLabel: p.name + ' nach oben', downLabel: p.name + ' nach unten', swapLabel: p.name + ' tauschen', removeLabel: p.name + ' entfernen',
@@ -2062,11 +2302,12 @@ class Component extends DCLogic {
     if (s.barrier) badges.push('Stufenlos');
     if (s.whom === 'Gruppe') badges.push('Gruppe, gemeinsamer Start');
     if (cw !== 'none') badges.push('Bis ' + kmText(s.footKm) + ' km zu Fuß' + (cw === 'stages' ? ' in 2 Etappen' : ''));
+    if (s.textLen !== 'auto') badges.push(s.textLen === 'long' ? 'Lange Texte' : 'Kurze Texte');
     if (hop) badges.push('Hop-on-Hop-off' + (s.footKm ? ', bis ' + kmText(s.footKm) + ' km zu Fuß' : ''));
     badges.push(s.when);
     var selP = s.sel !== null && s.sel < n ? stops[s.sel] : null;
     var sigNow = this.sig(s);
-    var whomHint = s.whom === 'Frei' ? 'Interessen nur für diese Tour. Dein Profil bleibt, wie es ist.' : s.whom === 'Überraschung' ? 'Bunt gemischt, ganz ohne Vorgaben.' : s.whom === 'Ich' ? 'Die Tour richtet sich nach deinem Profil.' : s.whom === 'Gruppe' ? 'Gruppen-Tour: Die Tour richtet sich nach deinen Einstellungen.' : 'Die Tour richtet sich nach dem Profil ' + s.whom + '.';
+    var whomHint = s.whom === 'Frei' ? 'Interessen nur für diese Tour. Dein Profil bleibt, wie es ist.' : s.whom === 'Überraschung' ? 'Bunt gemischt, ganz ohne Vorgaben.' : s.whom === 'Ich' ? 'Die Tour richtet sich nach deinem Profil.' : s.whom === 'Gruppe' ? (selected(s.groupInterests || {}).length ? 'Gruppen-Tour mit den Interessen, die du für die Gruppe gewählt hast.' : 'Wähle die Interessen für die Gruppe. Ohne Auswahl wird bunt gemischt.') : 'Die Tour richtet sich nach dem Profil ' + s.whom + '.';
     var tileMode = function (key) { var on = s.mode === key; return { pressed: pressed(on), st: tileSt(on), icon: on ? c.check : c.ink, pick: setter({ mode: key }) }; };
     var extraRow = function (label, key, last) { return { label: label, sw: sw(!!s[key]), divider: last ? 'transparent' : c.divider, toggle: tgl(key) }; };
     var chipList = function (obj, key) {
@@ -2079,17 +2320,24 @@ class Component extends DCLogic {
     // ---------- Meine Touren ----------
     var filters = ['Alle'].concat(MODE_KEYS);
     var cards = [];
+    var diaryOf = function (t) { return 'Tagebuch' + (t.photos ? ' · ' + t.photos + (t.photos === 1 ? ' Foto' : ' Fotos') : ''); };
     s.saved.forEach(function (t, i) {
       if (s.filter !== 'Alle' && s.filter !== t.mode) return;
-      cards.push({ title: t.title, meta: t.meta, modeLabel: MODES[t.mode].label, onPhone: !!t.onPhone, col: c, pts: routeString(t.stopIds.length, true), markerId: 'dot' + i, markerUrl: 'url(#dot' + i + ')', open: setter({ detail: i }) });
+      cards.push({ title: t.title, meta: t.meta, modeLabel: MODES[t.mode].label, onPhone: !!t.onPhone && !t.done, done: !!t.done, diaryInfo: diaryOf(t), col: c, pts: routeString(t.stopIds.length, true), markerId: 'dot' + i, markerUrl: 'url(#dot' + i + ')', open: setter({ detail: i }) });
     });
+    var plannedCards = cards.filter(function (k) { return !k.done; });
+    var doneCards = cards.filter(function (k) { return k.done; });
+    var homeRow = function (list) { return list.map(function (x, j, arr) { var t = x.t; return { title: t.title, meta: t.meta, modeShort: ({ walk: 'Fuß', bike: 'Rad', transit: 'Bahn', car: 'Auto' })[t.mode], onPhone: !!t.onPhone, diaryInfo: diaryOf(t), divider: j === arr.length - 1 ? 'transparent' : c.divider, open: function () { self.setState({ page: 'tours', detail: x.i, filter: 'Alle' }); } }; }); };
+    var withIdx = s.saved.map(function (t, i) { return { t: t, i: i }; });
+    var homePlanned = homeRow(withIdx.filter(function (x) { return !x.t.done; }).slice(0, 3));
+    var homeDone = homeRow(withIdx.filter(function (x) { return x.t.done; }).slice(0, 3));
     var d = s.detail !== null ? s.saved[s.detail] : null;
     var detail = { pts: '', markers: [], stops: [], title: '', meta: '', kicker: '' };
     if (d) {
       var dp = webPts(d.stopIds.length);
       var dStops = d.stopIds.map(byId);
       detail = {
-        title: d.title, meta: d.meta + ' · ' + MODES[d.mode].label, kicker: d.onPhone ? 'Auf dem Handy gespeichert' : 'Nur in der Web-Ansicht gespeichert',
+        title: d.title, meta: d.meta + ' · ' + MODES[d.mode].label, kicker: d.done ? 'Erlebt · ' + diaryOf(d) : d.onPhone ? 'Geplant · auf dem Handy gespeichert' : 'Geplant · nur in der Web-Ansicht gespeichert',
         pts: routeString(d.stopIds.length, true),
         markers: dStops.map(function (p, i) { return { no: i + 1, left: dp[i][0] / 10, top: dp[i][1] / 8, st: markerSt(p.tip, false) }; }),
         stops: dStops.map(function (p, i) { return { no: i + 1, name: p.name, meta: p.topic + ' · ' + p.min + ' Min.', badge: badgeSt(p.tip), col: c, divider: i === dStops.length - 1 ? 'transparent' : c.divider }; }),
@@ -2106,7 +2354,18 @@ class Component extends DCLogic {
     return {
       c: c, is: is, nav: nav,
       toApp: function () { try { if (window.__toApp) { window.__toApp(); return; } } catch (e) {} self.say('Am Handy zeigt die Seite automatisch die App-Ansicht.'); },
-      goAccount: go('account'), goPlan: go('plan'),
+      goAccount: go('account'), goPlan: go('plan'), goTours: go('tours'), goCollection: go('collection'),
+      guest: !s.loggedIn, loggedIn: !!s.loggedIn,
+      login: function () { self.setState({ loggedIn: true, page: 'home', detail: null }); self.say('Angemeldet. Willkommen zurück!'); },
+      logout: function () { self.setState({ loggedIn: false, page: 'home', detail: null, send: false }); self.say('Abgemeldet'); },
+      goHome: setter({ page: 'home', detail: null, send: false }),
+      getApp: function () { self.say('Im Prototyp gibt es noch keinen Store-Link'); },
+      cityName: s.city,
+      homeCities: CITIES.map(function (x) { var on = s.city === x; return { label: x, pressed: pressed(on), st: on ? 'border: 1.5px solid ' + c.primary + '; background: ' + c.primary + '; color: ' + c.onPrimary + '; font-weight: 700' : 'border: 1.5px solid ' + c.onAccent + '; background: transparent; color: ' + c.onAccent, pick: setter({ city: x }) }; }),
+      searchCity: function () { self.say('Stadtsuche (im Prototyp fest)'); },
+      planCity: function () { self.setState({ page: 'plan', tab: 'settings', custom: null, sel: null, detail: null }); },
+      homePlanned: homePlanned, homeDone: homeDone, homeNoPlanned: homePlanned.length === 0,
+      homeCollect: s.cards.length + ' von ' + CARD_TOTAL + ' Karten gesammelt, 1 Abzeichen erhalten',
 
       tabs: {
         settings: { pressed: pressed(s.tab === 'settings'), st: segSt(s.tab === 'settings'), pick: setter({ tab: 'settings' }) },
@@ -2125,7 +2384,7 @@ class Component extends DCLogic {
         var pick = setter({ whom: w });
         return { label: label, on: on, pressed: pressed(on), st: chipSt(on), check: c.check, pick: pick };
       }),
-      isGroup: s.whom === 'Gruppe', isFree: s.whom === 'Frei', freeInts: chipList(s.freeInterests, 'freeInterests'), whomHint: whomHint,
+      isGroup: s.whom === 'Gruppe', isFree: s.whom === 'Frei', freeInts: chipList(s.freeInterests, 'freeInterests'), groupInts: chipList(s.groupInterests || {}, 'groupInterests'), whomHint: whomHint,
       modes: { walk: tileMode('walk'), bike: tileMode('bike'), transit: tileMode('transit'), car: tileMode('car') },
       modeHint: MODES[s.mode].hint,
       durations: seg(DURATIONS.map(function (x) { return x[0]; }), 'duration'),
@@ -2135,9 +2394,8 @@ class Component extends DCLogic {
       tourStyles: (tourKids ? STYLES.concat(KID_STYLES) : STYLES).map(function (x) { var on = s.tourStyle === x[0]; return { label: x[0], pressed: pressed(on), st: chipSt(on), pick: setter({ tourStyle: x[0] }) }; }),
       tourKids: tourKids,
       lenLabel: 'Textlänge pro Ort',
-      lenHint: tourKids
-        ? 'Wird automatisch gewählt, kurz und kindgerecht: unter 10 etwa 3 bis 5 Min., 10 bis 14 bis etwa 8 Min. pro Ort.'
-        : 'Wird automatisch gewählt, nach Verkehrsmittel, Dauer und Ort. ' + MODES[s.mode].len,
+      textLens: TEXTLENS.map(function (x) { var on = s.textLen === x[0]; return { label: x[1], pressed: pressed(on), st: segSt(on), pick: setter({ textLen: x[0] }) }; }),
+      lenHint: s.textLen === 'short' ? 'Alle Orte mit kurzem Text, etwa 1,5 bis 2 Minuten.' : s.textLen === 'long' ? 'Alle Orte mit langem Text, etwa 3,5 bis 4,5 Minuten.' : 'Die App wählt pro Ort: kurz (1,5 bis 2 Min.) oder lang (3,5 bis 4,5 Min.), je nach Ort, Verkehrsmittel und Dauer.',
       outputs: seg(OUTPUTS, 'output'),
       extras: [extraRow('Barrierefrei (stufenlos)', 'barrier', true)],
       isCar: s.mode === 'car',
@@ -2196,7 +2454,7 @@ class Component extends DCLogic {
       confirmSend: function () { self.saveEntry(true); self.setState({ send: false }); self.say(self.state.whom === 'Gruppe' ? 'Gruppen-Tour gespeichert, du startest sie unterwegs in der App' : 'Tour liegt in der App unter „Meine Touren“ bereit'); },
 
       filters: filters.map(function (f) { var on = s.filter === f; return { label: f === 'Alle' ? 'Alle' : MODES[f].label, pressed: pressed(on), st: chipSt(on), pick: setter({ filter: f }) }; }),
-      tourCards: cards, noTourCards: cards.length === 0,
+      tourCards: cards, plannedCards: plannedCards, doneCards: doneCards, noTourCards: doneCards.length === 0, noPlannedCards: plannedCards.length === 0,
       toursList: !d, toursDetail: !!d, detail: detail, closeDetail: setter({ detail: null }),
 
       interests: chipList(s.interests, 'interests'),
