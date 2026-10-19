@@ -1,0 +1,154 @@
+{
+  "v": 3,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-14T13:05:00Z"
+  },
+  "title": "Stadtführer-App Entwurf",
+  "launch": {
+    "view": "canvas"
+  },
+  "pages": [],
+  "boards": {
+    "Prototyp.dc.html": {
+      "x": -470,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "0 · Klick-Prototyp (alles zusammen)",
+      "is_interactive": true
+    },
+    "Main.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "1 · Profil anlegen",
+      "is_interactive": true
+    },
+    "Tour.dc.html": {
+      "x": 470,
+      "y": 0,
+      "w": 390,
+      "h": 1500,
+      "title": "2 · Tour erstellen",
+      "is_interactive": true
+    },
+    "Preview.dc.html": {
+      "x": 940,
+      "y": 0,
+      "w": 390,
+      "h": 1080,
+      "title": "3 · Vorschau",
+      "is_interactive": true
+    },
+    "Live.dc.html": {
+      "x": 1410,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "4 · Unterwegs",
+      "is_interactive": true
+    },
+    "MyTours.dc.html": {
+      "x": 1880,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "5 · Meine Touren",
+      "is_interactive": true
+    },
+    "Gruppen.dc.html": {
+      "x": 2350,
+      "y": 0,
+      "w": 390,
+      "h": 960,
+      "title": "2b · Gruppen-Tour",
+      "is_interactive": true
+    },
+    "Farben-Wegweiser.dc.html": {
+      "x": 0,
+      "y": 1900,
+      "w": 704,
+      "h": 910,
+      "title": "Farben · Wegweiser (aktuell)"
+    },
+    "Farben-Stadtpark.dc.html": {
+      "x": 784,
+      "y": 1900,
+      "w": 704,
+      "h": 910,
+      "title": "Farben · Stadtpark"
+    },
+    "Farben-Abend.dc.html": {
+      "x": 1568,
+      "y": 1900,
+      "w": 704,
+      "h": 910,
+      "title": "Farben · Abendstimmung"
+    },
+    "Farben-Hafen.dc.html": {
+      "x": 2352,
+      "y": 1900,
+      "w": 704,
+      "h": 910,
+      "title": "Farben · Hafen"
+    },
+    "Farben-Altstadt.dc.html": {
+      "x": 3136,
+      "y": 1900,
+      "w": 704,
+      "h": 910,
+      "title": "Farben · Altstadt"
+    },
+    "Sample.dc.html": {
+      "x": 3920,
+      "y": 1900,
+      "w": 300,
+      "h": 640,
+      "title": "Baustein · Muster-Bildschirm"
+    },
+    "Web.dc.html": {
+      "x": 2820,
+      "y": 0,
+      "w": 1440,
+      "h": 900,
+      "title": "0b · Web-Ansicht am Rechner",
+      "is_interactive": true,
+      "expand": "fill"
+    }
+  },
+  "order": [
+    "Prototyp.dc.html",
+    "Web.dc.html",
+    "Main.dc.html",
+    "Tour.dc.html",
+    "Preview.dc.html",
+    "Live.dc.html",
+    "MyTours.dc.html",
+    "Gruppen.dc.html",
+    "Farben-Wegweiser.dc.html",
+    "Farben-Stadtpark.dc.html",
+    "Farben-Abend.dc.html",
+    "Farben-Hafen.dc.html",
+    "Farben-Altstadt.dc.html",
+    "Sample.dc.html"
+  ],
+  "notes": {
+    "title": {
+      "x": -470,
+      "y": -300,
+      "text": "Stadtführer-App · Klick-Prototyp, Web-Ansicht und Hauptbildschirme",
+      "kind": "title1",
+      "maxW": 4730
+    },
+    "farben": {
+      "x": 0,
+      "y": 1640,
+      "text": "Farbvorschläge · hell und dunkel",
+      "kind": "title1",
+      "maxW": 4220
+    }
+  },
+  "designSystems": []
+}

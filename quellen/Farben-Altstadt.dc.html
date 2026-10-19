@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Farben Altstadt</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&amp;family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 704px; height: 910px; box-sizing: border-box; padding: 32px; background: #FFFFFF; color: #1A1D21; font-family: 'Atkinson Hyperlegible', sans-serif; display: flex; flex-direction: column">
+  <h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 28px; line-height: 34px">Altstadt</h1>
+  <p style="margin: 4px 0 0; font-size: 15px; line-height: 22px; color: #4D535B">Ziegelrot und Sandstein mit Messing, warm und historisch.</p>
+  <div style="margin-top: 24px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px">
+    <div style="display: flex; flex-direction: column">
+      <span style="font-size: 14px; font-weight: 700">Hell</span>
+      <div style="margin-top: 8px; display: flex; gap: 5px">
+        <div style="width: 56px; display: flex; flex-direction: column; gap: 3px"><div style="height: 40px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.12); background: {{light.bg}}"></div><span style="font-size: 10.5px; line-height: 14px; color: #4D535B">Grund</span><span style="font-size: 10.5px; line-height: 14px">{{light.bg}}</span></div>
+        <div style="width: 56px; display: flex; flex-direction: column; gap: 3px"><div style="height: 40px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.12); background: {{light.surface}}"></div><span style="font-size: 10.5px; line-height: 14px; color: #4D535B">Fläche</span><span style="font-size: 10.5px; line-height: 14px">{{light.surface}}</span></div>
+        <div style="width: 56px; display: flex; flex-direction: column; gap: 3px"><div style="height: 40px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.12); background: {{light.ink}}"></div><span style="font-size: 10.5px; line-height: 14px; color: #4D535B">Text</span><span style="font-size: 10.5px; line-height: 14px">{{light.ink}}</span></div>
+        <div style="width: 56px; display: flex; flex-direction: column; gap: 3px"><div style="height: 40px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.12); background: {{light.primary}}"></div><span style="font-size: 10.5px; line-height: 14px; color: #4D535B">Primär</span><span style="font-size: 10.5px; line-height: 14px">{{light.primary}}</span></div>
+        <div style="width: 56px; display: flex; flex-direction: column; gap: 3px"><div style="height: 40px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.12); background: {{light.accent}}"></div><span style="font-size: 10.5px; line-height: 14px; color: #4D535B">Akzent</span><span style="font-size: 10.5px; line-height: 14px">{{light.accent}}</span></div>
+      </div>
+      <div style="margin-top: 16px"><dc-import name="Sample" pal="{{ light }}" hint-size="300px,640px"></dc-import></div>
+    </div>
+    <div style="display: flex; flex-direction: column">
+      <span style="font-size: 14px; font-weight: 700">Dunkel</span>
+      <div style="margin-top: 8px; display: flex; gap: 5px">
+        <div style="width: 56px; display: flex; flex-direction: column; gap: 3px"><div style="height: 40px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.12); background: {{dark.bg}}"></div><span style="font-size: 10.5px; line-height: 14px; color: #4D535B">Grund</span><span style="font-size: 10.5px; line-height: 14px">{{dark.bg}}</span></div>
+        <div style="width: 56px; display: flex; flex-direction: column; gap: 3px"><div style="height: 40px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.12); background: {{dark.surface}}"></div><span style="font-size: 10.5px; line-height: 14px; color: #4D535B">Fläche</span><span style="font-size: 10.5px; line-height: 14px">{{dark.surface}}</span></div>
+        <div style="width: 56px; display: flex; flex-direction: column; gap: 3px"><div style="height: 40px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.12); background: {{dark.ink}}"></div><span style="font-size: 10.5px; line-height: 14px; color: #4D535B">Text</span><span style="font-size: 10.5px; line-height: 14px">{{dark.ink}}</span></div>
+        <div style="width: 56px; display: flex; flex-direction: column; gap: 3px"><div style="height: 40px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.12); background: {{dark.primary}}"></div><span style="font-size: 10.5px; line-height: 14px; color: #4D535B">Primär</span><span style="font-size: 10.5px; line-height: 14px">{{dark.primary}}</span></div>
+        <div style="width: 56px; display: flex; flex-direction: column; gap: 3px"><div style="height: 40px; border-radius: 8px; border: 1px solid rgba(0, 0, 0, 0.12); background: {{dark.accent}}"></div><span style="font-size: 10.5px; line-height: 14px; color: #4D535B">Akzent</span><span style="font-size: 10.5px; line-height: 14px">{{dark.accent}}</span></div>
+      </div>
+      <div style="margin-top: 16px"><dc-import name="Sample" pal="{{ dark }}" hint-size="300px,640px"></dc-import></div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":704,"height":910}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      light: { bg: '#F5F0E8', surface: '#FFFDF9', ink: '#2A1E18', muted: '#64554B', border: '#DACFC2', primary: '#9C3B22', onPrimary: '#FFFFFF', accent: '#D9A441', onAccent: '#2A1E18', mapBg: '#EDE5D8', street: '#FFFDF9', water: '#BCD2D6', park: '#D3DDBF' },
+      dark: { bg: '#17120F', surface: '#221B16', ink: '#F2EAE0', muted: '#B8A898', border: '#3A2F27', primary: '#E8A58F', onPrimary: '#17120F', accent: '#E0B055', onAccent: '#2A1E18', mapBg: '#221B16', street: '#352A21', water: '#1F363B', park: '#2B3420' }
+    };
+  }
+}
+</script>
+</body>
+</html>

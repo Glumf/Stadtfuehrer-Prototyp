@@ -1753,7 +1753,7 @@ class Component extends DCLogic {
     };
     var rows = [];
     tourStops.forEach(function (p, i) {
-      rows.push({ isStop: true, isNote: false, no: i + 1, name: p.name, meta: p.topic + ' · ' + (tt === 'move' ? (s.mode === 'walk' || hop ? 'im Vorbeigehen' : 'im Vorbeifahren') : p.min + ' Min.') + ' · Text ' + (isLong(s, p) ? 'lang' : 'kurz'), badge: p.tip ? 'border-radius: 8px; background: ' + c.primary + '; border: 2px solid ' + c.accent + '; color: ' + c.check : 'border-radius: 16px; background: ' + c.accent + '; border: 2px solid ' + c.primary + '; color: ' + c.onAccent, col: c, swapLabel: p.name + ' tauschen', removeLabel: p.name + ' entfernen',
+      rows.push({ isStop: true, isNote: false, no: i + 1, name: p.name, meta: p.topic + ' · ' + (tt === 'move' ? (s.mode === 'walk' || hop ? 'im Vorbeigehen' : 'im Vorbeifahren') : p.min + ' Min.'), badge: p.tip ? 'border-radius: 8px; background: ' + c.primary + '; border: 2px solid ' + c.accent + '; color: ' + c.check : 'border-radius: 16px; background: ' + c.accent + '; border: 2px solid ' + c.primary + '; color: ' + c.onAccent, col: c, swapLabel: p.name + ' tauschen', removeLabel: p.name + ' entfernen',
         swap: function () { self.setState(function (st) { var used = {}; st.stops.forEach(function (id) { used[id] = true; }); var cands = POOL.filter(function (q) { return !used[q.id]; }); if (!cands.length) return null; var pick = cands[st.swapCursor % cands.length]; var ns = st.stops.slice(); ns[i] = pick.id; return { stops: ns, swapCursor: st.swapCursor + 1 }; }); },
         remove: function () { self.setState(function (st) { return { stops: st.stops.filter(function (id, j) { return j !== i; }) }; }); } });
       pauseAfter(s, i, tourStops.length).forEach(function (q) { rows.push(noteRow(q.key, q.title, q.sub, true)); });
@@ -2267,7 +2267,7 @@ class Component extends DCLogic {
     var rows = [];
     stops.forEach(function (p, i) {
       var on = s.sel === i;
-      rows.push({ isStop: true, isNote: false, no: i + 1, name: p.name, meta: p.topic + ' · ' + (tt === 'move' ? (s.mode === 'walk' || hop ? 'im Vorbeigehen' : 'im Vorbeifahren') : p.min + ' Min.') + ' · Text ' + (isLong(s, p) ? 'lang' : 'kurz'), badge: badgeSt(p.tip), col: c,
+      rows.push({ isStop: true, isNote: false, no: i + 1, name: p.name, meta: p.topic + ' · ' + (tt === 'move' ? (s.mode === 'walk' || hop ? 'im Vorbeigehen' : 'im Vorbeifahren') : p.min + ' Min.'), badge: badgeSt(p.tip), col: c,
         st: on ? 'background: ' + c.surface + '; box-shadow: 0 0 0 2px ' + c.primary : 'background: ' + c.surface,
         selectLabel: p.name + ' auf der Karte zeigen', select: function () { self.setState(function (st) { return { sel: st.sel === i ? null : i }; }); },
         upLabel: p.name + ' nach oben', downLabel: p.name + ' nach unten', swapLabel: p.name + ' tauschen', removeLabel: p.name + ' entfernen',
