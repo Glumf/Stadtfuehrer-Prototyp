@@ -246,11 +246,6 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
     <div style="display: flex; flex-wrap: wrap; gap: 8px">
       <sc-for list="{{tourStyles}}" as="s" hint-placeholder-count="3"><button type="button" aria-pressed="{{s.pressed}}" onClick="{{s.pick}}" style="font: inherit; font-size: 14px; display: flex; align-items: center; gap: 6px; height: 44px; padding: 0 12px; border-radius: 22px; cursor: pointer; {{s.st}}"><sc-if value="{{s.on}}" hint-placeholder-val="{{ false }}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{s.check}}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>{{s.label}}</button></sc-for>
     </div>
-    <span style="display: block; margin: 14px 0 8px; font-size: 13px; color: {{c.muted}}">Erzähler</span>
-    <div style="display: flex; flex-direction: column; gap: 8px">
-      <sc-for list="{{tourFigures}}" as="f" hint-placeholder-count="2"><button type="button" aria-pressed="{{f.pressed}}" onClick="{{f.pick}}" style="font: inherit; text-align: left; min-height: 56px; display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 16px; cursor: pointer; {{f.st}}"><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 700; font-size: 15px">{{f.label}}</span><span style="font-size: 13px; line-height: 18px; {{f.subSt}}">{{f.sub}}</span></span><sc-if value="{{f.badge}}" hint-placeholder-val="{{ false }}"><span style="flex: none; height: 24px; box-sizing: border-box; padding: 0 8px; border-radius: 12px; font-size: 12px; font-weight: 700; display: flex; align-items: center; background: {{c.accent}}; color: {{c.onAccent}}">Premium</span></sc-if></button></sc-for>
-    </div>
-    <p style="margin: 8px 0 0; font-size: 13px; line-height: 18px; color: {{c.muted}}">{{figHint}}</p>
     <span style="display: block; margin: 14px 0 6px; font-size: 13px; color: {{c.muted}}">Ausgabe</span>
     <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
       <sc-for list="{{outputs}}" as="o" hint-placeholder-count="3"><button type="button" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="font: inherit; font-size: 15px; height: 44px; border: 0; border-radius: 10px; cursor: pointer; {{o.st}}">{{o.label}}</button></sc-for>
@@ -611,20 +606,6 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
     <div style="display: flex; flex-direction: column; background: {{c.surface}}; border-radius: 16px; padding: 0 8px 0 14px">
       <sc-for list="{{accessOpts}}" as="x" hint-placeholder-count="2"><div style="height: 56px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid {{x.divider}}"><span style="flex: 1; font-size: 15px">{{x.label}}</span><button type="button" role="switch" aria-checked="{{x.sw.on}}" aria-label="{{x.label}}" onClick="{{x.toggle}}" style="flex: none; width: 60px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer"><span style="width: 52px; height: 32px; box-sizing: border-box; border-radius: 16px; padding: 3px; display: flex; {{x.sw.track}}"><span style="width: 26px; height: 26px; border-radius: 13px; {{x.sw.knob}}"></span></span></button></div></sc-for>
     </div>
-    <h2 style="margin: 22px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 24px">Sprachausgabe</h2>
-    <span style="display: block; margin: 0 0 8px; font-size: 13px; color: {{c.muted}}">Handy-Stimme</span>
-    <div style="display: flex; gap: 8px; align-items: center">
-      <div style="flex: 1; min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
-        <sc-for list="{{voices}}" as="v" hint-placeholder-count="2"><button type="button" aria-pressed="{{v.pressed}}" onClick="{{v.pick}}" style="font: inherit; font-size: 14px; height: 44px; border: 0; border-radius: 10px; cursor: pointer; {{v.st}}">{{v.label}}</button></sc-for>
-      </div>
-      <button type="button" onClick="{{hearVoice}}" style="flex: none; font: inherit; font-size: 14px; font-weight: 700; height: 52px; padding: 0 14px; border-radius: 14px; border: 1.5px solid {{c.border}}; background: {{c.surface}}; color: {{c.ink}}; cursor: pointer">Probe hören</button>
-    </div>
-    <p style="margin: 8px 0 0; font-size: 13px; line-height: 18px; color: {{c.muted}}">Die App zeigt die deutschen Stimmen, die auf dem Handy installiert sind. Am iPhone klingen Premium-Stimmen wie „Anna (Premium)“ am besten.</p>
-    <span style="display: block; margin: 14px 0 8px; font-size: 13px; color: {{c.muted}}">Bei Abbiegehinweisen</span>
-    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
-      <sc-for list="{{navDucks}}" as="d" hint-placeholder-count="2"><button type="button" aria-pressed="{{d.pressed}}" onClick="{{d.pick}}" style="font: inherit; font-size: 14px; height: 44px; border: 0; border-radius: 10px; cursor: pointer; {{d.st}}">{{d.label}}</button></sc-for>
-    </div>
-    <p style="margin: 8px 0 0; font-size: 13px; line-height: 18px; color: {{c.muted}}">Abbiegehinweise sagt immer die Handy-Stimme an, auch ohne Netz.</p>
     <h2 style="margin: 22px 0 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 19px; line-height: 24px">Sprache</h2>
     <button type="button" onClick="{{language}}" style="font: inherit; text-align: left; width: 100%; height: 56px; border: 0; border-radius: 16px; background: {{c.surface}}; color: {{c.ink}}; padding: 0 14px; display: flex; align-items: center; justify-content: space-between; font-size: 15px; cursor: pointer">Deutsch<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{c.muted}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg></button>
     <button type="button" onClick="{{restart}}" style="font: inherit; margin-top: 20px; width: 100%; height: 48px; border: 0; background: transparent; color: {{c.ink}}; font-size: 14px; text-decoration: underline; cursor: pointer">Prototyp von vorn starten</button>
@@ -807,7 +788,7 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
         <div style="padding: 20px; border-radius: 20px; background: {{c.primary}}; color: {{c.onPrimary}}">
           <span style="font-weight: 700; font-size: 17px">Premium</span>
           <span style="display: block; margin-top: 2px; font-size: 13px; opacity: 0.8">[Preis] pro Monat</span>
-          <ul style="margin: 12px 0 0; padding-left: 18px; font-size: 14px; line-height: 22px"><li>Unbegrenzt Touren</li><li>Gruppen-Touren leiten</li><li>Offline-Modus</li></ul>
+          <ul style="margin: 12px 0 0; padding-left: 18px; font-size: 14px; line-height: 22px"><li>Unbegrenzt Touren</li><li>Gruppen-Touren leiten</li><li>Erzählerfiguren und Premium-Stimmen</li></ul>
         </div>
         <p style="grid-column: 1 / -1; margin: 0; font-size: 13px; color: {{c.muted}}">Preise und Grenzen sind noch offen.</p>
       </div>
@@ -980,11 +961,6 @@ button { -webkit-appearance: none; appearance: none; margin: 0; -webkit-tap-high
             <div style="display: flex; flex-wrap: wrap; gap: 8px">
               <sc-for list="{{tourStyles}}" as="s" hint-placeholder-count="3"><button type="button" aria-pressed="{{s.pressed}}" onClick="{{s.pick}}" style="font: inherit; font-size: 14px; height: 40px; padding: 0 12px; border-radius: 20px; cursor: pointer; {{s.st}}">{{s.label}}</button></sc-for>
             </div>
-            <span style="display: block; margin: 12px 0 8px; font-size: 13px; color: {{c.muted}}">Erzähler</span>
-            <div style="display: flex; flex-wrap: wrap; gap: 8px">
-              <sc-for list="{{tourFigures}}" as="f" hint-placeholder-count="2"><button type="button" aria-pressed="{{f.pressed}}" onClick="{{f.pick}}" style="font: inherit; font-size: 14px; height: 40px; padding: 0 12px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 6px; {{f.st}}">{{f.label}}<sc-if value="{{f.badge}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 8px; background: {{c.accent}}; color: {{c.onAccent}}">Premium</span></sc-if></button></sc-for>
-            </div>
-            <p style="margin: 6px 0 0; font-size: 13px; line-height: 18px; color: {{c.muted}}">{{figHint}}</p>
             <span style="display: block; margin: 12px 0 6px; font-size: 13px; color: {{c.muted}}">Ausgabe</span>
             <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
               <sc-for list="{{outputs}}" as="o" hint-placeholder-count="3"><button type="button" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="font: inherit; font-size: 14px; height: 40px; border: 0; border-radius: 10px; cursor: pointer; {{o.st}}">{{o.label}}</button></sc-for>
@@ -1531,17 +1507,6 @@ var INTERESTS = ['Geschichte', 'Kurioses', 'Natur', 'Essen & Trinken', 'Street A
 // Stile für alle (im Kinder-Modus nur einfacher erzählt) und Stile nur für Kinder
 var STYLES = [['Sachlich', 'Klare Fakten'], ['Humorvoll', 'Mit Augenzwinkern'], ['Zeitreise', 'Mittendrin um 1890']];
 var KID_STYLES = [['Rätsel & Entdecken', 'Hinweise suchen, Rätsel lösen'], ['Märchen & Sagen', 'Legenden vom Ort']];
-// Erzählerfiguren: feste Figuren mit eigener Stimme, jede passt zu bestimmten Stilen (Erwachsene, Kinder)
-var FIGURES = [
-  { name: 'Standard-Erzähler', sub: 'Für alle Stile', adult: null, kids: null, premium: false },
-  { name: 'Zeitreisende', sub: 'Warm und erzählend', adult: ['Zeitreise'], kids: ['Zeitreise', 'Märchen & Sagen'], premium: true },
-  { name: 'Nachtwächter', sub: 'Tief und ruhig', adult: ['Sachlich', 'Zeitreise'], kids: ['Märchen & Sagen'], premium: true },
-  { name: 'Stadtkatze', sub: 'Hell und verschmitzt', adult: ['Humorvoll'], kids: ['Humorvoll', 'Rätsel & Entdecken'], premium: true }
-];
-function figuresFor(style, kids) { return FIGURES.filter(function (f) { var l = kids ? f.kids : f.adult; return !l || l.indexOf(style) >= 0; }); }
-function figureFor(name, style, kids) { return figuresFor(style, kids).filter(function (f) { return f.name === name; })[0] || FIGURES[0]; }
-var VOICES = ['Anna', 'Markus'];
-var VOICE_SAMPLE = 'Hallo, ich bin dein Standard-Erzähler. In fünfzig Metern links in die Marktstraße.';
 var LEVELS = ['Einsteiger', 'Interessiert', 'Kenner'];
 var LEVEL_HINTS = {
   'Einsteiger': 'Einsteiger: Alles wird erklärt, kein Vorwissen nötig.',
@@ -1682,7 +1647,7 @@ class Component extends DCLogic {
       ],
       diary: null, photos: 0, notes: {}, diaryRating: '',
       exIdx: 0, exPlaying: true, exMode: 'walk',
-      theme: 'Wegweiser', appearance: 'auto', profile: 'Ich', tourFigure: 'Standard-Erzähler', voice: 'Anna', navDuck: 'leiser'
+      theme: 'Wegweiser', appearance: 'auto', profile: 'Ich'
     };
   }
 
@@ -1762,7 +1727,6 @@ class Component extends DCLogic {
     var profAud = profKids ? 'Kinder ' + s.age : s.level;
     var styleTile = function (x) { var on = s.style === x[0]; return { label: x[0], sub: x[1], pressed: pressed(on), st: tileSt(on), subSt: on ? 'color: ' + c.onPrimary + '; opacity: 0.8' : 'color: ' + c.muted, pick: setter({ style: x[0] }) }; };
     var tourKids = s.tourAud !== 'Erwachsene';
-    var fig = figureFor(s.tourFigure, s.tourStyle, tourKids);
     var interestSummary = selInts.length ? selInts.slice(0, 3).join(', ') + (selInts.length > 3 ? ' +' + (selInts.length - 3) : '') : 'Noch keine Interessen';
 
     // ---------- Vorschau / Unterwegs ----------
@@ -1904,8 +1868,6 @@ class Component extends DCLogic {
       tourAuds: ['Erwachsene'].concat(AGES).map(function (a) { var on = s.tourAud === a; return { label: a === 'Erwachsene' ? 'Erwachsene' : 'Kinder ' + a, on: on, pressed: pressed(on), st: chipSt(on), check: c.check, pick: function () { self.setState(function (st) { var p = { tourAud: a }; if (a === 'Erwachsene') if (isKidStyle(st.tourStyle)) p.tourStyle = isKidStyle(st.style) ? 'Sachlich' : st.style; return p; }); } }; }),
       tourStyles: (tourKids ? STYLES.concat(KID_STYLES) : STYLES).map(function (x) { var on = s.tourStyle === x[0]; return { label: x[0], on: on, pressed: pressed(on), st: chipSt(on), check: c.check, pick: setter({ tourStyle: x[0] }) }; }),
       tourKids: tourKids,
-      tourFigures: figuresFor(s.tourStyle, tourKids).map(function (f) { var on = fig.name === f.name; return { label: f.name, sub: f.sub, badge: f.premium && !s.premium, pressed: pressed(on), st: tileSt(on), subSt: on ? 'color: ' + c.onPrimary + '; opacity: 0.8' : 'color: ' + c.muted, pick: function () { if (f.premium && !self.state.premium) { self.setState({ abo: true }); return; } self.setState({ tourFigure: f.name }); } }; }),
-      figHint: fig.premium ? fig.name + ' spricht mit eigener Premium-Stimme, erzeugt von einer KI. Abbiegehinweise sagt die Handy-Stimme an.' : (s.premium ? 'Der Standard-Erzähler spricht mit einer natürlichen Premium-Stimme, erzeugt von einer KI.' : 'Der Standard-Erzähler liest mit der Handy-Stimme vor, gratis und offline. Figuren mit eigener Stimme gibt es mit Premium.'),
       lenLabel: 'Textlänge pro Ort',
       textLens: TEXTLENS.map(function (x) { var on = s.textLen === x[0]; return { label: x[1], pressed: pressed(on), st: segSt(on), pick: setter({ textLen: x[0] }) }; }),
       lenHint: 'Wird automatisch pro Ort gewählt: kurz (1,5 bis 2 Min.) oder lang (3,5 bis 4,5 Min.), je nach Ort, Verkehrsmittel und Dauer.',
@@ -1958,7 +1920,7 @@ class Component extends DCLogic {
       wcBtnSt: 'background: ' + c.surface + '; color: ' + c.ink + '; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18)',
       wcPins: pts.length > 2 ? [{ left: Math.round((pts[0][0] + pts[1][0]) / 2) - 13, top: Math.round((pts[0][1] + pts[1][1]) / 2) + 8 }, { left: Math.round((pts[2][0] + pts[1][0]) / 2) + 4, top: Math.round((pts[2][1] + pts[1][1]) / 2) - 28 }] : [],
       liveFooter: tt === 'mixed' ? 'Im Auto läuft die Erzählung während der Fahrt, zu Fuß startet sie, sobald du ankommst.' : tt === 'move' ? 'Die Erzählung läuft, während du weitergehst oder weiterfährst.' : 'Die Erzählung startet automatisch, sobald du ankommst.',
-      liveStyle: (fig.premium ? fig.name + ' · ' : '') + s.tourStyle + (ta !== 'Erwachsene' ? ' · Kinder ' + ta : ''), liveTopic: cur.topic, liveName: cur.name, liveHeard: liveHeard,
+      liveStyle: s.tourStyle + (ta !== 'Erwachsene' ? ' · Kinder ' + ta : ''), liveTopic: cur.topic, liveName: cur.name, liveHeard: liveHeard,
       showText: s.showText, hideText: !s.showText, narration: INTROS[s.tourStyle] + (ta !== 'Erwachsene' ? cur.k : cur.text),
       progress: s.playing ? '38%' : '33%', elapsed: isLong(s, cur) ? (s.playing ? '1:32' : '1:20') : (s.playing ? '0:41' : '0:35'), liveLen: isLong(s, cur) ? '4:05' : '1:50',
       playing: s.playing, paused: !s.playing, playLabel: s.playing ? 'Pause' : 'Abspielen',
@@ -1985,11 +1947,11 @@ class Component extends DCLogic {
       profChips: profChips,
       aboLabel: s.premium ? 'Premium' : 'Premium holen',
       aboTitle: s.premium ? 'Premium ist aktiv' : 'Kostenlos',
-      aboSub: s.premium ? 'Unbegrenzte Touren, Gruppen leiten, Offline-Modus' : 'Begrenzte Zahl an Touren pro Monat, Standard-Erzähler',
+      aboSub: s.premium ? 'Unbegrenzte Touren, Gruppen leiten, Premium-Stimmen' : 'Begrenzte Zahl an Touren pro Monat, Standard-Erzähler',
       aboBtn: s.premium ? 'Verwalten' : 'Upgrade',
       aboOn: s.abo, openAbo: function () { self.setState({ abo: true }); }, closeAbo: function () { self.setState({ abo: false }); },
       aboHead: s.premium ? 'Du hast Premium' : 'Mehr Stadt mit Premium',
-      aboPerks: ['Unbegrenzt viele Touren', 'Gruppen-Touren leiten, die anderen hören gratis mit', 'Weitere Erzählerfiguren und Premium-Stimmen', 'Offline-Modus mit Karte und Audio'],
+      aboPerks: ['Unbegrenzt viele Touren', 'Gruppen-Touren leiten, die anderen hören gratis mit', 'Weitere Erzählerfiguren und Premium-Stimmen'],
       aboCta: s.premium ? 'Fertig' : 'Premium holen',
       buyAbo: function () { var was = self.state.premium; self.setState({ abo: false, premium: true }); if (!was) self.say('Premium ist aktiv. Viel Spaß beim Entdecken!'); },
       cardCount: s.cards.length + ' von ' + CARD_TOTAL + ' Orten in [Deine Stadt] gesammelt',
@@ -2027,9 +1989,6 @@ class Component extends DCLogic {
       profilesList: ['Ich', 'Familie', 'Freunde'].map(function (p) { var on = s.profile === p; return { label: p, state: on ? 'aktiv' : 'wechseln', pressed: pressed(on), col: c, pick: function () { self.setState({ profile: p, whom: p }); self.say('Profil ' + p + ' ist aktiv'); } }; }),
       accessOpts: [extraRow('Barrierefrei (stufenlos)', 'barrier', true)],
       language: function () { self.say('Weitere Sprachen folgen später'); },
-      voices: VOICES.map(function (v) { var on = s.voice === v; return { label: v, pressed: pressed(on), st: segSt(on), pick: setter({ voice: v }) }; }),
-      navDucks: [['leiser', 'Erzählung leiser'], ['pause', 'Erzählung pausiert']].map(function (x) { var on = s.navDuck === x[0]; return { label: x[1], pressed: pressed(on), st: segSt(on), pick: setter({ navDuck: x[0] }) }; }),
-      hearVoice: function () { try { var syn = window.speechSynthesis; if (!syn) { self.say('Hier kann der Prototyp nicht vorlesen'); return; } syn.cancel(); var u = new SpeechSynthesisUtterance(VOICE_SAMPLE); u.lang = 'de-DE'; var vs = syn.getVoices().filter(function (v) { return /^de/i.test(v.lang || ''); }); var pick = vs.filter(function (v) { return v.name.indexOf(self.state.voice) >= 0; })[0] || vs[0]; if (pick) u.voice = pick; syn.speak(u); if (!pick) self.say('Keine deutsche Stimme auf diesem Gerät gefunden'); } catch (e) { self.say('Hier kann der Prototyp nicht vorlesen'); } },
       restart: function () { self.setState({ screen: 'welcome', history: [], toast: '' }); },
       toastOn: !!s.toast, toastText: s.toast
     };
@@ -2066,15 +2025,6 @@ var PALETTES = {
 var INTERESTS = ['Geschichte', 'Kurioses', 'Natur', 'Essen & Trinken', 'Street Art', 'Architektur', 'Krimi', 'Nachtleben', 'Drehorte'];
 var STYLES = [['Sachlich', 'Klare Fakten'], ['Humorvoll', 'Mit Augenzwinkern'], ['Zeitreise', 'Mittendrin um 1890']];
 var KID_STYLES = [['Rätsel & Entdecken', 'Hinweise suchen, Rätsel lösen'], ['Märchen & Sagen', 'Legenden vom Ort']];
-// Erzählerfiguren: feste Figuren mit eigener Stimme, jede passt zu bestimmten Stilen (Erwachsene, Kinder)
-var FIGURES = [
-  { name: 'Standard-Erzähler', sub: 'Für alle Stile', adult: null, kids: null, premium: false },
-  { name: 'Zeitreisende', sub: 'Warm und erzählend', adult: ['Zeitreise'], kids: ['Zeitreise', 'Märchen & Sagen'], premium: true },
-  { name: 'Nachtwächter', sub: 'Tief und ruhig', adult: ['Sachlich', 'Zeitreise'], kids: ['Märchen & Sagen'], premium: true },
-  { name: 'Stadtkatze', sub: 'Hell und verschmitzt', adult: ['Humorvoll'], kids: ['Humorvoll', 'Rätsel & Entdecken'], premium: true }
-];
-function figuresFor(style, kids) { return FIGURES.filter(function (f) { var l = kids ? f.kids : f.adult; return !l || l.indexOf(style) >= 0; }); }
-function figureFor(name, style, kids) { return figuresFor(style, kids).filter(function (f) { return f.name === name; })[0] || FIGURES[0]; }
 var LEVELS = ['Einsteiger', 'Interessiert', 'Kenner'];
 var LEVEL_HINTS = {
   'Einsteiger': 'Einsteiger: Alles wird erklärt, kein Vorwissen nötig.',
@@ -2231,7 +2181,7 @@ class Component extends DCLogic {
         { title: 'Krimi-Abend am Hafen', meta: '21. Sep. · 3 Std. · 8 Stopps', mode: 'transit', stopIds: [10, 12, 6, 2, 5, 7, 9, 14], onPhone: false, done: true, photos: 0 }
       ],
       detail: null, filter: 'Alle',
-      theme: 'Wegweiser', appearance: 'auto', premium: false, tourFigure: 'Standard-Erzähler'
+      theme: 'Wegweiser', appearance: 'auto', premium: false
     };
   }
 
@@ -2291,7 +2241,6 @@ class Component extends DCLogic {
     var pts = webPts(n);
     var round = s.route === 'Rundtour';
     var tourKids = s.tourAud !== 'Erwachsene';
-    var fig = figureFor(s.tourFigure, s.tourStyle, tourKids);
     var markerSt = function (tip, on) {
       var base = tip ? 'border-radius: 8px; background: ' + c.primary + '; border: 2.5px solid ' + c.accent + '; color: ' + c.check : 'border-radius: 17px; background: ' + c.accent + '; border: 2.5px solid ' + c.primary + '; color: ' + c.onAccent;
       return base + (on ? '; box-shadow: 0 0 0 6px ' + c.accent + '66, 0 2px 6px rgba(0, 0, 0, 0.25)' : '; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25)');
@@ -2449,8 +2398,6 @@ class Component extends DCLogic {
       tempos: seg(TEMPOS, 'tempo'),
       routes: seg(['Rundtour', 'Von A nach B'], 'route'),
       tourAuds: ['Erwachsene'].concat(AGES).map(function (a) { var on = s.tourAud === a; return { label: a === 'Erwachsene' ? 'Erwachsene' : 'Kinder ' + a, pressed: pressed(on), st: chipSt(on), pick: function () { self.setState(function (st) { var p = { tourAud: a }; if (a === 'Erwachsene') if (isKidStyle(st.tourStyle)) p.tourStyle = isKidStyle(st.style) ? 'Sachlich' : st.style; return p; }); } }; }),
-      tourFigures: figuresFor(s.tourStyle, tourKids).map(function (f) { var on = fig.name === f.name; return { label: f.name, badge: f.premium && !s.premium, pressed: pressed(on), st: chipSt(on), pick: function () { if (f.premium && !self.state.premium) { self.say('Figuren mit eigener Stimme gibt es mit Premium, unter Konto und Abo'); return; } self.setState({ tourFigure: f.name }); } }; }),
-      figHint: fig.premium ? fig.name + ' spricht mit eigener Premium-Stimme, erzeugt von einer KI. Abbiegehinweise sagt die Handy-Stimme an.' : (s.premium ? 'Der Standard-Erzähler spricht mit einer natürlichen Premium-Stimme, erzeugt von einer KI.' : 'Der Standard-Erzähler liest mit der Handy-Stimme vor, gratis und offline. Figuren mit eigener Stimme gibt es mit Premium.'),
       tourStyles: (tourKids ? STYLES.concat(KID_STYLES) : STYLES).map(function (x) { var on = s.tourStyle === x[0]; return { label: x[0], pressed: pressed(on), st: chipSt(on), pick: setter({ tourStyle: x[0] }) }; }),
       tourKids: tourKids,
       lenLabel: 'Textlänge pro Ort',
