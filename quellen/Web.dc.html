@@ -286,6 +286,11 @@ a{color:inherit}
             <div style="display: flex; flex-wrap: wrap; gap: 8px">
               <sc-for list="{{tourStyles}}" as="s" hint-placeholder-count="3"><button type="button" aria-pressed="{{s.pressed}}" onClick="{{s.pick}}" style="font: inherit; font-size: 14px; height: 40px; padding: 0 12px; border-radius: 20px; cursor: pointer; {{s.st}}">{{s.label}}</button></sc-for>
             </div>
+            <span style="display: block; margin: 12px 0 8px; font-size: 13px; color: {{c.muted}}">Erzähler</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <sc-for list="{{tourFigures}}" as="f" hint-placeholder-count="2"><button type="button" aria-pressed="{{f.pressed}}" onClick="{{f.pick}}" style="font: inherit; font-size: 14px; height: 40px; padding: 0 12px; border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 6px; {{f.st}}">{{f.label}}<sc-if value="{{f.badge}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; font-weight: 700; padding: 2px 6px; border-radius: 8px; background: {{c.accent}}; color: {{c.onAccent}}">Premium</span></sc-if></button></sc-for>
+            </div>
+            <p style="margin: 6px 0 0; font-size: 13px; line-height: 18px; color: {{c.muted}}">{{figHint}}</p>
             <span style="display: block; margin: 12px 0 6px; font-size: 13px; color: {{c.muted}}">Ausgabe</span>
             <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; background: {{c.seg}}; border-radius: 14px">
               <sc-for list="{{outputs}}" as="o" hint-placeholder-count="3"><button type="button" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="font: inherit; font-size: 14px; height: 40px; border: 0; border-radius: 10px; cursor: pointer; {{o.st}}">{{o.label}}</button></sc-for>
@@ -755,6 +760,15 @@ var PALETTES = {
 var INTERESTS = ['Geschichte', 'Kurioses', 'Natur', 'Essen & Trinken', 'Street Art', 'Architektur', 'Krimi', 'Nachtleben', 'Drehorte'];
 var STYLES = [['Sachlich', 'Klare Fakten'], ['Humorvoll', 'Mit Augenzwinkern'], ['Zeitreise', 'Mittendrin um 1890']];
 var KID_STYLES = [['Rätsel & Entdecken', 'Hinweise suchen, Rätsel lösen'], ['Märchen & Sagen', 'Legenden vom Ort']];
+// Erzählerfiguren: feste Figuren mit eigener Stimme, jede passt zu bestimmten Stilen (Erwachsene, Kinder)
+var FIGURES = [
+  { name: 'Standard-Erzähler', sub: 'Für alle Stile', adult: null, kids: null, premium: false },
+  { name: 'Zeitreisende', sub: 'Warm und erzählend', adult: ['Zeitreise'], kids: ['Zeitreise', 'Märchen & Sagen'], premium: true },
+  { name: 'Nachtwächter', sub: 'Tief und ruhig', adult: ['Sachlich', 'Zeitreise'], kids: ['Märchen & Sagen'], premium: true },
+  { name: 'Stadtkatze', sub: 'Hell und verschmitzt', adult: ['Humorvoll'], kids: ['Humorvoll', 'Rätsel & Entdecken'], premium: true }
+];
+function figuresFor(style, kids) { return FIGURES.filter(function (f) { var l = kids ? f.kids : f.adult; return !l || l.indexOf(style) >= 0; }); }
+function figureFor(name, style, kids) { return figuresFor(style, kids).filter(function (f) { return f.name === name; })[0] || FIGURES[0]; }
 var LEVELS = ['Einsteiger', 'Interessiert', 'Kenner'];
 var LEVEL_HINTS = {
   'Einsteiger': 'Einsteiger: Alles wird erklärt, kein Vorwissen nötig.',
@@ -911,7 +925,7 @@ class Component extends DCLogic {
         { title: 'Krimi-Abend am Hafen', meta: '21. Sep. · 3 Std. · 8 Stopps', mode: 'transit', stopIds: [10, 12, 6, 2, 5, 7, 9, 14], onPhone: false, done: true, photos: 0 }
       ],
       detail: null, filter: 'Alle',
-      theme: 'Wegweiser', appearance: 'auto', premium: false
+      theme: 'Wegweiser', appearance: 'auto', premium: false, tourFigure: 'Standard-Erzähler'
     };
   }
 
@@ -971,6 +985,7 @@ class Component extends DCLogic {
     var pts = webPts(n);
     var round = s.route === 'Rundtour';
     var tourKids = s.tourAud !== 'Erwachsene';
+    var fig = figureFor(s.tourFigure, s.tourStyle, tourKids);
     var markerSt = function (tip, on) {
       var base = tip ? 'border-radius: 8px; background: ' + c.primary + '; border: 2.5px solid ' + c.accent + '; color: ' + c.check : 'border-radius: 17px; background: ' + c.accent + '; border: 2.5px solid ' + c.primary + '; color: ' + c.onAccent;
       return base + (on ? '; box-shadow: 0 0 0 6px ' + c.accent + '66, 0 2px 6px rgba(0, 0, 0, 0.25)' : '; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25)');
@@ -1128,6 +1143,8 @@ class Component extends DCLogic {
       tempos: seg(TEMPOS, 'tempo'),
       routes: seg(['Rundtour', 'Von A nach B'], 'route'),
       tourAuds: ['Erwachsene'].concat(AGES).map(function (a) { var on = s.tourAud === a; return { label: a === 'Erwachsene' ? 'Erwachsene' : 'Kinder ' + a, pressed: pressed(on), st: chipSt(on), pick: function () { self.setState(function (st) { var p = { tourAud: a }; if (a === 'Erwachsene') if (isKidStyle(st.tourStyle)) p.tourStyle = isKidStyle(st.style) ? 'Sachlich' : st.style; return p; }); } }; }),
+      tourFigures: figuresFor(s.tourStyle, tourKids).map(function (f) { var on = fig.name === f.name; return { label: f.name, badge: f.premium && !s.premium, pressed: pressed(on), st: chipSt(on), pick: function () { if (f.premium && !self.state.premium) { self.say('Figuren mit eigener Stimme gibt es mit Premium, unter Konto und Abo'); return; } self.setState({ tourFigure: f.name }); } }; }),
+      figHint: fig.premium ? fig.name + ' spricht mit eigener Premium-Stimme, erzeugt von einer KI. Abbiegehinweise sagt die Handy-Stimme an.' : (s.premium ? 'Der Standard-Erzähler spricht mit einer natürlichen Premium-Stimme, erzeugt von einer KI.' : 'Der Standard-Erzähler liest mit der Handy-Stimme vor, gratis und offline. Figuren mit eigener Stimme gibt es mit Premium.'),
       tourStyles: (tourKids ? STYLES.concat(KID_STYLES) : STYLES).map(function (x) { var on = s.tourStyle === x[0]; return { label: x[0], pressed: pressed(on), st: chipSt(on), pick: setter({ tourStyle: x[0] }) }; }),
       tourKids: tourKids,
       lenLabel: 'Textlänge pro Ort',
